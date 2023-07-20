@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Owner - Dashboard</title>
+    <meta name="robots" content="index, follow"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+	<!-- favicons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+	<!-- Style CSS -->
+    <link rel="stylesheet" type="text/css" href="fonts/jost/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="libs/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="libs/fontawesome-pro/css/fontawesome.css" />
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="libs/slick/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="libs/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="libs/quilljs/css/quill.bubble.css" />
+    <link rel="stylesheet" type="text/css" href="libs/quilljs/css/quill.core.css" />
+    <link rel="stylesheet" type="text/css" href="libs/quilljs/css/quill.snow.css" />
+    <link rel="stylesheet" type="text/css" href="libs/chosen/chosen.min.css" />
+    <link rel="stylesheet" type="text/css" href="libs/datetimepicker/jquery.datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="libs/venobox/venobox.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <!-- jQuery -->    
+    <script src="js/jquery-1.12.4.js"></script>
+	<script src="libs/popper/popper.js"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+	<script src="libs/slick/slick.min.js"></script>
+	<script src="libs/slick/jquery.zoom.min.js"></script>
+	<script src="libs/isotope/isotope.pkgd.min.js"></script>
+	<script src="libs/quilljs/js/quill.core.js"></script>
+    <script src="libs/quilljs/js/quill.js"></script>
+    <script src="libs/chosen/chosen.jquery.min.js"></script>
+    <script src="libs/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+    <script src="libs/venobox/venobox.min.js"></script>
+    <script src="libs/waypoints/jquery.waypoints.min.js"></script>
+    <!-- orther script -->
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+	<div id="wrapper">
+        <header id="header" class="site-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-6 col-5">
+                        <div class="site">
+                            <div class="site__menu">
+                                <a title="Menu Icon" href="#" class="site__menu__icon">
+                                    <i class="las la-bars la-24-black"></i>
+                                </a>
+                                <div class="popup-background"></div>
+                                <div class="popup popup--left">
+                                    <a title="Close" href="#" class="popup__close">
+                                        <i class="las la-times la-24-black"></i>
+                                    </a><!-- .popup__close -->
+                                    <div class="popup__content">
+                                        <div class="popup__user popup__box open-form">
+                                            <a title="Login" href="#" class="open-login">Login</a>
+                                            <a title="Sign Up" href="#" class="open-signup">Sign Up</a>
+                                        </div><!-- .popup__user -->
+                                        <div class="popup__menu popup__box">
+                                            <ul class="menu-arrow">
+                                                <li><a title="Page" href="#">Lowongan Kerja</a></li>
+                                                
+                                            </ul>
+                                        </div><!-- .popup__menu -->
+                                    </div><!-- .popup__content -->
+                                    <div class="popup__button popup__box">
+                                        <a title="Add place" href="add-place.html" class="btn">
+                                            <i class="la la-plus"></i>
+                                            <span>Add place</span>
+                                        </a>
+                                    </div><!-- .popup__button -->
+                                </div><!-- .popup -->
+                            </div><!-- .site__menu -->
+                            <div class="site__brand">
+                                <a title="Logo" href="index.html" class="site__brand__logo"><img src="images/assets/logo.png" alt="Golo"></a>
+                            </div><!-- .site__brand -->
+
+                                <div class="site__search layout-02">
+                                <a title="Close" href="#" class="search__close">
+                                    <i class="la la-times"></i>
+                                </a><!-- .search__close -->
+                                <form action="#" class="site-banner__search layout-02">
+									<div class="field-input">
+										<label for="s">Cari</label>
+										<input class="site-banner__search__input open-suggestion" id="s" type="text" name="s" placeholder="Ex: Desain Grafis, Videografer" autocomplete="off">
+										
+									</div><!-- .site-banner__search__input -->
+									<div class="field-input">
+										<label for="loca">Lokasi</label>
+										<input class="site-banner__search__input open-suggestion" id="loca" type="text" name="where" placeholder="Your city" autocomplete="off">
+										<div class="search-suggestions location-suggestions">
+											<ul>
+												<li><a href="#"><i class="las la-location-arrow"></i><span>Current location</span></a></li>
+												<li><a href="#"><span>Medan</span></a></li>
+											</ul>
+										</div>
+									</div><!-- .site-banner__search__input -->
+									<div class="field-submit">
+										<button><i class="las la-search la-24-black"></i></button>
+									</div>
+								</form><!-- .site-banner__search -->
+                            </div><!-- .site__search -->
+                            
+                        </div><!-- .site -->
+                    </div><!-- .col-md-6 -->
+                    <div class="col-xl-6 col-7">
+                        <div class="right-header align-right">
+                            <nav class="main-menu">
+                                <ul>
+                                    <li><a title="Page" href="lowongankerja.html">Lowongan Kerja</a></li>
+                                </ul>
+                            </nav>
+                            
+                            <div class="ava">
+                                <a title="Sebastian" href="#"><img src="images/avatars/female-1.jpg" alt=""></a>
+                            </div>
+                        </div><!-- .right-header -->
+                    </div><!-- .col-md-6 -->
+                </div><!-- .row -->
+            </div><!-- .container-fluid -->
+        </header><!-- .site-header -->
+
+		<main id="main" class="site-main">
+			<div class="site-content owner-content">
+				<div class="member-menu">
+					<div class="container">
+						<ul>
+							<li class="active"><a href="dashboard-perusahaan.html">Dashboard</a></li>
+							<li><a href="pelamar-perusahaan.html">Pelamar</a></li>
+							<li><a href="loker-perusahaan.html">Lowongan Kerja</a></li>
+							<li><a href="permintaansiswa-perusahaan.html">Permintaan Siswa</a></li>
+							<li><a href="profile-perusahaan.html">Profile</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="container">
+					<div class="member-wrap">
+						
+						<div class="member-statistical">
+							<div class="row">
+								<div class="col-lg-3 col-6">
+									<div class="item blue">
+										<h3>Active Lowongan</h3>
+										<span class="number">1</span>
+										<span class="line"></span>
+									</div>
+								</div>
+								<div class="col-lg-3 col-6">
+									<div class="item green">
+										<h3>Pelamar</h3>
+										<span class="number">12</span>
+										<span class="line"></span>
+									</div>
+								</div>
+								<div class="col-lg-3 col-6">
+									<div class="item yellow">
+										<h3>Permintaan Siswa</h3>
+										<span class="number">6</span>
+										<span class="line"></span>
+									</div>
+								</div>
+								<div class="col-lg-3 col-6">
+									<div class="item purple">
+										<h3>Total Views</h3>
+										<span class="number">145</span>
+										<span class="line"></span>
+									</div>
+								</div>
+							</div>
+						</div><!-- .member-statistical -->
+						<div class="owner-box">
+							<div class="row">
+								<div class="col-lg-4">
+									<div class="ob-item">
+										<div class="ob-head">
+											<h3>Pelamar Terbaru</h3>
+											<a href="#" class="view-all" title="View All">View all</a>
+										</div>
+										<div class="ob-content">
+											<ul>
+												<li class="pending">
+													<p class="date"><b>Date:</b>June 15, 2023</p>
+													<p class="place"><b>Nama:</b>Anto</p>
+                                                    <p class="place"><b>Lulusan:</b>S1</p>
+													<p class="status"><b>Status:</b><span>Pending</span></p>
+													<a href="#" title="More" class="more"><i class="las la-angle-right"></i></a>
+												</li>
+												<li class="approve">
+													<p class="date"><b>Date:</b>June 15, 2023</p>
+													<p class="place"><b>Nama:</b>Anto</p>
+                                                    <p class="place"><b>Lulusan:</b>S1</p>
+													<p class="status"><b>Status:</b><span>Approve</span></p>
+													<a href="#" title="More" class="more"><i class="las la-angle-right"></i></a>
+												</li>
+												<li class="cancel">
+													<p class="date"><b>Date:</b>June 15, 2023</p>
+													<p class="place"><b>Nama:</b>putri</p>
+                                                    <p class="place"><b>Lulusan:</b>S1</p>
+													<p class="status"><b>Status:</b><span>Cancel</span></p>
+													<a href="#" title="More" class="more"><i class="las la-angle-right"></i></a>
+												</li>
+												<li class="pending">
+													<p class="date"><b>Date:</b>June 15, 2023</p>
+													<p class="place"><b>Nama:</b>Sinta</p>
+                                                    <p class="place"><b>Lulusan:</b>S1</p>
+													<p class="status"><b>Status:</b><span>Pending</span></p>
+													<a href="#" title="More" class="more"><i class="las la-angle-right"></i></a>
+												</li>
+												<li class="approve">
+													<p class="date"><b>Date:</b>June 15, 2023</p>
+													<p class="place"><b>Nama:</b>Andi</p>
+                                                    <p class="place"><b>Lulusan:</b>S1</p>
+													<p class="status"><b>Status:</b><span>Approve</span></p>
+													<a href="#" title="More" class="more"><i class="las la-angle-right"></i></a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="ob-item">
+										<div class="ob-head">
+											<h3>Notifications <span>(5)</span></h3>
+											<a href="#" class="clear-all" title="Clear All">Clear all</a>
+										</div>
+										<div class="ob-content">
+											<ul>
+												<li class="noti-item unread">
+													<p>Anda Menerima Balasan Atas Permintaan Siswa <br> Permintaan ID: #123434</p>
+													<span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
+												</li>
+												<li class="noti-item unread">
+													<p>Anda Menerima Balasan Atas Permintaan Siswa <br> Permintaan ID: #123434</p>
+													<span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
+												</li>
+                                                <li class="noti-item unread">
+													<p>Anda Menerima Balasan Atas Permintaan Siswa <br> Permintaan ID: #123434</p>
+													<span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
+												</li>
+                                                <li class="noti-item unread">
+													<p>Anda Menerima Balasan Atas Permintaan Siswa <br> Permintaan ID: #123434</p>
+													<span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
+												</li>
+                                                <li class="noti-item unread">
+													<p>Anda Menerima Balasan Atas Permintaan Siswa <br> Permintaan ID: #123434</p>
+													<span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+                                <div class="col-lg-4">
+                                    <div class="upgrade-box">
+                                        <h1>Cari Siswa Magang disini!</h1>
+                                        <p>anda dapat memilih siswa mana yang kompeten untuk perusahaan anda.</p>
+                                        <a href="siswa-list.html" class="btn" title="Upgrade now">Cari Siswa</a>
+                                        <a href="#" class="close" data-close="upgrade-box"><i class="las la-times"></i></a>
+                                    </div>
+                                </div>
+							</div>
+						</div><!-- .owner-box -->
+					</div><!-- .member-wrap -->
+				</div>
+			</div><!-- .site-content -->
+		</main><!-- .site-main -->
+
+		<footer id="footer" class="footer">
+			<div class="container">
+				<div class="footer__bottom">
+					<p class="footer__bottom__copyright">2023 &copy; <a title="domain esemka" href="#">domain esemka</a>. All rights reserved.</p>
+				</div><!-- .top-footer -->
+			</div><!-- .container -->
+		</footer><!-- site-footer -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvPDNG6pePr9iFpeRKaOlaZF_l0oT3lWk&callback=initMap" async defer></script>
+		<script src="js/map-single.js"></script>
+
+	</div><!-- #wrapper -->
+</body>
+</html>
