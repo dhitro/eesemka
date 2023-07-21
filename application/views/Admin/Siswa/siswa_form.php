@@ -18,7 +18,7 @@
                   <div class="col-3" id="inputFormRow">
                     <div class="field-group field-file">
                       <label for="foto" class="preview">
-                        <img class="img_preview" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
+                        <img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
                         <i class="la la-cloud-upload-alt"></i>
                       </label>
                       <div class="field-note"><a href="<?= base_url('admin/siswa_delete_file') ?>" data-id="<?= $foto->id ?>" class="btn-sm btn-danger gantiFile"> <i class="la la-exchange-alt"></i> Ganti Foto</a></div>
@@ -134,11 +134,18 @@
               <label for="pengalaman">Sertifikat Keahlian <br><button class="badge btn-primary btn-sm rounded tambah-keahlian"><i class="las la-plus"></i> Tambah</button>
                 <?php echo form_error('pengalaman') ?></label>
               <div class="row" id="keahlian">
-                <?php foreach ($data = loadsiswakeahlian($id) as $p) : ?>
+                <?php foreach ($data = loadsiswakeahlian($id) as $p) : 
+                  $tipe = explode(".",$p->file);
+                  $valid = ['png','jpg','jpeg','gif'];
+                  ?>
                   <div class="col-3" id="inputFormRow">
                     <div class="field-group field-file">
                       <label for="sertifikat_keahlian1" class="preview">
-                        <img class="img_preview" src="<?= base_url() . "upload/dokumen/" . $p->file ?>" alt="">
+                        <?php if(in_array($tipe[1],$valid)) : ?>
+                        <img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $p->file ?>" alt="">
+                        <?php else: ?>
+                          <a  class="btn img_pre" href="<?= base_url() . "upload/dokumen/" . $p->file ?>"><?= $p->file ?></a>
+                        <?php endif; ?>
                         <i class="la la-cloud-upload-alt"></i>
                       </label>
                       <div class="field-note"><a href="<?= base_url('admin/siswa_delete_file') ?>" data-id="<?= $p->id ?>" class="btn-sm btn-danger removeFiles"> <i class="la la-trash-alt"></i> Hapus</a></div>
@@ -157,7 +164,7 @@
                   <div class="col-3" id="inputFormRow">
                     <div class="field-group field-file">
                       <label for="sertifikat_pendukung1" class="preview">
-                        <img class="img_preview" src="<?= base_url() . "upload/dokumen/" . $p->file ?>" alt="">
+                        <img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $p->file ?>" alt="">
                         <i class="la la-cloud-upload-alt"></i>
                       </label>
                       <div class="field-note"><a href="<?= base_url('admin/siswa_delete_file') ?>" data-id="<?= $p->id ?>" class="btn-sm btn-danger removeFiles"> <i class="la la-trash-alt"></i> Hapus</a></div>

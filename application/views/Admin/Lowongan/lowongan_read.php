@@ -77,7 +77,7 @@
 					<td class="text-nowrap">
 						<?php $foto = getfotoprofil($d->id_siswa, 3);
 						if (!empty($foto)) : ?>
-							<img class="img_preview" width="40px" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
+							<img class="img_preview"  width="40px" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
 						<?php endif; ?>
 						<?= getsiswa($d->id_siswa) ?>
 					</td>

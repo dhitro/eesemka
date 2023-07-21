@@ -533,11 +533,23 @@
         function readURL(input, _this) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-        
-                reader.onload = function (e) {
-                    _this.parents( '.field-group' ).find( '.img_preview' ).attr('src', e.target.result);
+                const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+                var type_file = input.files[0].type;
+               
+                var name_file = input.files[0].name;
+                
+                if (validImageTypes.includes(type_file)) {
+                    // invalid file type code goes here.
+                    reader.onload = function (e) {
+                        _this.parents( '.field-group' ).find( '.img_preview' ).attr('src', e.target.result);
+                        _this.parents( '.field-group' ).find( '.field-note' ).html(name_file);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }else{
+                    _this.parents( '.field-group' ).find( '.img_preview' ).attr('src', '../../images/favicon.ico');
+                    _this.parents( '.field-group' ).find( '.field-note' ).html(name_file);
+                   
                 }
-                reader.readAsDataURL(input.files[0]);
             }
         }
         $(document).on('change', '.field-group input[type="file"]', function() {
@@ -1471,6 +1483,24 @@
         }
      
     });
+
+    $(document).on('click', '.btn-close-modal', function(e) {
+        
+        $('#myModal').modal("toggle");
+    });
+
+    $(document).on('click', '.img_pre', function(e) {
+        e.preventDefault();
+        var val = $(this).attr("src");
+       
+        if(!val) val = $(this).attr("href");
+        console.log(val);
+        $('#viewer').attr('data', val);
+        $('#viewer').show();
+        $('#myModal').modal("toggle");
+        // $("#myModal").modal('show')  
+  
+      });
 
 
     });

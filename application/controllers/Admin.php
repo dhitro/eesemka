@@ -21,7 +21,8 @@ class Admin extends CI_Controller
       'PsLowongan_model',
       'Swpengalaman_model',
       'File_model',
-      'Lamaran_model'
+      'Lamaran_model',
+      'Permintaan_model'
     ]);
     is_logged_in();
   }
@@ -247,6 +248,28 @@ class Admin extends CI_Controller
         'id_user' => $row->id_user,
       );
       $this->template->load('template', 'Admin/Siswa/siswa_read', $data);
+    } else {
+      $this->session->set_flashdata('message', 'Record Not Found');
+      redirect(site_url('admin/siswa'));
+    }
+  }
+
+  public function siswa_profile($id)
+  {
+    $row = $this->Siswa_model->get_by_id($id);
+    if ($row) {
+      $data = array(
+        'title' => 'Admin Area - Detail Siswa',
+        'nik' => $row->nik,
+        'id' => $row->id,
+        'nama_siswa' => $row->nama_siswa,
+        'jenis_kelamin' => $row->jenis_kelamin,
+        'alamat' => $row->alamat,
+        'status' => $row->status,
+        'deskripsi' => $row->deskripsi,
+        'id_user' => $row->id_user,
+      );
+      $this->template->load('template', 'Admin/Siswa/siswa_profile', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
       redirect(site_url('admin/siswa'));
@@ -868,10 +891,9 @@ class Admin extends CI_Controller
   }
 
 
-  // Module sekolah
+  // Module Lamaran
   public function lamaran()
   {
-    // $sekolah = $this->db->get('eesemka_sekolah')->result_array();
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
@@ -1032,4 +1054,170 @@ class Admin extends CI_Controller
     $this->form_validation->set_rules('id', 'id', 'trim');
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
   }
+
+  // Module Permintaan
+  public function permintaan()
+  {
+    $per_hal = $this->input->post('per_hal');
+    if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
+    $ses_hal = $this->session->userdata('perhal');
+    $config['base_url'] = site_url('/admin/permintaan');
+    $config['page_query_string'] = TRUE;
+    $config['total_rows'] = $this->Permintaan_model->get_count();
+    $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
+    $config['full_tag_open'] = '<div class="pagination__numbers">';
+    $config['full_tag_close'] = '</div>';
+
+    $this->pagination->initialize($config);
+    $limit = $config['per_page'];
+    $offset = html_escape($this->input->get('per_page'));
+    $cari = html_escape($this->input->get('s'));
+
+    $sekolah = $this->Permintaan_model->get_limit_data($limit, $offset, $cari);
+
+
+    $this->pagination->initialize($config);
+    $data = array(
+      'title' => 'Admin Area - Data permintaan',
+      'data' => $sekolah,
+      'actionadd' => site_url('admin/permintaan_create'),
+      'actionfilter' => site_url('admin/permintaan'),
+    );
+    $this->template->load('template', 'Admin/Permintaan/permintaan_list', $data);
+  }
+
+  public function permintaan_read($id)
+  {
+    $row = $this->Permintaan_model->get_by_id($id);
+    if ($row) {
+      $data = array(
+        'title' => 'Admin Area - Detail permintaan',
+        'id' => $row->id,
+        'id_lowongan' => $row->id_lowongan,
+        'id_siswa' => $row->id_siswa,
+        'keterangan' => $row->keterangan,
+       
+      );
+      $this->template->load('template', 'Admin/Permintaan/permintaan_read', $data);
+    } else {
+      $this->session->set_flashdata('message', 'Record Not Found');
+      redirect(site_url('admin/permintaan'));
+    }
+  }
+
+  public function permintaan_create()
+  {
+    $data = array(
+      'title' => 'Admin Area - Tambah permintaan',
+      'button' => 'Create',
+      'action' => site_url('admin/permintaan_create_action'),
+      'id' => set_value('id'),
+      'uuid' => set_value('uuid'),
+      'id_perusahaan' => set_value('id_perusahaan'),
+      'id_siswa' => set_value('id_siswa'),
+      'keterangan' => set_value('keterangan'),
+     
+    );
+    $this->template->load('template', 'Admin/Permintaan/permintaan_form', $data);
+  }
+
+  public function permintaan_create_action()
+  {
+    $this->permintaan_rules();
+
+    if ($this->form_validation->run() == FALSE) {
+      $this->permintaan_create();
+    } else {
+      $uuid = $this->uuid->v4();
+      $data = array(
+        'id_perusahaan' => $this->input->post('id_perusahaan', TRUE),
+        'id_siswa' => $this->input->post('id_siswa', TRUE),
+        'keterangan' => $this->input->post('keterangan', TRUE),
+        'created_by' => $this->session->userdata('user_id'),
+        'uuid' =>  $uuid,
+      );
+
+      $idlast =   $this->Permintaan_model->insert($data);
+
+     $this->session->set_flashdata('message', 'Create Record Success');
+      redirect(site_url('admin/permintaan'));
+    }
+  }
+
+  public function permintaan_update($id)
+  {
+
+    $row = $this->Permintaan_model->get_by_id($id);
+
+    if ($row) {
+      $data = array(
+        'title' => 'Admin Area - Form Data permintaan',
+        'button' => 'Update',
+        'action' => site_url('admin/permintaan_update_action'),
+        'id' => set_value('id', $row->id),
+        'id_perusahaan' => set_value('id_perusahaan', $row->id_perusahaan),
+        'id_siswa' => set_value('id_siswa', $row->id_siswa),
+        'keterangan' => set_value('keterangan', $row->keterangan),
+        'uuid' => set_value('uuid', $row->uuid),
+      );
+      $this->template->load('template', 'Admin/Permintaan/permintaan_form', $data);
+    } else {
+      $this->session->set_flashdata('message', 'Record Not Found');
+      redirect(site_url('admin/permintaan'));
+    }
+  }
+
+  public function permintaan_update_action()
+  {
+    $this->permintaan_rules();
+
+    if ($this->form_validation->run() == FALSE) {
+      $this->permintaan_update($this->input->post('id', TRUE));
+    } else {
+      $data = array(
+        'id_perusahaan' => $this->input->post('id_perusahaan', TRUE),
+        'id_siswa' => $this->input->post('id_siswa', TRUE),
+        'keterangan' => $this->input->post('keterangan', TRUE),
+      
+      );
+
+      $this->Permintaan_model->update($this->input->post('id', TRUE), $data);
+      $this->session->set_flashdata('message', 'Update Record Success');
+      redirect(site_url('admin/permintaan'));
+    }
+  }
+
+  public function permintaan_approve()
+  {
+    $id = $this->input->post('id', TRUE);
+    $val = $this->input->post('val', TRUE);
+    $data = array(
+      'status' => $val,
+    );
+    $this->Permintaan_model->update($id, $data);
+  }
+
+
+  public function permintaan_delete($id)
+  {
+    $row = $this->Permintaan_model->get_by_id($id);
+
+    if ($row) {
+      $this->Permintaan_model->delete($id);
+      // $this->session->set_flashdata('message', 'Delete Record Success');
+      // redirect(site_url('admin/sekolah'));
+    } else {
+      // $this->session->set_flashdata('message', 'Record Not Found');
+      // redirect(site_url('admin/sekolah'));
+    }
+  }
+
+  public function permintaan_rules()
+  {
+    $this->form_validation->set_rules('id_perusahaan', 'Nama Perusahaan', 'trim|required');
+
+    $this->form_validation->set_rules('id', 'id', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+  }
+
 }

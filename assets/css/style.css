@@ -932,7 +932,7 @@ a.place__comments__reply i { display: inline-block; vertical-align: middle; marg
 .place-share .list-social-icon a.pinterest { background-color: #CB2027; }
 
 .listing-main { display: -webkit-box; display: -ms-flexbox; display: flex; justify-content: flex-end; border-top: 1px solid #eeeeee; }
-.listing-main .listing-nav { background-color: #ffffff; position: fixed; left: 0; bottom: 0; top: 80px; width: 30%; z-index: 9; border-top: 1px solid #eee; transition: all 0.3s; }
+.listing-main .listing-nav { background-color: #ffffff; position: fixed; left: 0; bottom: 0; top: 153px; width: 36%; z-index: 9; border-top: 1px solid #eee; transition: all 0.3s; }
 .listing-main .listing-nav.on_scroll { top: 0; }
 .listing-main .listing-nav.is_footer { position: relative; }
 .listing-main .listing-content { -webkit-box-flex: 0; -ms-flex: 0 0 70%; flex: 0 0 70%; max-width: 70%; }
@@ -944,10 +944,10 @@ a.place__comments__reply i { display: inline-block; vertical-align: middle; marg
 .listing-menu li:hover a { color: #2d2d2d; border-right: 4px solid #23d3d3; }
 .listing-menu li.active a { color: #2d2d2d; font-weight: 500; border-right: 4px solid #23d3d3; }
 
-.listing-content { border-left: 1px solid #eeeeee; background-color: #f9f9f9; padding: 60px; }
+.listing-content { border-left: 1px solid #eeeeee; background-color: #f9f9f9; padding: 0px; }
 .listing-content > h2 { font-size: 28px; font-weight: 500; margin-bottom: 30px; }
 
-.listing-box { border: 1px solid #eeeeee; background-color: #ffffff; padding: 30px; margin-bottom: 15px; }
+.listing-box { border: 1px solid #eeeeee; background-color: #ffffff; padding: 30px; margin-bottom: 15px; width: 500px; }
 .listing-box > h3 { font-size: 15px; font-weight: 500; color: #8d8d8d; text-transform: uppercase; margin-bottom: 20px; }
 .listing-box label { display: block; font-size: 15px; font-weight: 500; color: #2d2d2d; margin-bottom: 6px; font-weight: 500; font-family: "Jost"; }
 .listing-box h4.label { display: block; font-size: 15px; font-weight: 500; color: #2d2d2d; margin-bottom: 6px; font-weight: 500; font-family: "Jost"; }

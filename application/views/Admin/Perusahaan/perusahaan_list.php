@@ -54,7 +54,7 @@
 				<td style="min-width: 100px;">
 									<?php $foto = getfotoprofil($d->id,6);
                 					if (!empty($foto)) : ?>
-										<img class="img_preview" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
+										<img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
 									<?php endif; ?>	
 									</td>
 				<td class="text-nowrap"><b><?= $d->nama_perusahaan ?></b></td>

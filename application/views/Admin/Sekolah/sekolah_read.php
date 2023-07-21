@@ -73,7 +73,12 @@
 									</td> -->
 					<td><?= $no++ ?></td>
 					<td><b><?= $d->nik ?></b></td>
-					<td><b><?= $d->nama_siswa ?></b></td>
+					<td >
+					<?php $foto = getfotoprofil($d->id, 3);
+					if (!empty($foto)) : ?>
+						<img class="img_preview" width="40px" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
+					<?php endif; ?>
+						<b class="text-nowrap"><?= $d->nama_siswa ?></b></td>
 					<td><b><?= $d->jenis_kelamin ?></b></td>
 					<td class="text-nowrap"><?= $d->alamat ?></td>
 					<td><b><?= getnamasekolah($d->id_sekolah) ?></b></td>

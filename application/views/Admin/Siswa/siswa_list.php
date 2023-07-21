@@ -74,7 +74,7 @@
 									<td style="min-width: 100px;">
 									<?php $foto = getfotoprofil($d->id,3);
                 					if (!empty($foto)) : ?>
-										<img class="img_preview" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
+										<img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
 									<?php endif; ?>	
 									</td>
 									<td ><b><?= $d->nik ?></b></td>
@@ -87,7 +87,8 @@
 									<td class="text-nowrap small"><?= getnamauser($d->id_user) ?></td>
 									<td class="place-action text-nowrap">
 										<a href="<?= site_url('admin/siswa_update/' . $d->id) ?>" class="edit" title="Edit"><i class="las la-edit"></i></a>
-										<a href="<?= site_url('admin/siswa_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a>
+										<!-- <a href="<?= site_url('admin/siswa_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a> -->
+										<a href="<?= site_url('admin/siswa_profile/' . $d->id) ?>" class="view text-danger" title="View"><i class="la la-eye"></i></a>
 										<a href="<?= site_url('admin/siswa_delete/' . $d->id) ?>" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
 									</td>
 								</tr>

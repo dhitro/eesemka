@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/libs/line-awesome/css/line-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/libs/fontawesome-pro/css/fontawesome.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/libs/bootstrap/css/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/libs/slick/slick-theme.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/libs/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/libs/quilljs/css/quill.bubble.css" />
@@ -30,9 +31,14 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     
     <!-- jQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script> -->
+
+
     <script src="<?php echo base_url() ?>assets/js/jquery-1.12.4.js"></script>
-    <script src="<?php echo base_url() ?>assets/libs/popper/popper.js"></script>
     <script src="<?php echo base_url() ?>assets/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/libs/popper/popper.js"></script>
     <script src="<?php echo base_url() ?>assets/libs/slick/slick.min.js"></script>
     <script src="<?php echo base_url() ?>assets/libs/slick/jquery.zoom.min.js"></script>
     <script src="<?php echo base_url() ?>assets/libs/isotope/isotope.pkgd.min.js"></script>
@@ -133,7 +139,7 @@
                 </div><!-- .row -->
             </div><!-- .container-fluid -->
         </header><!-- .site-header -->
-        <main id="main" class="site-main">
+        <main id="main" class="site-main ">
             <div class="site-content owner-content">
                 <div class="member-menu">
                     <div class="container">
@@ -164,11 +170,11 @@
                             <?php elseif($menuaawal == 'admin'): ?>    
                             <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('admin') ?>">Dashboard</a></li>
 							<li class="<?= $menuaktif == 'sekolah' || $menuaktif == 'sekolah_create' || $menuaktif == 'sekolah_update' || $menuaktif== 'sekolah_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/sekolah') ?>">Sekolah</a></li>
-							<li class="<?= $menuaktif == 'siswa' || $menuaktif == 'siswa_create' || $menuaktif == 'siswa_update' || $menuaktif== 'siswa_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/siswa') ?>">Siswa</a></li>
+							<li class="<?= $menuaktif == 'siswa' || $menuaktif == 'siswa_profile' || $menuaktif == 'siswa_create' || $menuaktif == 'siswa_update' || $menuaktif== 'siswa_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/siswa') ?>">Siswa</a></li>
 							<li class="<?= $menuaktif == 'perusahaan' || $menuaktif == 'perusahaan_create' || $menuaktif == 'perusahaan_update' || $menuaktif== 'perusahaan_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/perusahaan') ?>">Perusahaan</a></li>
 							<li class="<?= $menuaktif == 'lowongan' || $menuaktif == 'lowongan_create' || $menuaktif == 'lowongan_update' || $menuaktif== 'lowongan_read'  ? 'active' : '' ?>"><a href="<?= base_url('admin/lowongan') ?>">Lowongan Kerja</a></li>
-							<li class="<?= $menuaktif == 'lamaran' ? 'active' : '' ?>"><a href="<?= base_url('admin/lamaran') ?>">Lamaran Kerja</a></li>
-							<li class="<?= $menuaktif == 'permintaan' ? 'active' : '' ?>"><a href="<?= base_url('admin/permintaan') ?>">Permintaan Perusahaan</a></li>
+							<li class="<?= $menuaktif == 'lamaran' || $menuaktif == 'lamaran_create' || $menuaktif == 'lamaran_update' || $menuaktif== 'lamaran_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/lamaran') ?>">Lamaran Kerja</a></li>
+							<li class="<?= $menuaktif == 'permintaan' || $menuaktif == 'permintaan_create' || $menuaktif == 'permintaan_update' || $menuaktif== 'permintaan_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/permintaan') ?>">Permintaan Siswa</a></li>
 							<li class="<?= $menuaktif == 'user' ? 'active' : '' ?>"><a href="<?= base_url('admin/user') ?>">User</a></li>
                             <?php endif; ?>
                             <li class="text-danger"><a onclick="return confirm('Apakah anda yakin akan keluar ?')" href="<?= base_url("auth/logout") ?>"> Logout</a>
@@ -184,6 +190,27 @@
                 </div>
             </div>
         </main><!-- .site-main -->
+
+        <div class="modal" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title ">Preview File</h5>
+               
+            </div>
+            <div class="modal-body">
+                <object id="viewer" data="" width="100%" height="500px">
+                    This browser does not support PDFs. Please download the PDF to view it:
+                    <a id="downloader" href="" target="_blank">Download PDF</a>
+                </object>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-close-modal" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- Modal -->
+</div>
 
         <footer id="footer" class="footer">
             <div class="container">
