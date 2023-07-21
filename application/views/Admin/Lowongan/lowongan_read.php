@@ -41,3 +41,71 @@
       </div><!-- /.box -->
     </div><!-- /.col -->
   </div><!-- /.row -->
+  </div><!-- /.row -->
+
+  <div class="row">
+  <table class="member-place-list owner-booking table-responsive">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Pelamar</th>
+									<th>Tanggal</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td data-title="ID">1201</td>
+									<td data-title="Places"><b>Anto</b></td>
+									<td data-title="Booking at">13 Juni 2023</td>
+									<td data-title="Status" class="approved">Approved</td>
+									<td data-title="" class="place-action">
+										<a href="#" class="cancel" title="Cancel">Cancel</a>
+										<a href="#" class="detail" title="Detail">Detail</a>
+									</td>
+								</tr>
+								<tr>
+									<td data-title="ID">1201</td>
+									<td data-title="Places"><b>Andi</b></td>
+									<td data-title="Booking at">13 Juni 2023</td>
+									<td data-title="Status" class="pending">Pending</td>
+									<td data-title="" class="place-action">
+										<a href="#" class="approve" title="Approve">Approve</a>
+										<a href="#" class="cancel" title="Cancel">Cancel</a>
+										<a href="#" class="detail" title="Detail">Detail</a>
+									</td>
+								</tr>
+								<tr>
+									<td data-title="ID">1201</td>
+									<td data-title="Places"><b>Sinta</b></td>
+									<td data-title="Booking at">13 Juni 2023</td>
+									<td data-title="Status" class="cancel">Cancel</td>
+									<td data-title="" class="place-action">
+										<a href="#" class="approve" title="Approve">Approve</a>
+										<a href="#" class="detail" title="Detail">Detail</a>
+									</td>
+								</tr>
+								<tr>
+									<td data-title="ID">1201</td>
+									<td data-title="Places"><b>Eko</b></td>
+									<td data-title="Booking at">13 Juni 2023</td>
+									<td data-title="Status" class="approved">Approved</td>
+									<td data-title="" class="place-action">
+										<a href="#" class="cancel" title="Cancel">Cancel</a>
+										<a href="#" class="detail" title="Detail">Detail</a>
+									</td>
+								</tr>
+								<tr>
+									<td data-title="ID">1201</td>
+									<td data-title="Places"><b>Rani</b></td>
+									<td data-title="Booking at">13 Juni 2023</td>
+									<td data-title="Status" class="approved">Approved</td>
+									<td data-title="" class="place-action">
+										<a href="#" class="cancel" title="Cancel">Cancel</a>
+										<a href="#" class="detail" title="Detail">Detail</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+  </div>

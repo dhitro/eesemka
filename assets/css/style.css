@@ -1453,6 +1453,14 @@ a.place__comments__reply i { display: inline-block; vertical-align: middle; marg
 .member-place-list.owner-booking td.place-action .detail { border-color: #2d2d2d; color: #2d2d2d; }
 .member-place-list.owner-booking td.place-action .detail:hover { background-color: #2d2d2d; color: #ffffff; }
 
+div.place-action a { font-size: 12px; height: 20px; line-height: 18px; border-radius: 20px; -webkit-backface-visibility: hidden; -moz-backface-visibility: hidden; -webkit-transform: translate3d(0, 0, 0); -moz-transform: translate3d(0, 0, 0); display: inline-block; text-align: center; padding: 0 15px; border: 1px solid; margin-left: 0px; }
+div.place-action .publish { border-color: #2dcb48; color: #2dcb48; }
+div.place-action .publish:hover { background-color: #2dcb48; color: #ffffff; }
+div.place-action .pending { border-color: #ffcc00; color: #ffcc00; }
+div.place-action .pending:hover { background-color: #ffcc00; color: #ffffff; }
+div.place-action .close { border-color: #e74807; color: #e74807; }
+div.place-action .close:hover { background-color: #e74807; color: #ffffff; }
+
 .place-action { position: relative; }
 
 .box-option { display: none; position: absolute; box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1); width: 130px; z-index: 9; background-color: #ffffff; padding: 20px; top: 80px; left: 0; }

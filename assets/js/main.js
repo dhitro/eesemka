@@ -1229,25 +1229,6 @@
     // }
     });
 
-    $( '.approve' ).on( 'click', function(e) {
-        e.preventDefault();
-        var href = $(this).attr('href');
-        var th = $( this );
-        var id = th.data('id');
-        var val = 'Valid';
-        var isGood=confirm('Are You Sure ?');
-        if (isGood) {
-        $.post(href,{id:id,val:val},function(response){ 
-        //  alert("Success");
-         th.parents( 'tr' ).find('.text-status').html(val);
-         th.parents( 'tr' ).find('.text-status').removeClass('text-danger');
-         th.parents( 'tr' ).find('.text-status').addClass('text-success');
-
-        });
-        }
-     
-    });
-
     function uniqId() {
         return Math.round(new Date().getTime() + (Math.random() * 100));
       }
@@ -1354,6 +1335,25 @@
 
      });
 
+     $( '.approve' ).on( 'click', function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        var th = $( this );
+        var id = th.data('id');
+        var val = 'Valid';
+        var isGood=confirm('Are You Sure ?');
+        if (isGood) {
+        $.post(href,{id:id,val:val},function(response){ 
+        //  alert("Success");
+         th.parents( 'tr' ).find('.text-status').html(val);
+         th.parents( 'tr' ).find('.text-status').removeClass('text-danger');
+         th.parents( 'tr' ).find('.text-status').addClass('text-success');
+
+        });
+        }
+     
+    });
+
     $( '.cancel' ).on( 'click', function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
@@ -1367,6 +1367,66 @@
          th.parents( 'tr' ).find('.text-status').html(val);
          th.parents( 'tr' ).find('.text-status').removeClass('text-success');
          th.parents( 'tr' ).find('.text-status').addClass('text-danger');
+        });
+        }
+     
+    });
+
+    $( '.publish' ).on( 'click', function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        var th = $( this );
+        var id = th.data('id');
+        var val = 'Publish';
+        var isGood=confirm('Are You Sure ?');
+        if (isGood) {
+        $.post(href,{id:id,val:val},function(response){ 
+        //  alert("Success");
+         th.parents( 'tr' ).find('.text-status').html(val);
+         th.parents( 'tr' ).find('.text-status').removeClass('text-danger');
+         th.parents( 'tr' ).find('.text-status').removeClass('text-warning');
+         th.parents( 'tr' ).find('.text-status').addClass('text-success');
+
+        });
+        }
+     
+    });
+
+    $( '.pending' ).on( 'click', function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        var th = $( this );
+        var id = th.data('id');
+        var val = 'Pending';
+        var isGood=confirm('Are You Sure ?');
+        if (isGood) {
+        $.post(href,{id:id,val:val},function(response){ 
+        //  alert("Success");
+         th.parents( 'tr' ).find('.text-status').html(val);
+         th.parents( 'tr' ).find('.text-status').removeClass('text-danger');
+         th.parents( 'tr' ).find('.text-status').removeClass('text-success');
+         th.parents( 'tr' ).find('.text-status').addClass('text-warning');
+
+        });
+        }
+     
+    });
+
+    $( '.close' ).on( 'click', function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        var th = $( this );
+        var id = th.data('id');
+        var val = 'Close';
+        var isGood=confirm('Are You Sure ?');
+        if (isGood) {
+        $.post(href,{id:id,val:val},function(response){ 
+        //  alert("Success");
+         th.parents( 'tr' ).find('.text-status').html(val);
+         th.parents( 'tr' ).find('.text-status').removeClass('text-success');
+         th.parents( 'tr' ).find('.text-status').removeClass('text-warning');
+         th.parents( 'tr' ).find('.text-status').addClass('text-danger');
+
         });
         }
      

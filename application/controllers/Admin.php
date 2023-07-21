@@ -826,6 +826,17 @@ class Admin extends CI_Controller
     }
   }
 
+  public function lowongan_approve()
+  {
+    $id = $this->input->post('id', TRUE);
+    $val = $this->input->post('val', TRUE);
+    $data = array(
+      'status' => $val,
+    );
+    $this->Lowongan_model->update($id, $data);
+  }
+
+
   public function lowongan_delete($id)
   {
     $row = $this->Lowongan_model->get_by_id($id);

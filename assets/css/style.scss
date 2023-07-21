@@ -6998,6 +6998,33 @@ a.place__comments__reply {
 			width: 15%;
 		}
 	}
+	
+	div.place-action {
+		.approve {
+			border-color: #2dcb48;
+			color: #2dcb48;
+			&:hover {
+				background-color: #2dcb48;
+				color: #ffffff;
+			}
+		}
+		.pending {
+			border-color: #ffcc00;
+			color: #ffcc00;
+			&:hover {
+				background-color: #ffcc00;
+				color: #ffffff;
+			}
+		}
+		.cancel {
+			border-color: #e74807;
+			color: #e74807;
+			&:hover {
+				background-color: #e74807;
+				color: #ffffff;
+			}
+		}
+	}
 	td.place-action {
 		text-align: right;
 		a {

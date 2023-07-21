@@ -32,7 +32,7 @@
 <table class="member-place-list table-responsive">
 	<thead>
 		<tr>
-			
+
 			<th>ID</th>
 			<th></th>
 			<th>Nama Perusahaan</th>
@@ -50,19 +50,25 @@
 		$no = 1;
 		foreach ($data as $d) : ?>
 			<tr>
-				
+
 				<td><?= $no++ ?></td>
 				<td style="min-width: 100px;">
-									<?php $foto = getfotofeeds($d->id);
-                					if (!empty($foto)) : ?>
-										<img class="img_preview" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
-									<?php endif; ?>	
-									</td>
+					<?php $foto = getfotofeeds($d->id);
+					if (!empty($foto)) : ?>
+						<img class="img_preview" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
+					<?php endif; ?>
+				</td>
 				<td class="text-nowrap"><b><?= getnamaperusahaan($d->id_perusahaan)  ?></b></td>
 				<td><?= $d->nama_lowongan ?></td>
 				<td><?= $d->deskripsi ?></td>
 				<td><?= $d->persyaratan ?></td>
-				<td><?= $d->status ?></td>
+				<?php 
+				$st = '';
+				if($d->status == 'Publish') $st = 'text-success';
+				if($d->status == 'Pending') $st = 'text-warning';
+				if($d->status == 'Close') $st = 'text-danger';
+				?>
+				<td class="small text-status <?= $st ?>"><?= $d->status ?></td>
 				<td class="text-nowrap small"><?= getnamauser($d->created_by) ?></td>
 				<td>
 					<ul>
@@ -71,10 +77,17 @@
 						<?php endforeach; ?>
 					</ul>
 				</td>
-				<td class="place-action text-nowrap">
-					<a href="<?= site_url('admin/lowongan_update/' . $d->id) ?>" class="edit" title="Edit"><i class="las la-edit"></i></a>
-					<a href="<?= site_url('admin/lowongan_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a>
-					<a href="<?= site_url('admin/lowongan_delete/' . $d->id) ?>" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
+				<td class="">
+					<div class="text-nowrap">
+						<a href="<?= site_url('admin/lowongan_update/' . $d->id) ?>" class="edit" title="Edit"><i class="las la-edit"></i></a>
+						<a href="<?= site_url('admin/lowongan_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a>
+						<a href="<?= site_url('admin/lowongan_delete/' . $d->id) ?>" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
+					</div>
+					<div class="place-action">
+						<a href="<?= site_url('admin/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="publish" title="Publish">Publish</a>
+						<a href="<?= site_url('admin/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="pending" title="Pending">Pending</a>
+						<a href="<?= site_url('admin/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="close" title="Close">Close</a>
+					</div>
 				</td>
 			</tr>
 		<?php endforeach; ?>
