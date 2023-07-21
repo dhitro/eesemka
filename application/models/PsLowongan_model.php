@@ -7,8 +7,10 @@ class PsLowongan_model extends CI_Model
 {
 
     public $table = 'eesemka_posisi_lowongan';
+    public $tablef = 'eesemka_posisi';
     public $id = 'id';
     public $idlowongan = 'id_lowongan';
+    public $idposisi = 'id_posisi';
     public $order = 'DESC';
 
     function __construct()
@@ -27,7 +29,8 @@ class PsLowongan_model extends CI_Model
      function get_allposisi($id)
      {
         $this->db->where($this->idlowongan, $id);
-         $this->db->order_by($this->id, $this->order);
+        $this->db->join($this->tablef,"$this->tablef.$this->id = $this->table.$this->idposisi");
+        //  $this->db->order_by($this->id, $this->order);
          return $this->db->get($this->table)->result();
      }
 

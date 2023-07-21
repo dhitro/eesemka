@@ -1,5 +1,5 @@
 <div class="member-wrap-top">
-	<h2>E-Esemka - Data Lowongan</h2>
+	<h2>E-Esemka - Data Lamaran</h2>
 </div><!-- .member-wrap-top -->
 <a href="<?= $actionadd ?>" class="btn btn-danger mb-4"><i class="las la-plus"></i> Tambah Data</a>
 
@@ -32,16 +32,22 @@
 <table class="member-place-list table-responsive">
 	<thead>
 		<tr>
-
+			<!-- <th>
+										<div class="field-check">
+											<label for="all">
+												<input id="all" type="checkbox" value="all">
+												<span class="checkmark">
+													<i class="la la-check"></i>
+												</span>
+											</label>
+										</div>
+									</th> -->
 			<th>ID</th>
-			<th></th>
-			<th>Nama Perusahaan</th>
-			<th>Lowongan</th>
-			<th>Deskripsi</th>
-			<th>Persyaratan</th>
+			<th>Nama Lowongan</th>
+			<th class="text-nowrap">Nama Pelamar</th>
+			<th>Posisi Lamaran</th>
 			<th>Status</th>
-			<th>Dibuat Oleh</th>
-			<th>Posisi Yang Dibutuhkan</th>
+			<th>Tanggal</th>
 			<th>Action</th>
 		</tr>
 	</thead>
@@ -52,41 +58,36 @@
 			<tr>
 
 				<td><?= $no++ ?></td>
-				<td style="min-width: 100px;">
-					<?php $foto = getfotofeeds($d->id);
-					if (!empty($foto)) : ?>
-						<img class="img_preview" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
-					<?php endif; ?>
+				<td class="text-nowrap">
+					<b><?= getlowongan($d->id_lowongan) ?></b>
 				</td>
-				<td class="text-nowrap"><b><?= getnamaperusahaan($d->id_perusahaan)  ?></b></td>
-				<td><?= $d->nama_lowongan ?></td>
-				<td><?= $d->deskripsi ?></td>
-				<td><?= $d->persyaratan ?></td>
-				<?php 
+
+				<td class="text-nowrap">
+					<?php $foto = getfotoprofil($d->id_siswa, 3);
+					if (!empty($foto)) : ?>
+						<img class="img_preview" width="40px" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
+					<?php endif; ?>
+					<?= getsiswa($d->id_siswa) ?>
+				</td>
+				<td class="text-nowrap"><?= getnamaposisi($d->id_posisi) ?></td>
+				<?php
 				$st = '';
-				if($d->status == 'Publish') $st = 'text-success';
-				if($d->status == 'Pending') $st = 'text-warning';
-				if($d->status == 'Close') $st = 'text-danger';
+				if ($d->status == 'Approve') $st = 'text-success';
+				if ($d->status == 'Pending') $st = 'text-warning';
+				if ($d->status == 'Reject') $st = 'text-danger';
 				?>
 				<td class="small text-status <?= $st ?>"><?= $d->status ?></td>
-				<td class="text-nowrap small"><?= getnamauser($d->created_by) ?></td>
-				<td>
-					<ul>
-						<?php foreach (loadposisilowongan($d->id) as $bp) :  ?>
-							<li><?= getnamaposisi($bp->id_posisi) ?></li>
-						<?php endforeach; ?>
-					</ul>
-				</td>
+				<td style="width: 350px;"><?= $d->created_at ?></td>
 				<td class="">
 					<div class="text-nowrap">
-						<a href="<?= site_url('admin/lowongan_update/' . $d->id) ?>" class="edit" title="Edit"><i class="las la-edit"></i></a>
-						<a href="<?= site_url('admin/lowongan_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a>
-						<a href="<?= site_url('admin/lowongan_delete/' . $d->id) ?>" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
+					<a href="<?= site_url('admin/lamaran_update/' . $d->id) ?>" class="edit" title="Edit"><i class="las la-edit"></i></a>
+					<a href="<?= site_url('admin/lamaran_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a>
+					<a href="<?= site_url('admin/lamaran_delete/' . $d->id) ?>" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
 					</div>
 					<div class="place-action">
-						<a href="<?= site_url('admin/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="publish" title="Publish">Publish</a>
-						<a href="<?= site_url('admin/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="pending" title="Pending">Pending</a>
-						<a href="<?= site_url('admin/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="close" title="Close">Close</a>
+						<a href="<?= site_url('admin/lamaran_approve/') ?>" data-id="<?= $d->id ?>" class="approved" title="Approve">Approve</a>
+						<a href="<?= site_url('admin/lamaran_approve/') ?>" data-id="<?= $d->id ?>" class="pending" title="Pending">Pending</a>
+						<a href="<?= site_url('admin/lamaran_approve/') ?>" data-id="<?= $d->id ?>" class="reject" title="Reject">Reject</a>
 					</div>
 				</td>
 			</tr>

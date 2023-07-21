@@ -11,15 +11,18 @@ class Admin extends CI_Controller
     $this->load->library('upload');
     $this->load->library('uuid');
     $this->load->library('pagination');
-    $this->load->model('Sekolah_model');
-    $this->load->model('Siswa_model');
-    $this->load->model('Perusahaan_model');
-    $this->load->model('Bdperusahaan_model');
-    $this->load->model('Lowongan_model');
-    $this->load->model('Posisi_model');
-    $this->load->model('PsLowongan_model');
-    $this->load->model('Swpengalaman_model');
-    $this->load->model('File_model');
+    $this->load->model([
+      'Sekolah_model',
+      'Siswa_model',
+      'Perusahaan_model',
+      'Bdperusahaan_model',
+      'Lowongan_model',
+      'Posisi_model',
+      'PsLowongan_model',
+      'Swpengalaman_model',
+      'File_model',
+      'Lamaran_model'
+    ]);
     is_logged_in();
   }
 
@@ -118,7 +121,7 @@ class Admin extends CI_Controller
       $fileuploaded = array();
 
       if (!empty($_FILES['foto']['name'])) :
-        $fileuploaded =  upload_files('upload/dokumen', $uuid, $_FILES['foto'], $idlast, 3, 'foto[]');
+        $fileuploaded =  upload_files('upload/dokumen', $uuid, $_FILES['foto'], $idlast, 5, 'foto[]');
       endif;
 
       $this->session->set_flashdata('message', 'Create Record Success');
@@ -167,7 +170,7 @@ class Admin extends CI_Controller
       $this->Sekolah_model->update($this->input->post('id', TRUE), $data);
       $fileuploaded = array();
       if (!empty($_FILES['foto']['name'])) :
-        $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 3, 'foto[]');
+        $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 5, 'foto[]');
       endif;
       $this->session->set_flashdata('message', 'Update Record Success');
       redirect(site_url('admin/sekolah'));
@@ -545,7 +548,7 @@ class Admin extends CI_Controller
       $fileuploaded = array();
 
       if (!empty($_FILES['foto']['name'])) :
-        $fileuploaded =  upload_files('upload/dokumen', $uuid, $_FILES['foto'], $idlast, 3, 'foto[]');
+        $fileuploaded =  upload_files('upload/dokumen', $uuid, $_FILES['foto'], $idlast, 6, 'foto[]');
       endif;
 
       $bidang_list = $this->input->post('bidang_list');
@@ -608,7 +611,7 @@ class Admin extends CI_Controller
       $this->Perusahaan_model->update($this->input->post('id', TRUE), $data);
       $fileuploaded = array();
       if (!empty($_FILES['foto']['name'])) :
-        $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 3, 'foto[]');
+        $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 6, 'foto[]');
       endif;
 
       $bidang_list = $this->input->post('bidang_list');
@@ -647,8 +650,8 @@ class Admin extends CI_Controller
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
   }
 
-  // Module lowongann
-  public function Lowongan()
+  // Module lowongan
+  public function lowongan()
   {
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
@@ -665,13 +668,13 @@ class Admin extends CI_Controller
     $offset = html_escape($this->input->get('per_page'));
     $cari = html_escape($this->input->get('s'));
 
-    $Lowongan = $this->Lowongan_model->get_limit_data($limit, $offset, $cari);
+    $lowongan = $this->Lowongan_model->get_limit_data($limit, $offset, $cari);
 
 
     $this->pagination->initialize($config);
     $data = array(
       'title' => 'Admin Area - Data Lowongan',
-      'data' => $Lowongan,
+      'data' => $lowongan,
       'actionadd' => site_url('admin/lowongan_create'),
       'actionfilter' => site_url('admin/lowongan'),
     );
@@ -687,7 +690,7 @@ class Admin extends CI_Controller
         'id' => $row->id,
         'nama_lowongan' => $row->nama_lowongan,
         'deskripsi' => $row->deskripsi,
-        'persayaratan' => $row->persayaratan,
+        'persyaratan' => $row->persyaratan,
         'status' => $row->status,
       );
       $this->template->load('template', 'Admin/Lowongan/lowongan_read', $data);
@@ -820,11 +823,20 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('message', 'Update Record Success');
         redirect(site_url('admin/lowongan'));
       else :
-        $this->session->set_flashdata('message', 'Error Record'. var_dump($this->db->error()) );
+        $this->session->set_flashdata('message', 'Error Record' . var_dump($this->db->error()));
         redirect(site_url('admin/lowongan'));
       endif;
     }
   }
+
+  public function lowongan_posisi(){
+    $id=  $this->input->post('id', TRUE);
+    $data =  $this->PsLowongan_model->get_allposisi($id);
+    $this->output
+			->set_content_type('application/json')
+			->set_output(json_encode($data));
+    
+   }
 
   public function lowongan_approve()
   {
@@ -840,7 +852,6 @@ class Admin extends CI_Controller
   public function lowongan_delete($id)
   {
     $row = $this->Lowongan_model->get_by_id($id);
-
     if ($row) {
       $this->Lowongan_model->delete($id);
     } else {
@@ -851,6 +862,172 @@ class Admin extends CI_Controller
   {
     $this->form_validation->set_rules('nama_lowongan', 'Nama Lowongan', 'trim|required');
     $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'trim|required');
+
+    $this->form_validation->set_rules('id', 'id', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+  }
+
+
+  // Module sekolah
+  public function lamaran()
+  {
+    // $sekolah = $this->db->get('eesemka_sekolah')->result_array();
+    $per_hal = $this->input->post('per_hal');
+    if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
+    $ses_hal = $this->session->userdata('perhal');
+    $config['base_url'] = site_url('/admin/lamaran');
+    $config['page_query_string'] = TRUE;
+    $config['total_rows'] = $this->Lamaran_model->get_count();
+    $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
+    $config['full_tag_open'] = '<div class="pagination__numbers">';
+    $config['full_tag_close'] = '</div>';
+
+    $this->pagination->initialize($config);
+    $limit = $config['per_page'];
+    $offset = html_escape($this->input->get('per_page'));
+    $cari = html_escape($this->input->get('s'));
+
+    $sekolah = $this->Lamaran_model->get_limit_data($limit, $offset, $cari);
+
+
+    $this->pagination->initialize($config);
+    $data = array(
+      'title' => 'Admin Area - Data Lamaran',
+      'data' => $sekolah,
+      'actionadd' => site_url('admin/lamaran_create'),
+      'actionfilter' => site_url('admin/lamaran'),
+    );
+    $this->template->load('template', 'Admin/Lamaran/lamaran_list', $data);
+  }
+
+  public function lamaran_read($id)
+  {
+    $row = $this->Lamaran_model->get_by_id($id);
+    if ($row) {
+      $data = array(
+        'title' => 'Admin Area - Detail Lamaran',
+        'id' => $row->id,
+        'id_lowongan' => $row->id_lowongan,
+        'id_siswa' => $row->id_siswa,
+       
+      );
+      $this->template->load('template', 'Admin/Lamaran/lamaran_read', $data);
+    } else {
+      $this->session->set_flashdata('message', 'Record Not Found');
+      redirect(site_url('admin/lamaran'));
+    }
+  }
+
+  public function lamaran_create()
+  {
+    $data = array(
+      'title' => 'Admin Area - Tambah Lamaran',
+      'button' => 'Create',
+      'action' => site_url('admin/lamaran_create_action'),
+      'id' => set_value('id'),
+      'uuid' => set_value('uuid'),
+      'id_lowongan' => set_value('id_lowongan'),
+      'id_posisi' => set_value('id_posisi'),
+      'id_siswa' => set_value('id_siswa'),
+     
+    );
+    $this->template->load('template', 'Admin/Lamaran/lamaran_form', $data);
+  }
+
+  public function lamaran_create_action()
+  {
+    $this->lamaran_rules();
+
+    if ($this->form_validation->run() == FALSE) {
+      $this->lamaran_create();
+    } else {
+      $uuid = $this->uuid->v4();
+      $data = array(
+        'id_lowongan' => $this->input->post('id_lowongan', TRUE),
+        'id_siswa' => $this->input->post('id_siswa', TRUE),
+        'id_posisi' => $this->input->post('id_posisi', TRUE),
+        'created_by' => $this->session->userdata('user_id'),
+        'uuid' =>  $uuid,
+      );
+
+      $idlast =   $this->Lamaran_model->insert($data);
+
+     $this->session->set_flashdata('message', 'Create Record Success');
+      redirect(site_url('admin/lamaran'));
+    }
+  }
+
+  public function lamaran_update($id)
+  {
+
+    $row = $this->Lamaran_model->get_by_id($id);
+
+    if ($row) {
+      $data = array(
+        'title' => 'Admin Area - Form Data Lamaran',
+        'button' => 'Update',
+        'action' => site_url('admin/lamaran_update_action'),
+        'id' => set_value('id', $row->id),
+        'id_lowongan' => set_value('id_lowongan', $row->id_lowongan),
+        'id_siswa' => set_value('id_siswa', $row->id_siswa),
+        'id_posisi' => set_value('id_posisi', $row->id_posisi),
+        'uuid' => set_value('uuid', $row->uuid),
+      );
+      $this->template->load('template', 'Admin/Lamaran/lamaran_form', $data);
+    } else {
+      $this->session->set_flashdata('message', 'Record Not Found');
+      redirect(site_url('admin/lamaran'));
+    }
+  }
+
+  public function lamaran_update_action()
+  {
+    $this->lamaran_rules();
+
+    if ($this->form_validation->run() == FALSE) {
+      $this->lamaran_update($this->input->post('id', TRUE));
+    } else {
+      $data = array(
+        'id_lowongan' => $this->input->post('id_lowongan', TRUE),
+        'id_posisi' => $this->input->post('id_posisi', TRUE),
+        'id_siswa' => $this->input->post('id_siswa', TRUE),
+      
+      );
+
+      $this->Lamaran_model->update($this->input->post('id', TRUE), $data);
+      $this->session->set_flashdata('message', 'Update Record Success');
+      redirect(site_url('admin/lamaran'));
+    }
+  }
+
+  public function lamaran_approve()
+  {
+    $id = $this->input->post('id', TRUE);
+    $val = $this->input->post('val', TRUE);
+    $data = array(
+      'status' => $val,
+    );
+    $this->Lamaran_model->update($id, $data);
+  }
+
+
+  public function lamaran_delete($id)
+  {
+    $row = $this->Lamaran_model->get_by_id($id);
+
+    if ($row) {
+      $this->Lamaran_model->delete($id);
+      // $this->session->set_flashdata('message', 'Delete Record Success');
+      // redirect(site_url('admin/sekolah'));
+    } else {
+      // $this->session->set_flashdata('message', 'Record Not Found');
+      // redirect(site_url('admin/sekolah'));
+    }
+  }
+
+  public function lamaran_rules()
+  {
+    $this->form_validation->set_rules('id_lowongan', 'Nama Lowongan', 'trim|required');
 
     $this->form_validation->set_rules('id', 'id', 'trim');
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

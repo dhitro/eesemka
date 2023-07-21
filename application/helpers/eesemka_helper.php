@@ -100,6 +100,26 @@ if (!function_exists('loaduser')) {
   }
 }
 
+if (!function_exists('loadlowongan')) {
+  function loadlowongan($id=null)
+  {
+    $ci = get_instance();
+    $ci->load->model('Lowongan_model');
+    $data = $ci->Lowongan_model->get_all();
+    return $data;
+  }
+}
+
+if (!function_exists('loadsiswa')) {
+  function loadsiswa($id=null)
+  {
+    $ci = get_instance();
+    $ci->load->model('Siswa_model');
+    $data = $ci->Siswa_model->get_all();
+    return $data;
+  }
+}
+
 
 if (!function_exists('loadsiswasekolah')) {
   function loadsiswasekolah($id=null)
@@ -131,6 +151,7 @@ if (!function_exists('loadsiswakeahlian')) {
   }
 }
 
+
 if (!function_exists('loadsiswapendukung')) {
   function loadsiswapendukung($id=null)
   {
@@ -141,12 +162,33 @@ if (!function_exists('loadsiswapendukung')) {
   }
 }
 
+if (!function_exists('loadlowonganposisi')) {
+  function loadlowonganposisi($id=null)
+  {
+    $ci = get_instance();
+    $ci->load->model('PsLowongan_model');
+    $data = $ci->PsLowongan_model->get_allposisi($id);
+    return $data;
+  }
+}
+if (!function_exists('loadlamaran')) {
+  function loadlamaran($id=null)
+  {
+    $ci = get_instance();
+    $ci->load->model('Lamaran_model');
+    $data = $ci->Lamaran_model->get_alllamaran($id);
+    return $data;
+  }
+}
+
+
+
 if (!function_exists('getfotoprofil')) {
-  function getfotoprofil($id)
+  function getfotoprofil($id=null ,$tipe =null)
   {
     $ci = get_instance();
     $ci->load->model('File_model');
-    $data = $ci->File_model->get_by_idsiswa($id,3);
+    $data = $ci->File_model->get_by_idsiswa($id,$tipe);
     if ($data) :
       return $data;
     else :
@@ -234,10 +276,24 @@ if (!function_exists('getsiswa')) {
   function getsiswa($id)
   {
     $ci = get_instance();
-    $ci->load->model('Sekolah_model');
-    $data = $ci->Sekolah_model->get_by_id($id);
+    $ci->load->model('Siswa_model');
+    $data = $ci->Siswa_model->get_by_id($id);
     if ($data) :
-      return $data->nama_sekolah;
+      return $data->nama_siswa;
+    else :
+      return '-';
+    endif;
+  }
+}
+
+if (!function_exists('getlowongan')) {
+  function getlowongan($id)
+  {
+    $ci = get_instance();
+    $ci->load->model('Lowongan_model');
+    $data = $ci->Lowongan_model->get_by_id($id);
+    if ($data) :
+      return $data->nama_lowongan;
     else :
       return '-';
     endif;
@@ -245,76 +301,6 @@ if (!function_exists('getsiswa')) {
 }
 
 
-if (!function_exists('loadrole')) {
-  function loadrole()
-  {
-    $ci = get_instance();
-    $data = $ci->db
-      ->get('sirinov_role')->result_array();
-    return $data;
-  }
-}
-
-
-
-if (!function_exists('loadtahun')) {
-  function loadtahun()
-  {
-    $ci = get_instance();
-    $data = $ci->db
-      ->get('sirinov_tahun')->result_array();
-    return $data;
-  }
-}
-
-if (!function_exists('loadtahapan')) {
-  function loadtahapan()
-  {
-    $ci = get_instance();
-    $data = $ci->db
-      ->get('sirinov_tahapan_inovasi')->result_array();
-    return $data;
-  }
-}
-
-if (!function_exists('loadfile')) {
-  function loadfile($id = null)
-  {
-    $ci = get_instance();
-    $data = $ci->db
-      ->where('uuid',$id)
-      ->get('sirinov_file')->result_array();
-    return $data;
-  }
-}
-
-if (!function_exists('loadfilelaporan')) {
-  function loadfilelaporan($id = null)
-  {
-    $ci = get_instance();
-    $data = $ci->db
-      ->where('uuid',$id)
-      ->get('sirinov_file_laporan')->result_array();
-    return $data;
-  }
-}
-
-
-if (!function_exists('gettahun')) {
-  function gettahun($id)
-  {
-    $ci = get_instance();
-    $data = $ci->db
-      ->where(['id' => $id])
-      ->get('sirinov_tahun')
-      ->row();
-    if ($data) :
-      return $data->tahun;
-    else :
-      return '-';
-    endif;
-  }
-}
 
 if (!function_exists('angka')) {
   function angka($angka)

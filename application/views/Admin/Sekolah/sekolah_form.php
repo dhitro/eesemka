@@ -13,7 +13,7 @@
               <label for="pengalaman">Foto Profil
                 <?php echo form_error('foto') ?></label>
               <div class="row" id="fotoprofil">
-                <?php $foto = getfotoprofil($id);
+                <?php $foto = getfotoprofil($id,5);
                 if (!empty($foto)) : ?>
                   <div class="col-3" id="inputFormRow">
                     <div class="field-group field-file">

@@ -1432,5 +1432,46 @@
      
     });
 
+    $( '.approved' ).on( 'click', function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        var th = $( this );
+        var id = th.data('id');
+        var val = 'Approve';
+        var isGood=confirm('Are You Sure ?');
+        if (isGood) {
+        $.post(href,{id:id,val:val},function(response){ 
+        //  alert("Success");
+         th.parents( 'tr' ).find('.text-status').html(val);
+         th.parents( 'tr' ).find('.text-status').removeClass('text-danger');
+         th.parents( 'tr' ).find('.text-status').removeClass('text-warning');
+         th.parents( 'tr' ).find('.text-status').addClass('text-success');
+
+        });
+        }
+     
+    });
+
+    $( '.reject' ).on( 'click', function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        var th = $( this );
+        var id = th.data('id');
+        var val = 'Reject';
+        var isGood=confirm('Are You Sure ?');
+        if (isGood) {
+        $.post(href,{id:id,val:val},function(response){ 
+        //  alert("Success");
+         th.parents( 'tr' ).find('.text-status').html(val);
+         th.parents( 'tr' ).find('.text-status').removeClass('text-success');
+         th.parents( 'tr' ).find('.text-status').removeClass('text-warning');
+         th.parents( 'tr' ).find('.text-status').addClass('text-danger');
+
+        });
+        }
+     
+    });
+
+
     });
 })(jQuery);

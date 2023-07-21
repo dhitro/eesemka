@@ -1460,6 +1460,10 @@ div.place-action .pending { border-color: #ffcc00; color: #ffcc00; }
 div.place-action .pending:hover { background-color: #ffcc00; color: #ffffff; }
 div.place-action .close { border-color: #e74807; color: #e74807; }
 div.place-action .close:hover { background-color: #e74807; color: #ffffff; }
+div.place-action .approved { border-color: #2dcb48; color: #2dcb48; }
+div.place-action .approved:hover { background-color: #2dcb48; color: #ffffff; }
+div.place-action .reject { border-color: #e74807; color: #e74807; }
+div.place-action .reject:hover { background-color: #e74807; color: #ffffff; }
 
 .place-action { position: relative; }
 

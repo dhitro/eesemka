@@ -72,7 +72,7 @@
 									</td> -->
 									<td ><?= $no++ ?></td>
 									<td style="min-width: 100px;">
-									<?php $foto = getfotoprofil($d->id);
+									<?php $foto = getfotoprofil($d->id,3);
                 					if (!empty($foto)) : ?>
 										<img class="img_preview" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
 									<?php endif; ?>	
