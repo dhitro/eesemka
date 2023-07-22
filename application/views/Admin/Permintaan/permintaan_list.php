@@ -81,7 +81,7 @@
 				<td class="">
 					<div class="text-nowrap">
 					<a href="<?= site_url('admin/permintaan_update/' . $d->id) ?>" class="edit" title="Edit"><i class="las la-edit"></i></a>
-					<a href="<?= site_url('admin/permintaan_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a>
+					<!-- <a href="<?= site_url('admin/permintaan_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a> -->
 					<a href="<?= site_url('admin/permintaan_delete/' . $d->id) ?>" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
 					</div>
 					<div class="place-action">

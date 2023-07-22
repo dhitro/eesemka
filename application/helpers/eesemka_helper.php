@@ -181,6 +181,15 @@ if (!function_exists('loadlamaran')) {
   }
 }
 
+if (!function_exists('loadlevel')) {
+  function loadlevel($id=null)
+  {
+    $ci = get_instance();
+    $ci->load->model('Level_model');
+    $data = $ci->Level_model->get_all();
+    return $data;
+  }
+}
 
 
 if (!function_exists('getfotoprofil')) {
@@ -226,6 +235,22 @@ if (!function_exists('getnamasekolah')) {
     endif;
   }
 }
+
+
+if (!function_exists('getnamalevel')) {
+  function getnamalevel($id)
+  {
+    $ci = get_instance();
+    $ci->load->model('Level_model');
+    $data = $ci->Level_model->get_by_id($id);
+    if ($data) :
+      return $data->nama;
+    else :
+      return '-';
+    endif;
+  }
+}
+
 
 if (!function_exists('getnamaperusahaan')) {
   function getnamaperusahaan($id)

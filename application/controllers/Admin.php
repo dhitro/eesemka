@@ -22,7 +22,8 @@ class Admin extends CI_Controller
       'Swpengalaman_model',
       'File_model',
       'Lamaran_model',
-      'Permintaan_model'
+      'Permintaan_model',
+      'User_model'
     ]);
     is_logged_in();
   }
@@ -1219,5 +1220,211 @@ class Admin extends CI_Controller
     $this->form_validation->set_rules('id', 'id', 'trim');
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
   }
+
+
+   // Module User
+   public function user()
+   {
+     // $user = $this->db->get('eesemka_user')->result_array();
+     $per_hal = $this->input->post('per_hal');
+     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
+     $ses_hal = $this->session->userdata('perhal');
+     $config['base_url'] = site_url('/admin/user');
+     $config['page_query_string'] = TRUE;
+     $config['total_rows'] = $this->User_model->get_count();
+     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
+     $config['full_tag_open'] = '<div class="pagination__numbers">';
+     $config['full_tag_close'] = '</div>';
+ 
+     $this->pagination->initialize($config);
+     $limit = $config['per_page'];
+     $offset = html_escape($this->input->get('per_page'));
+     $cari = html_escape($this->input->get('s'));
+ 
+     $user = $this->User_model->get_limit_data($limit, $offset, $cari);
+ 
+ 
+     $this->pagination->initialize($config);
+     $data = array(
+       'title' => 'Admin Area - Data User',
+       'data' => $user,
+       'actionadd' => site_url('admin/user_create'),
+       'actionfilter' => site_url('admin/user'),
+     );
+     $this->template->load('template', 'Admin/User/user_list', $data);
+   }
+ 
+   public function user_read($id)
+   {
+     $row = $this->User_model->get_by_id($id);
+     if ($row) {
+       $data = array(
+         'title' => 'Admin Area - Detail User',
+         'id' => $row->id,
+         'firstname' => $row->firstname,
+         'lastname' => $row->lastname,
+         'username' => $row->username,
+         'email' => $row->email,
+         'phone' => $row->phone,
+         'instagram' => $row->instagram,
+         'facebook' => $row->facebook,
+         'is_active' => $row->is_active,
+         'id_level' => $row->id_level,
+       );
+       $this->template->load('template', 'Admin/User/user_read', $data);
+     } else {
+       $this->session->set_flashdata('message', 'Record Not Found');
+       redirect(site_url('admin/user'));
+     }
+   }
+ 
+   public function user_create()
+   {
+     $data = array(
+       'title' => 'Admin Area - Tambah user',
+       'button' => 'Create',
+       'action' => site_url('admin/user_create_action'),
+       'id' => set_value('id'),
+       'uuid' => set_value('uuid'),
+       'firstname' => set_value('firstname'),
+       'lastname' => set_value('lastname'),
+       'username' => set_value('username'),
+       'password' => set_value('password'),
+       'email' => set_value('email'),
+       'phone' => set_value('phone'),
+       'facebook' => set_value('facebook'),
+       'instagram' => set_value('instagram'),
+       'is_active' => set_value('is_active'),
+       'id_level' => set_value('id_level'),
+     );
+     $this->template->load('template', 'Admin/User/user_form', $data);
+   }
+ 
+   public function user_create_action()
+   {
+     $this->user_rules();
+ 
+     if ($this->form_validation->run() == FALSE) {
+       $this->user_create();
+     } else {
+       $uuid = $this->uuid->v4();
+       $data = array(
+         'firstname' => $this->input->post('firstname', TRUE),
+         'lastname' => $this->input->post('lastname', TRUE),
+         'username' => $this->input->post('username', TRUE),
+         'password' => $this->input->post('password', TRUE),
+         'email' => $this->input->post('email', TRUE),
+         'phone' => $this->input->post('phone', TRUE),
+         'facebook' => $this->input->post('facebook', TRUE),
+         'instagram' => $this->input->post('instagram', TRUE),
+         'is_active' => $this->input->post('is_active', TRUE),
+         'id_level' => $this->input->post('id_level', TRUE),
+         'uuid' =>  $uuid,
+       );
+ 
+       $idlast =   $this->User_model->insert($data);
+ 
+       $fileuploaded = array();
+ 
+       if (!empty($_FILES['foto']['name'])) :
+         $fileuploaded =  upload_files('upload/dokumen', $uuid, $_FILES['foto'], $idlast, 5, 'foto[]');
+       endif;
+ 
+       $this->session->set_flashdata('message', 'Create Record Success');
+       redirect(site_url('admin/user'));
+     }
+   }
+ 
+   public function user_update($id)
+   {
+ 
+     $row = $this->User_model->get_by_id($id);
+ 
+     if ($row) {
+       $data = array(
+         'title' => 'Admin Area - Form Data user',
+         'button' => 'Update',
+         'action' => site_url('admin/user_update_action'),
+         'id' => set_value('id', $row->id),
+         'firstname' => set_value('firstname', $row->firstname),
+         'lastname' => set_value('lastname', $row->lastname),
+         'username' => set_value('username', $row->username),
+         'email' => set_value('email', $row->email),
+         'phone' => set_value('phone', $row->phone),
+         'facebook' => set_value('facebook', $row->facebook),
+         'instagram' => set_value('instagram', $row->instagram),
+         'is_active' => set_value('is_active', $row->is_active),
+         'id_level' => set_value('id_level', $row->id_level),
+         'uuid' => set_value('uuid', $row->uuid),
+       );
+       $this->template->load('template', 'Admin/User/user_form', $data);
+     } else {
+       $this->session->set_flashdata('message', 'Record Not Found');
+       redirect(site_url('admin/user'));
+     }
+   }
+ 
+   public function user_update_action()
+   {
+     $this->user_rules();
+ 
+     if ($this->form_validation->run() == FALSE) {
+       $this->user_update($this->input->post('id', TRUE));
+     } else {
+       $data = array(
+         'firstname' => $this->input->post('firstname', TRUE),
+         'lastname' => $this->input->post('lastname', TRUE),
+         'username' => $this->input->post('username', TRUE),
+         'email' => $this->input->post('email', TRUE),
+         'phone' => $this->input->post('phone', TRUE),
+         'facebook' => $this->input->post('facebook', TRUE),
+         'instagram' => $this->input->post('instagram', TRUE),
+        //  'is_active' => $this->input->post('is_active', TRUE),
+         'id_level' => $this->input->post('id_level', TRUE),
+       );
+       if(!empty($this->input->post('password', TRUE)))  $data['password'] = password_hash($this->input->post('password', TRUE), PASSWORD_DEFAULT);
+ 
+       $this->User_model->update($this->input->post('id', TRUE), $data);
+       $fileuploaded = array();
+       if (!empty($_FILES['foto']['name'])) :
+         $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 5, 'foto[]');
+       endif;
+       $this->session->set_flashdata('message', 'Update Record Success');
+       redirect(site_url('admin/user'));
+     }
+   }
+ 
+
+  public function user_active()
+  {
+    $id = $this->input->post('id', TRUE);
+    $is_active = $this->input->post('is_active', TRUE);
+    $data = array(
+      'is_active' => $is_active,
+    );
+    $this->User_model->update($id, $data);
+  }
+
+   public function user_delete($id)
+   {
+     $row = $this->User_model->get_by_id($id);
+ 
+     if ($row) {
+       $this->User_model->delete($id);
+       // $this->session->set_flashdata('message', 'Delete Record Success');
+       // redirect(site_url('admin/user'));
+     } else {
+       // $this->session->set_flashdata('message', 'Record Not Found');
+       // redirect(site_url('admin/user'));
+     }
+   }
+ 
+   public function user_rules()
+   {
+     $this->form_validation->set_rules('firstname', 'Nama User', 'trim|required');
+ 
+     $this->form_validation->set_rules('id', 'id', 'trim');
+     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+   }
 
 }

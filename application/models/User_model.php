@@ -67,6 +67,12 @@ class User_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    public function get_count()
+    {
+        $query = $this->db->get($this->table);
+        return $query->num_rows();
+    }
+    
     // insert data
     function insert($data)
     {
