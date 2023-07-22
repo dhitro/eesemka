@@ -10,28 +10,7 @@
                     <h3>Overview</h3>
                     <div class="place__desc"><?= htmlspecialchars_decode($deskripsi) ?> </div><!-- .place__desc -->
                     <a href="#" class="show-more" title="Show More">Show more</a>
-                </div>
-                <div class="place__box">
-                    <h3>Contact Info</h3>
-                    <ul class="place__contact">
-                        <li>
-                            <i class="la la-phone"></i>
-                            <a title="00 343 7859" href="tel:003437859">00 123 4567</a>
-                        </li>
-                        <li>
-                            <i class="la la-globe"></i>
-                            <a title="www.abcsite.com" href="www.abcsite.com">www.abcdefg.com</a>
-                        </li>
-                        <li>
-                            <i class="la la-facebook-f"></i>
-                            <a title="fb.com/abc" href="fb.com/abc">facebook.com/eesemka</a>
-                        </li>
-                        <li>
-                            <i class="la la-instagram"></i>
-                            <a title="instagram.com/abc" href="instagram.com/abc">instagram.com/eesemka</a>
-                        </li>
-                    </ul>
-                </div><!-- .place__box -->
+                </div>  
                 <div class="place__box place__box-open">
                     <h3 class="place__title--additional">
                         Persyaratan

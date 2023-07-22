@@ -1,6 +1,4 @@
-			<div class="place">
-				
-					
+			<div class="place">	
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-8">

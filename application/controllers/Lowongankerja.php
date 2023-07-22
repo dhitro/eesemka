@@ -13,7 +13,7 @@ class Lowongankerja extends CI_Controller {
     $this->load->model([
       
       'Lowongan_model'
-    ]);
+    ]);  
   }
 
 	

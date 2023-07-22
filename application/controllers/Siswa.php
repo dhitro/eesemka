@@ -167,4 +167,54 @@ class Siswa extends CI_Controller
 
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
   }
+
+  public function profile($id=null)
+  {
+    $row = $this->Siswa_model->get_by_id($id);
+    
+      $data = array(
+        'title' => 'Admin Area - Detail Siswa',
+        'nik' => $row->nik,
+        'id' => $row->id,
+        'nama_siswa' => $row->nama_siswa,
+        'jenis_kelamin' => $row->jenis_kelamin,
+        'alamat' => $row->alamat,
+        'status' => $row->status,
+        'deskripsi' => $row->deskripsi,
+        'id_user' => $row->id_user,
+      );
+      $this->template->load('template', 'Siswa/profile', $data);
+    
+  }
+
+  // Module Permintaan
+  public function permintaan()
+  {
+    $per_hal = $this->input->post('per_hal');
+    if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
+    $ses_hal = $this->session->userdata('perhal');
+    $config['base_url'] = site_url('/siswa/permintaan');
+    $config['page_query_string'] = TRUE;
+    $config['total_rows'] = $this->Permintaan_model->get_count();
+    $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
+    $config['full_tag_open'] = '<div class="pagination__numbers">';
+    $config['full_tag_close'] = '</div>';
+
+    $this->pagination->initialize($config);
+    $limit = $config['per_page'];
+    $offset = html_escape($this->input->get('per_page'));
+    $cari = html_escape($this->input->get('s'));
+
+    $sekolah = $this->Permintaan_model->get_limit_data($limit, $offset, $cari);
+
+
+    $this->pagination->initialize($config);
+    $data = array(
+      'title' => 'Admin Area - Data permintaan',
+      'data' => $sekolah,
+      'actionadd' => site_url('admin/permintaan_create'),
+      'actionfilter' => site_url('admin/permintaan'),
+    );
+    $this->template->load('template', 'siswa/Permintaan/permintaan_list', $data);
+  }
 }
