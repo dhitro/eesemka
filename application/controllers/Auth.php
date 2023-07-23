@@ -54,6 +54,9 @@ class Auth extends CI_Controller
         if ($user) {
             if ($user['is_active'] == 1) {
                 if (password_verify($password, $user['password'])) {
+                    $idsiswa = getidsiswa($user['id']);
+                    $idsekolah = getidsekolah($user['id']);
+                    $idperusahaan = getidperusahaan($user['id']);
                     $data = [
                         'username' => $user['username'],
                         'firstname' => $user['firstname'],
@@ -61,6 +64,9 @@ class Auth extends CI_Controller
                         'user_id' => $user['id'],
                         'email' => $user['email'],
                         'id_level' => $user['id_level'],
+                        'id_sekolah' => $idsekolah,
+                        'id_siswa' => $idsiswa,
+                        'id_perusahaan' => $idperusahaan,
                         'level' => $user['level'],
                         'timeout' => time() + (60*60)
                     ];

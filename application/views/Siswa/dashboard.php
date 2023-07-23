@@ -28,137 +28,42 @@
                 <div class="owner-page-content">
                     <h2>Lowongan Yang Anda Masukan</h2>
                     <div class="area-places layout-3col">
-                        <div class="place-item layout-02 place-hover">
-                            <div class="place-inner">
-                                <div class="place-thumb hover-img">
-                                    <a class="entry-thumb" href="single-loker.html"><img src="<?= base_url() ?>assets/images/cilinic/listing-02.jpg" alt=""></a>
-                                    <a href="#" class="author" title="Author"><img src="<?= base_url() ?>assets/images/avatars/default.jpg" alt="Author"></a>
-                                </div>
-                                <div class="entry-detail">
-                                    <div class="entry-head">
-                                        <div class="place-type list-item">
-                                            <span>Desain Grafis</span>
-                                        </div>
-                                        <div class="place-city">
-                                            <a href="#">Medan</a>
-                                        </div>
-                                    </div>
-                                    <h3 class="place-title"><a href="single-loker.html">Lowongan Kerja Desain Grafis Part Time</a></h3>
-                                    <div class="entry-address"><i class="las la-map-marker"></i>PT. ESEMKA MEDAN</div>
-                                </div>
-                            </div>
+                    <?php
+            $no = 1;
+            foreach ($data as $d) :
+                $foto = getfotofeeds($d->id_lowongan);
+
+            ?>
+                <div class="place-item layout-02 place-hover">
+                    <div class="place-inner">
+                        <div class="place-thumb hover-img">
+                            <?php if (!empty($foto)) : ?>
+                                <a class="entry-thumb" href="<?= base_url('siswa/lowongandetail/').$d->id_lowongan ?> "><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
+                            <?php else : ?>
+                                <a class="entry-thumb" href="<?= base_url('siswa/lowongandetail/').$d->id_lowongan ?> "><img src="<?= base_url('assets/') ?>images/listing.jpg" alt=""></a>
+                            <?php endif; ?>
+                            <a href="#" class="author" title="<?= getnamauser($d->created_by)  ?>"><img src="<?= base_url('assets/') ?>images/avatars/default.jpg" alt="<?= getnamauser($d->created_by)  ?>"></a>
                         </div>
-                        <div class="place-item layout-02 place-hover">
-                            <div class="place-inner">
-                                <div class="place-thumb hover-img">
-                                    <a class="entry-thumb" href="single-loker.html"><img src="<?= base_url() ?>assets/images/cilinic/listing-02.jpg" alt=""></a>
-                                    <a href="#" class="author" title="Author"><img src="<?= base_url() ?>assets/images/avatars/default.jpg" alt="Author"></a>
+                        <div class="entry-detail">
+                            <div class="entry-head">
+                                <div class="place-type list-item">
+                                        <small><?= getnamaposisi($d->id_posisi) ?></small>,
+                                    
                                 </div>
-                                <div class="entry-detail">
-                                    <div class="entry-head">
-                                        <div class="place-type list-item">
-                                            <span>Desain Grafis</span>
-                                        </div>
-                                        <div class="place-city">
-                                            <a href="#">Medan</a>
-                                        </div>
-                                    </div>
-                                    <h3 class="place-title"><a href="single-loker.html">Lowongan Kerja Desain Grafis Part Time</a></h3>
-                                    <div class="entry-address"><i class="las la-map-marker"></i>PT. ESEMKA MEDAN</div>
+                                <div class="place-city">
+                                    <a href="#">Medan</a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="place-item layout-02 place-hover">
-                            <div class="place-inner">
-                                <div class="place-thumb hover-img">
-                                    <a class="entry-thumb" href="single-loker.html"><img src="<?= base_url() ?>assets/images/cilinic/listing-02.jpg" alt=""></a>
-                                    <a href="#" class="author" title="Author"><img src="<?= base_url() ?>assets/images/avatars/default.jpg" alt="Author"></a>
-                                </div>
-                                <div class="entry-detail">
-                                    <div class="entry-head">
-                                        <div class="place-type list-item">
-                                            <span>Desain Grafis</span>
-                                        </div>
-                                        <div class="place-city">
-                                            <a href="#">Medan</a>
-                                        </div>
-                                    </div>
-                                    <h3 class="place-title"><a href="single-loker.html">Lowongan Kerja Desain Grafis Part Time</a></h3>
-                                    <div class="entry-address"><i class="las la-map-marker"></i>PT. ESEMKA MEDAN</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="place-item layout-02 place-hover">
-                            <div class="place-inner">
-                                <div class="place-thumb hover-img">
-                                    <a class="entry-thumb" href="single-loker.html"><img src="<?= base_url() ?>assets/images/cilinic/listing-02.jpg" alt=""></a>
-                                    <a href="#" class="author" title="Author"><img src="<?= base_url() ?>assets/images/avatars/default.jpg" alt="Author"></a>
-                                </div>
-                                <div class="entry-detail">
-                                    <div class="entry-head">
-                                        <div class="place-type list-item">
-                                            <span>Desain Grafis</span>
-                                        </div>
-                                        <div class="place-city">
-                                            <a href="#">Medan</a>
-                                        </div>
-                                    </div>
-                                    <h3 class="place-title"><a href="single-loker.html">Lowongan Kerja Desain Grafis Part Time</a></h3>
-                                    <div class="entry-address"><i class="las la-map-marker"></i>PT. ESEMKA MEDAN</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="place-item layout-02 place-hover">
-                            <div class="place-inner">
-                                <div class="place-thumb hover-img">
-                                    <a class="entry-thumb" href="single-loker.html"><img src="<?= base_url() ?>assets/images/cilinic/listing-02.jpg" alt=""></a>
-                                    <a href="#" class="author" title="Author"><img src="<?= base_url() ?>assets/images/avatars/default.jpg" alt="Author"></a>
-                                </div>
-                                <div class="entry-detail">
-                                    <div class="entry-head">
-                                        <div class="place-type list-item">
-                                            <span>Desain Grafis</span>
-                                        </div>
-                                        <div class="place-city">
-                                            <a href="#">Medan</a>
-                                        </div>
-                                    </div>
-                                    <h3 class="place-title"><a href="single-loker.html">Lowongan Kerja Desain Grafis Part Time</a></h3>
-                                    <div class="entry-address"><i class="las la-map-marker"></i>PT. ESEMKA MEDAN</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="place-item layout-02 place-hover">
-                            <div class="place-inner">
-                                <div class="place-thumb hover-img">
-                                    <a class="entry-thumb" href="single-loker.html"><img src="<?= base_url() ?>assets/images/cilinic/listing-02.jpg" alt=""></a>
-                                    <a href="#" class="author" title="Author"><img src="<?= base_url() ?>assets/images/avatars/default.jpg" alt="Author"></a>
-                                </div>
-                                <div class="entry-detail">
-                                    <div class="entry-head">
-                                        <div class="place-type list-item">
-                                            <span>Desain Grafis</span>
-                                        </div>
-                                        <div class="place-city">
-                                            <a href="#">Medan</a>
-                                        </div>
-                                    </div>
-                                    <h3 class="place-title"><a href="single-loker.html">Lowongan Kerja Desain Grafis Part Time</a></h3>
-                                    <div class="entry-address"><i class="las la-map-marker"></i>PT. ESEMKA MEDAN</div>
-                                </div>
-                            </div>
+                            <h3 class="place-title"><a href="<?= base_url('siswa/lowongandetail/').$d->id_lowongan ?> "><?=  getnamalowongan($d->id_lowongan)  ?></a></h3>
+                           
                         </div>
                     </div>
-                    <div class="pagination">
-                        <div class="pagination__numbers">
-                            <span>1</span>
-                            <a title="2" href="#">2</a>
-                            <a title="3" href="#">3</a>
-                            <a title="Next" href="#">
-                                <i class="la la-angle-right"></i>
-                            </a>
-                        </div>
+                </div>
+            <?php endforeach; ?>
                     </div>
+                    <div class="pagination align-left">
+        <?= $this->pagination->create_links(); ?>
+    </div><!-- .pagination -->
                 </div>
             </div>
             <div class="col-lg-3">

@@ -8,6 +8,7 @@ class Sekolah_model extends CI_Model
 
     public $table = 'eesemka_sekolah';
     public $id = 'id';
+    public $id_user = 'id_user';
     public $order = 'DESC';
 
     function __construct()
@@ -29,6 +30,13 @@ class Sekolah_model extends CI_Model
         return $this->db->get($this->table)->row();
     }
     
+    // get data by id
+    function get_by_iduser($id)
+    {
+        $this->db->where($this->id_user, $id);
+        return $this->db->get($this->table)->row();
+    }
+
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('id', $q);

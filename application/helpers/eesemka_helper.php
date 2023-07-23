@@ -281,6 +281,35 @@ if (!function_exists('getnamaposisi')) {
   }
 }
 
+if (!function_exists('getnamalowongan')) {
+  function getnamalowongan($id)
+  {
+    $ci = get_instance();
+    $ci->load->model('Lowongan_model');
+    $data = $ci->Lowongan_model->get_by_id($id);
+    if ($data) :
+      return $data->nama_lowongan;
+    else :
+      return '-';
+    endif;
+  }
+}
+
+
+if (!function_exists('getnamaperusahaanbylowongan')) {
+  function getnamaperusahaanbylowongan($id)
+  {
+    $ci = get_instance();
+    $ci->load->model('Lowongan_model');
+    $data = $ci->Lowongan_model->get_perusahaan_by_id($id);
+    if ($data) :
+      return $data->nama_perusahaan;
+    else :
+      return '-';
+    endif;
+  }
+}
+
 
 if (!function_exists('getnamauser')) {
   function getnamauser($id)
@@ -307,6 +336,62 @@ if (!function_exists('getsiswa')) {
       return $data->nama_siswa;
     else :
       return '-';
+    endif;
+  }
+}
+
+if (!function_exists('getidsiswa')) {
+  function getidsiswa($id)
+  {
+    $ci = get_instance();
+    $ci->load->model('Siswa_model');
+    $data = $ci->Siswa_model->get_by_iduser($id);
+    if ($data) :
+      return $data->id;
+    else :
+      return null;
+    endif;
+  }
+}
+
+if (!function_exists('getidsiswa')) {
+  function getidsiswa($id)
+  {
+    $ci = get_instance();
+    $ci->load->model('Siswa_model');
+    $data = $ci->Siswa_model->get_by_iduser($id);
+    if ($data) :
+      return $data->id;
+    else :
+      return null;
+    endif;
+  }
+}
+
+if (!function_exists('getidsekolah')) {
+  function getidsekolah($id)
+  {
+    $ci = get_instance();
+    $ci->load->model('Sekolah_model');
+    $data = $ci->Sekolah_model->get_by_iduser($id);
+    if ($data) :
+      return $data->id;
+    else :
+      return null;
+    endif;
+  }
+}
+
+if (!function_exists('getidperusahaan')) {
+  function getidperusahaan($id)
+  {
+    $ci = get_instance();
+    $ci->load->model('Perusahaan_model');
+    $data = $ci->Perusahaan_model->get_by_iduser($id);
+    if ($data) :
+      return $data->id;
+    else :
+      return null;
     endif;
   }
 }

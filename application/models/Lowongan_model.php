@@ -10,6 +10,7 @@ class Lowongan_model extends CI_Model
     public $tablef = 'eesemka_posisi_lowongan';
     public $tablef2 = 'eesemka_posisi';
     public $tablef3 = 'eesemka_lamaran';
+    public $tablef4 = 'eesemka_perusahaan';
     public $id = 'id';
     public $order = 'DESC';
 
@@ -49,6 +50,15 @@ class Lowongan_model extends CI_Model
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
+        return $this->db->get($this->table)->row();
+    }
+
+
+    // get data by id
+    function get_perusahaan_by_id($id)
+    {
+        $this->db->where($this->id, $id);
+        $this->db->join($this->tablef4,"$this->table.id_perusahaan = $this->tablef4.id");
         return $this->db->get($this->table)->row();
     }
     

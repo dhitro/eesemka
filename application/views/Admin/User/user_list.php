@@ -46,10 +46,8 @@
 			<th>Fistname</th>
 			<th>Lastname</th>
 			<th>Username</th>
-			<th>Email</th>
-			<th>Phone</th>
-			<th>Facebook</th>
-			<th>Instagram</th>
+			<th>Basic Info </th>
+			
 			<th>Status</th>
 			<th>Level User</th>
 			<th>Action</th>
@@ -71,16 +69,13 @@
 					<b><?= $d->username ?></b>
 				</td>
 				<td class="text-nowrap">
-					<b><?= $d->email ?></b>
-				</td>
-				<td class="text-nowrap">
-					<b><?= $d->phone ?></b>
-				</td>
-				<td class="text-nowrap">
-					<b><?= $d->facebook ?></b>
-				</td>
-				<td class="text-nowrap">
-					<b><?= $d->instagram ?></b>
+					<b>Email : <?= $d->email ?></b>
+					<br>
+					<b>Phone : <?= $d->phone ?></b>
+					<br>
+					<b>Facebook : <?= $d->facebook ?></b>
+					<br>
+					<b>Instagram : <?= $d->instagram ?></b>
 				</td>
 				<td class="text-nowrap">
 					<label class="switch">

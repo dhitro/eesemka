@@ -60,7 +60,7 @@
 				</td>
 				<td class="text-nowrap"><b><?= getnamaperusahaan($d->id_perusahaan)  ?></b></td>
 				<td><?= $d->nama_lowongan ?></td>
-				<td><?= $d->deskripsi ?></td>
+				<td style="min-width: 250px !important;"><?= mb_substr($d->deskripsi,0,100)."...."  ?></td>
 				<td><?= $d->persyaratan ?></td>
 				<?php 
 				$st = '';

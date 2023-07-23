@@ -144,7 +144,7 @@
                         <?php if(in_array($tipe[1],$valid)) : ?>
                         <img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $p->file ?>" alt="">
                         <?php else: ?>
-                          <a  class="btn img_pre" href="<?= base_url() . "upload/dokumen/" . $p->file ?>"><?= $p->file ?></a>
+                          <a  class="btn img_pre" href="<?= base_url() . "upload/dokumen/" . $p->file ?>">Dokumen</a>
                         <?php endif; ?>
                         <i class="la la-cloud-upload-alt"></i>
                       </label>
@@ -164,7 +164,11 @@
                   <div class="col-3" id="inputFormRow">
                     <div class="field-group field-file">
                       <label for="sertifikat_pendukung1" class="preview">
+                      <?php if(in_array($tipe[1],$valid)) : ?>
                         <img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $p->file ?>" alt="">
+                        <?php else: ?>
+                          <a  class="btn img_pre" href="<?= base_url() . "upload/dokumen/" . $p->file ?>">Dokumen</a>
+                        <?php endif; ?>
                         <i class="la la-cloud-upload-alt"></i>
                       </label>
                       <div class="field-note"><a href="<?= base_url('admin/siswa_delete_file') ?>" data-id="<?= $p->id ?>" class="btn-sm btn-danger removeFiles"> <i class="la la-trash-alt"></i> Hapus</a></div>

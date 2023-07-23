@@ -151,18 +151,18 @@
                         ?>
                         <ul>
                             <?php if($menuaawal == 'perusahaan'): ?>
-                            <li class="<?= $menuaktif == 'perusahaan' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan') ?>">Dashboard</a></li>
-                            <li><a href="<?= base_url('perusahaan/pelamar') ?>">Pelamar</a></li>
+                            <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan') ?>">Dashboard</a></li>
+                            <li class="<?= $menuaktif == 'lowongan' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan/pelamar') ?>">Pelamar</a></li>
                             <li><a href="<?= base_url('perusahaan/lowongan') ?>">Lowongan Kerja</a></li>
                             <li><a href="<?= base_url('perusahaan/permintaan') ?>">Permintaan Siswa</a></li>
                             <li><a href="<?= base_url('perusahaan/profile') ?>">Profile</a></li>
                             <?php elseif($menuaawal == 'siswa'): ?>    
-                            <li class="<?= $menuaktif == 'siswa' ? 'active' : '' ?>"><a href="<?= base_url('siswa') ?>">Dashboard</a></li>
-							<li><a href="<?= base_url('siswa/lowongan') ?>">Lowongan Kerja</a></li>
+                            <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('siswa') ?>">Dashboard</a></li>
+							<li class="<?= $menuaktif == 'lowongan' || $menuaktif == 'lowongandetail'  ?  'active' : '' ?>"><a href="<?= base_url('siswa/lowongan') ?>">Lowongan Kerja</a></li>
 							<li><a href="<?= base_url('siswa/permintaan') ?>">Permintaan Perusahaan</a></li>
 							<li><a href="<?= base_url('siswa/profile') ?>">Profile</a></li>
                             <?php elseif($menuaawal == 'sekolah'): ?>    
-                            <li class="<?= $menuaktif == 'sekolah' ? 'active' : '' ?>"><a href="<?= base_url('sekolah') ?>">Dashboard</a></li>
+                            <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('sekolah') ?>">Dashboard</a></li>
 							<li><a href="<?= base_url('sekolah/siswa') ?>">Data Siswa</a></li>
 							<li><a href="<?= base_url('sekolah/lowongan') ?>">Lowongan Kerja</a></li>
 							<li><a href="<?= base_url('sekolah/permintaan') ?>">Permintaan Perusahaan</a></li>

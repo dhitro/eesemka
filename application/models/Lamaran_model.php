@@ -9,6 +9,7 @@ class Lamaran_model extends CI_Model
     public $table = 'eesemka_lamaran';
     public $id = 'id';
     public $idlowongan = 'id_lowongan';
+    public $idposisi = 'id_posisi';
     public $order = 'DESC';
 
     function __construct()
@@ -45,8 +46,16 @@ class Lamaran_model extends CI_Model
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
+
     public function get_count()
     {
+        $query = $this->db->get($this->table);
+        return $query->num_rows();
+    }
+
+    public function get_count_where($data)
+    {
+        $this->db->where($data);
         $query = $this->db->get($this->table);
         return $query->num_rows();
     }
@@ -55,6 +64,15 @@ class Lamaran_model extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id', $q);
+	// $this->db->or_like('nama', $q);
+	$this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
+
+    // get data with limit and search
+    function get_limit_data_done($limit, $start = 0, $q = NULL) {
+        $this->db->order_by($this->id, $this->order);
+        $this->db->where($q);
 	// $this->db->or_like('nama', $q);
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
