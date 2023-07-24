@@ -55,7 +55,7 @@ class Siswa extends CI_Controller
 
     $this->pagination->initialize($config);
     $data = array(
-      'title' => 'Siswa Membner Area',
+      'title' => 'Siswa Member Area',
       'data' => $lamaran,
       // 'actionadd' => site_url('siswa/lowongan_create'),
       // 'actionfilter' => site_url('siswa/lowongan'),
