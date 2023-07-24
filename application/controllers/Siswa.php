@@ -121,7 +121,7 @@ class Siswa extends CI_Controller
         'title' => 'Siswa Area - Form Data Lowongan',
         'button' => 'Update',
         'data' => $lowongan,
-        'action' => site_url('admin/lowongan_update_action'),
+        'action' => site_url('siswa/lowongan_update_action'),
         'id' => set_value('id', $row->id),
         'id_perusahaan' => set_value('id_perusahaan', $row->id_perusahaan),
         'id_posisi' => set_value('id_posisi', $idposisi),

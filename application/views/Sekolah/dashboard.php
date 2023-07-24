@@ -2,14 +2,14 @@
 	<div class="row">
 		<div class="col-lg-3 col-6">
 			<div class="item blue">
-				<h3>Active Lowongan</h3>
+				<h3>Siswa</h3>
 				<span class="number">1</span>
 				<span class="line"></span>
 			</div>
 		</div>
 		<div class="col-lg-3 col-6">
 			<div class="item green">
-				<h3>Pelamar</h3>
+				<h3>Alumni</h3>
 				<span class="number">12</span>
 				<span class="line"></span>
 			</div>
@@ -21,13 +21,7 @@
 				<span class="line"></span>
 			</div>
 		</div>
-		<div class="col-lg-3 col-6">
-			<div class="item purple">
-				<h3>Total Views</h3>
-				<span class="number">145</span>
-				<span class="line"></span>
-			</div>
-		</div>
+		
 	</div>
 </div><!-- .member-statistical -->
 <div class="owner-box">
@@ -35,7 +29,7 @@
 		<div class="col-lg-4">
 			<div class="ob-item">
 				<div class="ob-head">
-					<h3>Pelamar Terbaru</h3>
+					<h3>Siswa Terbaru</h3>
 					<a href="#" class="view-all" title="View All">View all</a>
 				</div>
 				<div class="ob-content">
@@ -112,13 +106,13 @@
 			</div>
 		</div>
 
-		<div class="col-lg-4">
+		<!-- <div class="col-lg-4">
 			<div class="upgrade-box">
 				<h1>Cari Siswa Magang disini!</h1>
 				<p>anda dapat memilih siswa mana yang kompeten untuk perusahaan anda.</p>
 				<a href="siswa-list.html" class="btn" title="Upgrade now">Cari Siswa</a>
 				<a href="#" class="close" data-close="upgrade-box"><i class="las la-times"></i></a>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div><!-- .owner-box -->

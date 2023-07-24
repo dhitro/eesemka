@@ -136,16 +136,29 @@
                                 $foto = [];
                                 if ($this->session->userdata('id_level') == 4) :
                                     $foto = getfotoprofil($this->session->userdata('id_siswa'), 3);
+                                ?>
+                                    <a title="Icon" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
+                                <?php
                                 elseif ($this->session->userdata('id_level') == 2) :
                                     $foto = getfotoprofil($this->session->userdata('id_sekolah'), 5);
+                                ?>
+                                    <a title="Icon" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
+                                <?php
                                 elseif ($this->session->userdata('id_level') == 3) :
                                     $foto = getfotoprofil($this->session->userdata('id_perusahaan'), 6);
-                                else:
-                                    $foto = [];
-                                endif;
-                                
                                 ?>
-                                <a title="Icon" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
+                                    <a title="Icon" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
+                                <?php
+                                else :
+                                    'default.png';
+                                ?>
+                                    <a title="Icon" href="#"><img src="<?= base_url() . "assets/images/avatars/default.png" ?>" alt=""></a>
+                                <?php
+                                endif;
+
+                                ?>
+
+
                             </div>
                         </div><!-- .right-header -->
                     </div><!-- .col-md-6 -->
@@ -176,7 +189,7 @@
                                 <li class="<?= $menuaktif == 'profile' ? 'active' : '' ?>"><a href="<?= base_url('siswa/profile') ?>">Profile</a></li>
                             <?php elseif ($menuaawal == 'sekolah') : ?>
                                 <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('sekolah') ?>">Dashboard</a></li>
-                                <li><a href="<?= base_url('sekolah/siswa') ?>">Data Siswa</a></li>
+                                <li class="<?= $menuaktif == 'siswa' || $menuaktif == 'siswa_profile' || $menuaktif == 'siswa_create' || $menuaktif == 'siswa_update' || $menuaktif == 'siswa_read' ? 'active' : '' ?>"><a href="<?= base_url('sekolah/siswa') ?>">Data Siswa</a></li>
                                 <li><a href="<?= base_url('sekolah/lowongan') ?>">Lowongan Kerja</a></li>
                                 <li><a href="<?= base_url('sekolah/permintaan') ?>">Permintaan Perusahaan</a></li>
                                 <li><a href="<?= base_url('sekolah/profile') ?>">Profile</a></li>
@@ -188,7 +201,7 @@
                                 <li class="<?= $menuaktif == 'lowongan' || $menuaktif == 'lowongan_create' || $menuaktif == 'lowongan_update' || $menuaktif == 'lowongan_read'  ? 'active' : '' ?>"><a href="<?= base_url('admin/lowongan') ?>">Lowongan Kerja</a></li>
                                 <li class="<?= $menuaktif == 'lamaran' || $menuaktif == 'lamaran_create' || $menuaktif == 'lamaran_update' || $menuaktif == 'lamaran_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/lamaran') ?>">Lamaran Kerja</a></li>
                                 <li class="<?= $menuaktif == 'permintaan' || $menuaktif == 'permintaan_create' || $menuaktif == 'permintaan_update' || $menuaktif == 'permintaan_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/permintaan') ?>">Permintaan Siswa</a></li>
-                                <li class="<?= $menuaktif == 'user' ||$menuaktif == 'user_update' ? 'active' : '' ?>"><a href="<?= base_url('admin/user') ?>">User</a></li>
+                                <li class="<?= $menuaktif == 'user' || $menuaktif == 'user_update' ? 'active' : '' ?>"><a href="<?= base_url('admin/user') ?>">User</a></li>
                             <?php endif; ?>
                             <li class="text-danger"><a onclick="return confirm('Apakah anda yakin akan keluar ?')" href="<?= base_url("auth/logout") ?>"> Logout</a>
                         </ul>

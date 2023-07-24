@@ -71,6 +71,16 @@ class Siswa_model extends CI_Model
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
+    function get_limit_data_user($limit, $start = 0, $q = NULL, $idsekolah = NULL) {
+       $this->db->where($this->id_sekolah,$idsekolah);
+        $this->db->order_by($this->id, $this->order);
+        $this->db->like('id', $q);
+        $this->db->or_like('nama_siswa', $q);
+        $this->db->or_like('alamat', $q);
+        $this->db->or_like('deskripsi', $q);
+        $this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
 
     // insert data
     function insert($data)
