@@ -1,190 +1,247 @@
 <div class="listing-main">
-<div class="listing-nav">
-				<div class="listing-menu nav-scroll">
-					<ul>
-						<li class="active"><a href="#profilsiswa" title="Profil Siswa"><span class="icon"><i class="la la-cog"></i></span><span>Profil Siswa</span></a></li>
-						<li><a href="#pengalamankerja" title="pengalamankerja"><span class="icon"><i class="la la-wifi"></i></span><span>Pengalaman Kerja</span></a></li>
-						<li><a href="#sertifikat" title="sertifikat"><span class="icon"><i class="la la-image"></i></span><span>Sertifikat</span></a></li>
-					</ul>
-				</div>
-			</div><!-- .listing-nav -->
+  <div class="listing-nav">
+    <div class="listing-menu nav-scroll">
+      <ul>
+        <li class="active"><a href="#profilsiswa" title="Profil Siswa"><span class="icon"><i class="la la-cog"></i></span><span>Profil Siswa</span></a></li>
+        <li><a href="#pengalamankerja" title="pengalamankerja"><span class="icon"><i class="la la-wifi"></i></span><span>Pengalaman Kerja</span></a></li>
+        <li><a href="#sertifikat" title="sertifikat"><span class="icon"><i class="la la-image"></i></span><span>Sertifikat</span></a></li>
+      </ul>
+    </div>
+  </div><!-- .listing-nav -->
 
-<div class="listing-content">
+  <div class="listing-content">
     <h2>Biodata</h2>
     <div class="text-danger"><?= $this->session->flashdata('message'); ?></div>
     <form action="<?php echo $action; ?>" class="form-underline" style="max-width: 600px !important;" method="post" enctype="multipart/form-data">
-            <div class="field-input mt-2">
-              <label for="pengalaman">Foto Profil
-                <?php echo form_error('foto') ?></label>
-              <div class="row" id="fotoprofil">
-                <?php $foto = getfotoprofil($id,3);
-                if (!empty($foto)) : ?>
-                  <div class="col-3" id="inputFormRow">
-                    <div class="field-group field-file">
-                      <label for="foto" class="preview">
-                        <img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
-                        <i class="la la-cloud-upload-alt"></i>
-                      </label>
-                      <div class="field-note"><a href="<?= base_url('admin/siswa_delete_file') ?>" data-id="<?= $foto->id ?>" class="btn-sm btn-danger gantiFile"> <i class="la la-exchange-alt"></i> Ganti Foto</a></div>
-                    </div>
-                  </div>
-                <?php else : ?>
-                  <div class="col-3">
-                    <div class="field-group field-file">
-                      <label for="foto" class="preview">
-                        <input type="file" id="foto" name="foto[]" class="upload-file" data-max-size="1024">
-                        <img class="img_preview" src="" alt="">
-                        <i class="la la-cloud-upload-alt"></i>
-                      </label>
-                      <div class="field-note">Maximum file size: 1 MB.</div>
-                    </div>
-                  </div>
-                <?php endif; ?>
-              </div>
-
-            </div>
-            <div class="field-input">
-              <input type="hidden" name="id" value="<?php echo $id; ?>" />
-              <input type="hidden" name="uuid" value="<?php echo $uuid; ?>" />
-              <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('user_id'); ?>" />
-              <label for="nik">NIK <?php echo form_error('nik') ?></label>
-              <input type="text" name="nik" placeholder="NIK" id="nik" value="<?php echo $nik; ?>">
-            </div>
-            <div class="field-input">
-              <label for="nama_siswa">Nama Siswa <?php echo form_error('nama_siswa') ?></label>
-              <input type="text" name="nama_siswa" placeholder="Nama Siswa" id="nama_siswa" value="<?php echo $nama_siswa; ?>">
-            </div>
-
-            <div class="field-input">
-              <label for="jenis_kelamin">Jenis Kelamin <?php echo form_error('jenis_kelamin') ?></label>
-              <div class="text-nowrap mt-2" style="height: 20px !important;">
-                <input <?= $jenis_kelamin == 'Laki-laki' ? 'checked' : '' ?> class="" style="margin-right:10px; height: 20px !important;width : 20px !important;" value="Laki-laki" type="radio" name="jenis_kelamin" id="jk1">
-                <label class="" for="jk1">
-                  Laki-laki
+      <div class="field-input mt-2">
+        <label for="pengalaman">Foto Profil
+          <?php echo form_error('foto') ?></label>
+        <div class="row" id="fotoprofil">
+          <?php $foto = getfotoprofil($id, 3);
+          if (!empty($foto)) : ?>
+            <div class="col-3" id="inputFormRow">
+              <div class="field-group field-file">
+                <label for="foto" class="preview">
+                  <img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
+                  <i class="la la-cloud-upload-alt"></i>
                 </label>
+                <div class="field-note"><a href="<?= base_url('admin/siswa_delete_file') ?>" data-id="<?= $foto->id ?>" class="btn-sm btn-danger gantiFile"> <i class="la la-exchange-alt"></i> Ganti Foto</a></div>
               </div>
-              <div class="text-nowrap mt-2 mb-4" style="height: 20px !important;">
-                <input <?= $jenis_kelamin == 'Perempuan' ? 'checked' : '' ?> class="" style="margin-right: 10px;; height: 20px !important; width : 20px !important;" value="Perempuan" type="radio" name="jenis_kelamin" id="jk2">
-                <label class="" for="jk2">
-                  Perempuan
+            </div>
+          <?php else : ?>
+            <div class="col-3">
+              <div class="field-group field-file">
+                <label for="foto" class="preview">
+                  <input type="file" id="foto" name="foto[]" class="upload-file" data-max-size="1024">
+                  <img class="img_preview" src="" alt="">
+                  <i class="la la-cloud-upload-alt"></i>
                 </label>
+                <div class="field-note">Maximum file size: 1 MB.</div>
               </div>
             </div>
-            <div class="field-input">
-              <label for="alamat">Alamat <?php echo form_error('alamat') ?></label>
-              <input type="text" name="alamat" placeholder="Alamat" id="alamat" value="<?php echo $alamat; ?>">
+          <?php endif; ?>
+        </div>
+
+      </div>
+      <div class="field-input">
+        <input type="hidden" name="id" value="<?php echo $id; ?>" />
+        <input type="hidden" name="uuid" value="<?php echo $uuid; ?>" />
+        <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('user_id'); ?>" />
+        <label for="nik">NIK <?php echo form_error('nik') ?></label>
+        <input type="text" name="nik" placeholder="NIK" id="nik" value="<?php echo $nik; ?>">
+      </div>
+      <div class="field-input">
+        <label for="nama_siswa">Nama Siswa <?php echo form_error('nama_siswa') ?></label>
+        <input type="text" name="nama_siswa" placeholder="Nama Siswa" id="nama_siswa" value="<?php echo $nama_siswa; ?>">
+      </div>
+
+      <div class="field-input">
+        <label for="jenis_kelamin">Jenis Kelamin <?php echo form_error('jenis_kelamin') ?></label>
+        <div class="text-nowrap mt-2" style="height: 20px !important;">
+          <input <?= $jenis_kelamin == 'Laki-laki' ? 'checked' : '' ?> class="" style="margin-right:10px; height: 20px !important;width : 20px !important;" value="Laki-laki" type="radio" name="jenis_kelamin" id="jk1">
+          <label class="" for="jk1">
+            Laki-laki
+          </label>
+        </div>
+        <div class="text-nowrap mt-2 mb-4" style="height: 20px !important;">
+          <input <?= $jenis_kelamin == 'Perempuan' ? 'checked' : '' ?> class="" style="margin-right: 10px;; height: 20px !important; width : 20px !important;" value="Perempuan" type="radio" name="jenis_kelamin" id="jk2">
+          <label class="" for="jk2">
+            Perempuan
+          </label>
+        </div>
+      </div>
+      <div class="field-input">
+        <label for="alamat">Alamat <?php echo form_error('alamat') ?></label>
+        <input type="text" name="alamat" placeholder="Alamat" id="alamat" value="<?php echo $alamat; ?>">
+      </div>
+      <div class="field-input">
+        <label for="id_sekolah">Sekolah <?php echo form_error('id_sekolah') ?></label>
+        <select name="id_sekolah" id="id_sekolah" class="form-control select2bs4" required>
+          <option value="0">-- Pilih Sekolah --</option>
+          <?php foreach (loadsekolah() as $sk) :
+            $sel = $sk->id == $id_sekolah ? 'selected' : '';
+          ?>
+            <option <?= $sel ?> value="<?= $sk->id ?>"><?= $sk->nama_sekolah ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div class="field-input">
+        <label for="status">Status Siswa <?php echo form_error('status') ?></label>
+        <div class="text-nowrap mt-2" style="height: 20px !important;">
+          <input <?= $status == 'Siswa' ? 'checked' : '' ?> class="" style="margin-right:10px; height: 20px !important;width : 20px !important;" value="Siswa" type="radio" name="status" id="st1">
+          <label class="" for="st1">
+            Siswa
+          </label>
+        </div>
+        <div class="text-nowrap mt-2 mb-4" style="height: 20px !important;">
+          <input <?= $status == 'Alumni' ? 'checked' : '' ?> class="" style="margin-right: 10px;; height: 20px !important; width : 20px !important;" value="Alumni" type="radio" name="status" id="st2">
+          <label class="" for="st2">
+            Alumni
+          </label>
+        </div>
+      </div>
+      <div class="field-input">
+        <label for="deskripsi">Deskripsi <?php echo form_error('deskripsi') ?></label>
+        <textarea name="deskripsi" id="" cols="30" rows="10"><?php echo $deskripsi; ?></textarea>
+      </div>
+      <div class="field-input mt-2" id="pengalamankerja">
+        <label for="pengalaman">Pengalaman Kerja <br><button class="badge btn-primary btn-sm rounded tambah-pengalaman"><i class="las la-plus"></i> Tambah</button>
+          <?php echo form_error('pengalaman') ?></label>
+        <div id="pengalaman">
+          <?php foreach ($data = loadsiswapengalaman($id) as $p) : ?>
+            <div class="row" id="inputFormRow">
+              <div class="col-3">
+                <input type="text" value="<?= $p->tahun ?>" name="tahun[]" placeholder="Tahun" autocomplete="off">
+              </div>
+              <div class="col-6">
+                <input type="text" value="<?= $p->pengalaman ?>" name="pengalaman[]" placeholder="Masukkan Pengalaman" autocomplete="off">
+              </div>
+              <div class="col-3">
+                <button id="removeRow" type="button" class="btn-sm btn-danger"> <i class="la la-trash-alt"></i> Hapus</button>
+              </div>
             </div>
-            <div class="field-input">
-              <label for="id_sekolah">Sekolah <?php echo form_error('id_sekolah') ?></label>
-              <select name="id_sekolah" id="id_sekolah" class="form-control select2bs4" required>
-                <option value="0">-- Pilih Sekolah --</option>
-                <?php foreach (loadsekolah() as $sk) :
-                  $sel = $sk->id == $id_sekolah ? 'selected' : '';
-                ?>
-                  <option <?= $sel ?> value="<?= $sk->id ?>"><?= $sk->nama_sekolah ?></option>
-                <?php endforeach; ?>
-              </select>
-            </div>
-            <div class="field-input">
-              <label for="status">Status Siswa <?php echo form_error('status') ?></label>
-              <div class="text-nowrap mt-2" style="height: 20px !important;">
-                <input <?= $status == 'Siswa' ? 'checked' : '' ?> class="" style="margin-right:10px; height: 20px !important;width : 20px !important;" value="Siswa" type="radio" name="status" id="st1">
-                <label class="" for="st1">
-                  Siswa
+          <?php endforeach; ?>
+        </div>
+
+      </div>
+      <div class="field-input mt-2" id="sertifikat">
+        <label for="pengalaman">Sertifikat Keahlian <br><button class="badge btn-primary btn-sm rounded tambah-keahlian"><i class="las la-plus"></i> Tambah</button>
+          <?php echo form_error('pengalaman') ?></label>
+        <div class="row" id="keahlian">
+          <?php foreach ($data = loadsiswakeahlian($id) as $p) :
+            $tipe = explode(".", $p->file);
+            $valid = ['png', 'jpg', 'jpeg', 'gif'];
+          ?>
+            <div class="col-3" id="inputFormRow">
+              <div class="field-group field-file">
+                <label for="sertifikat_keahlian1" class="preview">
+                  <?php if (in_array($tipe[1], $valid)) : ?>
+                    <img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $p->file ?>" alt="">
+                  <?php else : ?>
+                    <a class="btn img_pre" href="<?= base_url() . "upload/dokumen/" . $p->file ?>">Dokumen</a>
+                  <?php endif; ?>
+                  <i class="la la-cloud-upload-alt"></i>
                 </label>
+                <div class="field-note"><a href="<?= base_url('admin/siswa_delete_file') ?>" data-id="<?= $p->id ?>" class="btn-sm btn-danger removeFiles"> <i class="la la-trash-alt"></i> Hapus</a></div>
               </div>
-              <div class="text-nowrap mt-2 mb-4" style="height: 20px !important;">
-                <input <?= $status == 'Alumni' ? 'checked' : '' ?> class="" style="margin-right: 10px;; height: 20px !important; width : 20px !important;" value="Alumni" type="radio" name="status" id="st2">
-                <label class="" for="st2">
-                  Alumni
+            </div>
+          <?php endforeach; ?>
+        </div>
+
+      </div>
+
+      <div class="field-input mt-2">
+        <label for="pengalaman">Sertifikat Pendukung <br><button class="badge btn-primary btn-sm rounded tambah-pendukung"><i class="las la-plus"></i> Tambah</button>
+          <?php echo form_error('pengalaman') ?></label>
+        <div class="row" id="pendukung">
+          <?php foreach ($data = loadsiswapendukung($id) as $p) : ?>
+            <div class="col-3" id="inputFormRow">
+              <div class="field-group field-file">
+                <label for="sertifikat_pendukung1" class="preview">
+                  <?php if (in_array($tipe[1], $valid)) : ?>
+                    <img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $p->file ?>" alt="">
+                  <?php else : ?>
+                    <a class="btn img_pre" href="<?= base_url() . "upload/dokumen/" . $p->file ?>">Dokumen</a>
+                  <?php endif; ?>
+                  <i class="la la-cloud-upload-alt"></i>
                 </label>
+                <div class="field-note"><a href="<?= base_url('admin/siswa_delete_file') ?>" data-id="<?= $p->id ?>" class="btn-sm btn-danger removeFiles"> <i class="la la-trash-alt"></i> Hapus</a></div>
               </div>
             </div>
-            <div class="field-input">
-              <label for="deskripsi">Deskripsi <?php echo form_error('deskripsi') ?></label>
-              <textarea name="deskripsi" id="" cols="30" rows="10"><?php echo $deskripsi; ?></textarea>
-            </div>
-            <div class="field-input mt-2" id="pengalamankerja">
-              <label for="pengalaman">Pengalaman Kerja <br><button class="badge btn-primary btn-sm rounded tambah-pengalaman"><i class="las la-plus"></i> Tambah</button>
-                <?php echo form_error('pengalaman') ?></label>
-              <div id="pengalaman">
-                <?php foreach ($data = loadsiswapengalaman($id) as $p) : ?>
-                  <div class="row" id="inputFormRow">
-                    <div class="col-3">
-                      <input type="text" value="<?= $p->tahun ?>" name="tahun[]" placeholder="Tahun" autocomplete="off">
-                    </div>
-                    <div class="col-6">
-                      <input type="text" value="<?= $p->pengalaman ?>" name="pengalaman[]" placeholder="Masukkan Pengalaman" autocomplete="off">
-                    </div>
-                    <div class="col-3">
-                      <button id="removeRow" type="button" class="btn-sm btn-danger"> <i class="la la-trash-alt"></i> Hapus</button>
-                    </div>
-                  </div>
-                <?php endforeach; ?>
-              </div>
+          <?php endforeach; ?>
+        </div>
 
-            </div>
-            <div class="field-input mt-2" id="sertifikat">
-              <label for="pengalaman">Sertifikat Keahlian <br><button class="badge btn-primary btn-sm rounded tambah-keahlian"><i class="las la-plus"></i> Tambah</button>
-                <?php echo form_error('pengalaman') ?></label>
-              <div class="row" id="keahlian">
-                <?php foreach ($data = loadsiswakeahlian($id) as $p) : 
-                  $tipe = explode(".",$p->file);
-                  $valid = ['png','jpg','jpeg','gif'];
-                  ?>
-                  <div class="col-3" id="inputFormRow">
-                    <div class="field-group field-file">
-                      <label for="sertifikat_keahlian1" class="preview">
-                        <?php if(in_array($tipe[1],$valid)) : ?>
-                        <img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $p->file ?>" alt="">
-                        <?php else: ?>
-                          <a  class="btn img_pre" href="<?= base_url() . "upload/dokumen/" . $p->file ?>">Dokumen</a>
-                        <?php endif; ?>
-                        <i class="la la-cloud-upload-alt"></i>
-                      </label>
-                      <div class="field-note"><a href="<?= base_url('admin/siswa_delete_file') ?>" data-id="<?= $p->id ?>" class="btn-sm btn-danger removeFiles"> <i class="la la-trash-alt"></i> Hapus</a></div>
-                    </div>
-                  </div>
-                <?php endforeach; ?>
-              </div>
+      </div>
 
-            </div>
+      <div class="field-submit mt-3">
+        <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
+        <a href="#" onclick="history.back()" class="btn btn-danger">Cancel</a>
+      </div>
+    </form>
 
-            <div class="field-input mt-2">
-              <label for="pengalaman">Sertifikat Pendukung <br><button class="badge btn-primary btn-sm rounded tambah-pendukung"><i class="las la-plus"></i> Tambah</button>
-                <?php echo form_error('pengalaman') ?></label>
-              <div class="row" id="pendukung">
-                <?php foreach ($data = loadsiswapendukung($id) as $p) : ?>
-                  <div class="col-3" id="inputFormRow">
-                    <div class="field-group field-file">
-                      <label for="sertifikat_pendukung1" class="preview">
-                      <?php if(in_array($tipe[1],$valid)) : ?>
-                        <img class="img_pre" src="<?= base_url() . "upload/dokumen/" . $p->file ?>" alt="">
-                        <?php else: ?>
-                          <a  class="btn img_pre" href="<?= base_url() . "upload/dokumen/" . $p->file ?>">Dokumen</a>
-                        <?php endif; ?>
-                        <i class="la la-cloud-upload-alt"></i>
-                      </label>
-                      <div class="field-note"><a href="<?= base_url('admin/siswa_delete_file') ?>" data-id="<?= $p->id ?>" class="btn-sm btn-danger removeFiles"> <i class="la la-trash-alt"></i> Hapus</a></div>
-                    </div>
-                  </div>
-                <?php endforeach; ?>
-              </div>
+  </div><!-- .listing-content -->
+  <div class="listing-content">
+    <h2>Basic Data</h2>
+    <form action="<?php echo $action; ?>" class="form-underline" style="max-width: 600px !important;" method="post" enctype="multipart/form-data">
 
-            </div>
+<div class="field-input">
+  <input type="hidden" name="id" value="<?php echo $id; ?>" />
+  <input type="hidden" name="uuid" value="<?php echo $uuid; ?>" />
+  <label for="firstname">Nama Depan / Firstname <?php echo form_error('firstname') ?></label>
+  <input type="text" name="firstname" placeholder="Nama Depan" id="firstname" value="<?php echo $firstname; ?>">
+</div>
+<div class="field-input">
+  <label for="lastname">Nama Belakang / Lastname <?php echo form_error('lastname') ?></label>
+  <input type="text" name="lastname" placeholder="Nama Belakang" id="lastname" value="<?php echo $lastname; ?>">
+</div>
+<div class="field-input">
+  <label for="lastname">Username <?php echo form_error('username') ?></label>
+  <input type="text" name="username" placeholder="Username" id="username" value="<?php echo $username; ?>">
+</div>
 
-            <div class="field-submit mt-3">
-              <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
-              <a href="#" onclick="history.back()" class="btn btn-danger">Cancel</a>
-            </div>
-          </form>
-   
-</div><!-- .listing-content -->
+<div class="field-input">
+  <label for="password">Password <?php echo form_error('password') ?> <?= !empty($id) == true ? '<span class="text-danger small"> (* Abaikan Jika Tidak Ingin Rubah Password </span>' : '' ?> </label>
+  <input type="text" name="password" placeholder="password" id="password" value="<?php echo $password; ?>">
+</div>
+<div class="field-input">
+  <label for="email">Email <?php echo form_error('email') ?></label>
+  <input type="text" name="email" placeholder="email" id="email" value="<?php echo $email; ?>">
+</div>
+<div class="field-input">
+  <label for="phone">Phone <?php echo form_error('phone') ?></label>
+  <input type="text" name="phone" placeholder="phone" id="phone" value="<?php echo $phone; ?>">
+</div>
+<div class="field-input">
+  <label for="facebook">Facebook <?php echo form_error('facebook') ?></label>
+  <input type="text" name="facebook" placeholder="facebook" id="facebook" value="<?php echo $facebook; ?>">
+</div>
+<div class="field-input">
+  <label for="instagram">Instagram <?php echo form_error('instagram') ?></label>
+  <input type="text" name="instagram" placeholder="instagram" id="instagram" value="<?php echo $instagram; ?>">
+</div>
+<div class="field-input">
+  <label for="id_level">Level User <?php echo form_error('id_level') ?></label>
+  <select name="id_level" id="id_level" class="form-control select2bs4" required>
+    <option value="0">-- Pilih Level User --</option>
+    <?php foreach (loadlevel() as $lv) :
+      $sel = $lv->id == $id_level ? 'selected' : '';
+    ?>
+      <option <?= $sel ?> value="<?= $lv->id ?>"><?= $lv->nama ?></option>
+    <?php endforeach; ?>
+  </select>
+</div>
+</div>
+<div class="field-submit mt-3">
+<button type="submit" class="btn btn-primary"><?php echo $button ?></button>
+<a href="#" onclick="history.back()" class="btn btn-danger">Cancel</a>
+</div>
+</form>
+  </div>
 </div>
 <script>
-    $(document).ready(function() {
-      CKEDITOR.replace('deskripsi', {
-        width: '100%'
-      });
+  $(document).ready(function() {
+    CKEDITOR.replace('deskripsi', {
+      width: '100%'
     });
-  </script>
+  });
+</script>

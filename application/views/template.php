@@ -127,7 +127,7 @@
                         <div class="right-header align-right">
                             <nav class="main-menu">
                                 <ul>
-                                    <li><a title="Page" href="<?= base_url($menuaktif . '/lowongankerja') ?>">Lowongan Kerja</a></li>
+                                    <li><a title="Page" href="#"><?= $this->session->userdata('firstname') ?></a></li>
                                 </ul>
                             </nav>
 
