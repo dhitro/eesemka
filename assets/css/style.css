@@ -944,7 +944,7 @@ a.place__comments__reply i { display: inline-block; vertical-align: middle; marg
 .listing-menu li:hover a { color: #2d2d2d; border-right: 4px solid #23d3d3; }
 .listing-menu li.active a { color: #2d2d2d; font-weight: 500; border-right: 4px solid #23d3d3; }
 
-.listing-content { border-left: 1px solid #eeeeee; background-color: #f9f9f9; padding: 0px; }
+.listing-content { border-left: 1px solid #eeeeee; background-color: #f9f9f9; padding: 10px; }
 .listing-content > h2 { font-size: 28px; font-weight: 500; margin-bottom: 30px; }
 
 .listing-box { border: 1px solid #eeeeee; background-color: #ffffff; padding: 30px; margin-bottom: 15px; width: 500px; }

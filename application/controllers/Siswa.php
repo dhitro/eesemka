@@ -189,7 +189,7 @@ class Siswa extends CI_Controller
   public function profile()
   {
     $row = $this->Siswa_model->get_by_id($this->session->userdata('id_siswa'));
-    
+    $rowbasic = $this->User_model->get_by_id($this->session->userdata('user_id'));
     $data = array(
       'title' => 'Admin Area - Form Data Siswa',
       'button' => 'Update',
@@ -205,6 +205,17 @@ class Siswa extends CI_Controller
       'deskripsi' => set_value('deskripsi', $row->deskripsi),
       'id_user' => set_value('id_user', $row->id_user),
       'uuid' => set_value('uuid', $row->uuid),
+     
+      'action2' => site_url('siswa/user_update_action'),
+      'iduser' => set_value('iduser', $rowbasic->id),
+      'firstname' => set_value('firstname', $rowbasic->firstname),
+      'lastname' => set_value('lastname', $rowbasic->lastname),
+      'username' => set_value('username', $rowbasic->username),
+      'email' => set_value('email', $rowbasic->email),
+      'phone' => set_value('phone', $rowbasic->phone),
+      'facebook' => set_value('facebook', $rowbasic->facebook),
+      'instagram' => set_value('instagram', $rowbasic->instagram),
+     
     );
       $this->template->load('template', 'Siswa/profile', $data);
     
@@ -272,6 +283,44 @@ class Siswa extends CI_Controller
     $this->form_validation->set_rules('id', 'id', 'trim');
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
   }
+
+
+  public function user_update_action()
+  {
+    $this->user_rules();
+
+    if ($this->form_validation->run() == FALSE) {
+      redirect(site_url('siswa/profile'));
+    } else {
+      $data = array(
+        'firstname' => $this->input->post('firstname', TRUE),
+        'lastname' => $this->input->post('lastname', TRUE),
+        'username' => $this->input->post('username', TRUE),
+        'email' => $this->input->post('email', TRUE),
+        'phone' => $this->input->post('phone', TRUE),
+        'facebook' => $this->input->post('facebook', TRUE),
+        'instagram' => $this->input->post('instagram', TRUE),
+     
+      );
+      if(!empty($this->input->post('password', TRUE)))  $data['password'] = password_hash($this->input->post('password', TRUE), PASSWORD_DEFAULT);
+
+      $this->User_model->update($this->input->post('id', TRUE), $data);
+      $fileuploaded = array();
+      if (!empty($_FILES['foto']['name'])) :
+        $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 5, 'foto[]');
+      endif;
+      $this->session->set_flashdata('message', 'Update Record Success');
+      redirect(site_url('siswa/profile'));
+    }
+  }
+
+  public function user_rules()
+   {
+     $this->form_validation->set_rules('firstname', 'Nama User', 'trim|required');
+ 
+     $this->form_validation->set_rules('id', 'id', 'trim');
+     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+   }
 
 
   // Module Permintaan
