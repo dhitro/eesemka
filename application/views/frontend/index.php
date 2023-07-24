@@ -1,17 +1,18 @@
 <!doctype html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>E-Esemka | SMK Siap Kerja</title>
-	<meta name="robots" content="index, follow"/>
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
 
-	<!-- favicons -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>E-Esemka | SMK Siap Kerja</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+
+    <!-- favicons -->
     <link rel="shortcut icon" href="<?php echo base_url() ?>/assets/images/favicon.ico">
 
-	<!-- Style CSS -->
+    <!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/assets/fonts/jost/stylesheet.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/assets/libs/line-awesome/css/line-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/assets/libs/fontawesome-pro/css/fontawesome.css" />
@@ -28,29 +29,29 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/assets/css/responsive.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-   
-    <!-- jQuery -->    
+
+    <!-- jQuery -->
     <script src="<?php echo base_url() ?>/assets/js/jquery-1.12.4.js"></script>
-	<script src="<?php echo base_url() ?>/assets/libs/popper/popper.js"></script>
+    <script src="<?php echo base_url() ?>/assets/libs/popper/popper.js"></script>
     <script src="<?php echo base_url() ?>/assets/libs/bootstrap/js/bootstrap.min.js"></script>
-	<script src="<?php echo base_url() ?>/assets/libs/slick/slick.min.js"></script>
-	<script src="<?php echo base_url() ?>/assets/libs/slick/jquery.zoom.min.js"></script>
-	<script src="<?php echo base_url() ?>/assets/libs/isotope/isotope.pkgd.min.js"></script>
-	<script src="<?php echo base_url() ?>/assets/libs/quilljs/js/quill.core.js"></script>
+    <script src="<?php echo base_url() ?>/assets/libs/slick/slick.min.js"></script>
+    <script src="<?php echo base_url() ?>/assets/libs/slick/jquery.zoom.min.js"></script>
+    <script src="<?php echo base_url() ?>/assets/libs/isotope/isotope.pkgd.min.js"></script>
+    <script src="<?php echo base_url() ?>/assets/libs/quilljs/js/quill.core.js"></script>
     <script src="<?php echo base_url() ?>/assets/libs/quilljs/js/quill.js"></script>
     <script src="<?php echo base_url() ?>/assets/libs/chosen/chosen.jquery.min.js"></script>
     <script src="<?php echo base_url() ?>/assets/libs/datetimepicker/jquery.datetimepicker.full.min.js"></script>
     <script src="<?php echo base_url() ?>/assets/libs/venobox/venobox.min.js"></script>
     <script src="<?php echo base_url() ?>/assets/libs/waypoints/jquery.waypoints.min.js"></script>
     <script src="<?php echo base_url() ?>assets/plugins/select2/js/select2.full.min.js"></script>
-   
+
     <!-- orther script -->
     <script src="<?php echo base_url() ?>/assets/js/main.js"></script>
 </head>
 
 <body>
-	<div id="wrapper">
-		<header id="header" class="site-header float-header">
+    <div id="wrapper">
+        <header id="header" class="site-header float-header">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-6 col-5">
@@ -87,7 +88,7 @@
                                 <a title="Logo" href="<?= base_url() ?>" class="site__brand__logo"><img src="<?php echo base_url() ?>assets/images/assets/logo.png" alt="Golo"></a>
                                 <?= $this->session->flashdata('message'); ?>
                             </div><!-- .site__brand -->
-                            
+
                         </div><!-- .site -->
                     </div><!-- .col-md-6 -->
                     <div class="col-xl-6 col-7">
@@ -109,11 +110,14 @@
                                     <form action="<?= base_url('auth/signup') ?>" method="POST" class="form-sign form-content" id="signup">
                                         <div class="field-inline">
                                             <div class="field-input">
-                                                <input type="text" placeholder="First Name" value="" name="first_name">
+                                                <input type="text" placeholder="First Name" value="" name="firstname">
                                             </div>
                                             <div class="field-input">
-                                                <input type="text" placeholder="Last Name" value="" name="last_name">
+                                                <input type="text" placeholder="Last Name" value="" name="lastname">
                                             </div>
+                                        </div>
+                                        <div class="field-input">
+                                            <input type="text" placeholder="Usernamr" value="" name="username">
                                         </div>
                                         <div class="field-input">
                                             <input type="email" placeholder="Email" value="" name="email">
@@ -121,7 +125,19 @@
                                         <div class="field-input">
                                             <input type="password" placeholder="Password" value="" name="password">
                                         </div>
-                                        <div class="field-check">
+                                        <div class="field-input">
+                                            <label for="id_level">User Sebagai <?php echo form_error('id_level') ?></label>
+                                            <select name="id_level" id="id_level" class="form-control select2bs4" required>
+                                                <option value="0">-- Pilih User Sebagai --</option>
+                                                <?php foreach (loadlevel() as $lv) :
+                                                    if ($lv->id > 1) :
+                                                ?>
+                                                        <option <?= $sel ?> value="<?= $lv->id ?>"><?= $lv->nama ?></option>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <div class="field-check  mt-3">
                                             <label for="accept">
                                                 <input type="checkbox" id="accept" value="">
                                                 Accept the <a title="Terms" href="#">Terms</a> and <a title="Privacy Policy" href="#">Privacy Policy</a>
@@ -172,8 +188,8 @@
             </div><!-- .container-fluid -->
         </header><!-- .site-header -->
 
-		<main id="main" class="site-main">
-			<section class="site-banner layout-03" style="background-image: url(<?= base_url()?>/assets/images/main-banner.png);">
+        <main id="main" class="site-main">
+            <section class="site-banner layout-03" style="background-image: url(<?= base_url() ?>/assets/images/main-banner.png);">
                 <div class="container">
                     <div class="site-banner__content">
                         <h1 class="site-banner__title">Cari Lowongan & Tenaga Kerja</h1>
@@ -181,7 +197,7 @@
                             <div class="field-input">
                                 <label for="s">Cari</label>
                                 <input class="site-banner__search__input open-suggestion" id="s" type="text" name="s" placeholder="Ex: Desain Grafis, Videografer" autocomplete="off">
-                                
+
                             </div><!-- .site-banner__search__input -->
                             <div class="field-input">
                                 <label for="loca">Lokasi</label>
@@ -205,7 +221,7 @@
                     <div class="inner">
                         <div class="row">
                             <div class="col-12 col-lg-4">
-                                <div class="item hover__box" style="background-image: url(<?= base_url()?>/assets/images/cat.png); background-color: #fccb02">
+                                <div class="item hover__box" style="background-image: url(<?= base_url() ?>/assets/images/cat.png); background-color: #fccb02">
                                     <a href="#">
                                         <span class="info">
                                             <span class="title">Sekolah</span>
@@ -216,7 +232,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <div class="item hover__box" style="background-image: url(<?= base_url()?>/assets/images/cat.png); background-color: #23d3d3">
+                                <div class="item hover__box" style="background-image: url(<?= base_url() ?>/assets/images/cat.png); background-color: #23d3d3">
                                     <a href="#">
                                         <span class="info">
                                             <span class="title">Siswa</span>
@@ -227,7 +243,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <div class="item hover__box" style="background-image: url(<?= base_url()?>/assets/images/cat.png); background-color: #005450">
+                                <div class="item hover__box" style="background-image: url(<?= base_url() ?>/assets/images/cat.png); background-color: #005450">
                                     <a href="#">
                                         <span class="info">
                                             <span class="title">Perusahaan</span>
@@ -251,9 +267,9 @@
                             <div class="place-item layout-02 place-hover">
                                 <div class="place-inner">
                                     <div class="place-thumb hover-img">
-                                        <a class="entry-thumb" href="<?= base_url('lowongankerja/detail/').'1'?>"><img src="<?php echo base_url() ?>assets/images/listing.jpg" alt=""></a>
+                                        <a class="entry-thumb" href="<?= base_url('lowongankerja/detail/') . '1' ?>"><img src="<?php echo base_url() ?>assets/images/listing.jpg" alt=""></a>
                                         <a href="#" class="author" title="Author"><img src="<?php echo base_url() ?>assets/images/avatars/default.jpg" alt="Author"></a>
-                                    </div>  
+                                    </div>
                                     <div class="entry-detail">
                                         <div class="entry-head">
                                             <div class="place-type list-item">
@@ -263,7 +279,7 @@
                                                 <a href="#">Medan</a>
                                             </div>
                                         </div>
-                                        <h3 class="place-title"><a href="<?= base_url('lowongankerja/detail/').'1'?>">Lowongan Kerja Desain Grafis Part Time</a></h3>
+                                        <h3 class="place-title"><a href="<?= base_url('lowongankerja/detail/') . '1' ?>">Lowongan Kerja Desain Grafis Part Time</a></h3>
                                         <div class="entry-address"><i class="las la-map-marker"></i>PT. ESEMKA MEDAN</div>
                                     </div>
                                 </div>
@@ -271,9 +287,9 @@
                             <div class="place-item layout-02 place-hover">
                                 <div class="place-inner">
                                     <div class="place-thumb hover-img">
-                                        <a class="entry-thumb" href="<?= base_url('lowongankerja/detail/').'1'?>"><img src="<?php echo base_url() ?>assets/images/listing.jpg" alt=""></a>
+                                        <a class="entry-thumb" href="<?= base_url('lowongankerja/detail/') . '1' ?>"><img src="<?php echo base_url() ?>assets/images/listing.jpg" alt=""></a>
                                         <a href="#" class="author" title="Author"><img src="<?php echo base_url() ?>assets/images/avatars/default.jpg" alt="Author"></a>
-                                    </div>  
+                                    </div>
                                     <div class="entry-detail">
                                         <div class="entry-head">
                                             <div class="place-type list-item">
@@ -283,7 +299,7 @@
                                                 <a href="#">Medan</a>
                                             </div>
                                         </div>
-                                        <h3 class="place-title"><a href="<?= base_url('lowongankerja/detail/').'1'?>">Lowongan Kerja Desain Grafis Part Time</a></h3>
+                                        <h3 class="place-title"><a href="<?= base_url('lowongankerja/detail/') . '1' ?>">Lowongan Kerja Desain Grafis Part Time</a></h3>
                                         <div class="entry-address"><i class="las la-map-marker"></i>PT. ESEMKA MEDAN</div>
                                     </div>
                                 </div>
@@ -291,9 +307,9 @@
                             <div class="place-item layout-02 place-hover">
                                 <div class="place-inner">
                                     <div class="place-thumb hover-img">
-                                        <a class="entry-thumb" href="<?= base_url('lowongankerja/detail/').'1'?>"><img src="<?php echo base_url() ?>assets/images/listing.jpg" alt=""></a>
+                                        <a class="entry-thumb" href="<?= base_url('lowongankerja/detail/') . '1' ?>"><img src="<?php echo base_url() ?>assets/images/listing.jpg" alt=""></a>
                                         <a href="#" class="author" title="Author"><img src="<?php echo base_url() ?>assets/images/avatars/default.jpg" alt="Author"></a>
-                                    </div>  
+                                    </div>
                                     <div class="entry-detail">
                                         <div class="entry-head">
                                             <div class="place-type list-item">
@@ -303,7 +319,7 @@
                                                 <a href="#">Medan</a>
                                             </div>
                                         </div>
-                                        <h3 class="place-title"><a href="<?= base_url('lowongankerja/detail/').'1'?>">Lowongan Kerja Desain Grafis Part Time</a></h3>
+                                        <h3 class="place-title"><a href="<?= base_url('lowongankerja/detail/') . '1' ?>">Lowongan Kerja Desain Grafis Part Time</a></h3>
                                         <div class="entry-address"><i class="las la-map-marker"></i>PT. ESEMKA MEDAN</div>
                                     </div>
                                 </div>
@@ -311,9 +327,9 @@
                             <div class="place-item layout-02 place-hover">
                                 <div class="place-inner">
                                     <div class="place-thumb hover-img">
-                                        <a class="entry-thumb" href="<?= base_url('lowongankerja/detail/').'1'?>"><img src="<?php echo base_url() ?>assets/images/listing.jpg" alt=""></a>
+                                        <a class="entry-thumb" href="<?= base_url('lowongankerja/detail/') . '1' ?>"><img src="<?php echo base_url() ?>assets/images/listing.jpg" alt=""></a>
                                         <a href="#" class="author" title="Author"><img src="<?php echo base_url() ?>assets/images/avatars/default.jpg" alt="Author"></a>
-                                    </div>  
+                                    </div>
                                     <div class="entry-detail">
                                         <div class="entry-head">
                                             <div class="place-type list-item">
@@ -323,7 +339,7 @@
                                                 <a href="#">Medan</a>
                                             </div>
                                         </div>
-                                        <h3 class="place-title"><a href="<?= base_url('lowongankerja/detail/').'1'?>">Lowongan Kerja Desain Grafis Part Time</a></h3>
+                                        <h3 class="place-title"><a href="<?= base_url('lowongankerja/detail/') . '1' ?>">Lowongan Kerja Desain Grafis Part Time</a></h3>
                                         <div class="entry-address"><i class="las la-map-marker"></i>PT. ESEMKA MEDAN</div>
                                     </div>
                                 </div>
@@ -331,9 +347,9 @@
                             <div class="place-item layout-02 place-hover">
                                 <div class="place-inner">
                                     <div class="place-thumb hover-img">
-                                        <a class="entry-thumb" href="<?= base_url('lowongankerja/detail/').'1'?>"><img src="<?php echo base_url() ?>assets/images/listing.jpg" alt=""></a>
+                                        <a class="entry-thumb" href="<?= base_url('lowongankerja/detail/') . '1' ?>"><img src="<?php echo base_url() ?>assets/images/listing.jpg" alt=""></a>
                                         <a href="#" class="author" title="Author"><img src="<?php echo base_url() ?>assets/images/avatars/default.jpg" alt="Author"></a>
-                                    </div>  
+                                    </div>
                                     <div class="entry-detail">
                                         <div class="entry-head">
                                             <div class="place-type list-item">
@@ -343,7 +359,7 @@
                                                 <a href="#">Medan</a>
                                             </div>
                                         </div>
-                                        <h3 class="place-title"><a href="<?= base_url('lowongankerja/detail/').'1'?>">Lowongan Kerja Desain Grafis Part Time</a></h3>
+                                        <h3 class="place-title"><a href="<?= base_url('lowongankerja/detail/') . '1' ?>">Lowongan Kerja Desain Grafis Part Time</a></h3>
                                         <div class="entry-address"><i class="las la-map-marker"></i>PT. ESEMKA MEDAN</div>
                                     </div>
                                 </div>
@@ -353,7 +369,7 @@
                             <div class="place-slider__prev slick-nav__prev">
                                 <i class="la la-arrow-left"></i>
                             </div><!-- .place-slider__prev -->
-                            <div class="place-slider__next slick-nav__next">        
+                            <div class="place-slider__next slick-nav__next">
                                 <i class="la la-arrow-right"></i>
                             </div><!-- .place-slider__next -->
                         </div><!-- .place-slider__nav -->
@@ -368,15 +384,16 @@
                     </div>
                 </div>
             </section><!-- .banner-wrap -->
-		</main><!-- .site-main -->
+        </main><!-- .site-main -->
 
-		<footer id="footer" class="footer">
-			<div class="container">
-				<div class="footer__bottom">
-					<p class="footer__bottom__copyright">2023 &copy; <a title="domain esemka" href="#">domain esemka</a>. All rights reserved.</p>
-				</div><!-- .top-footer -->
-			</div><!-- .container -->
-		</footer><!-- site-footer -->
-	</div><!-- #wrapper -->
+        <footer id="footer" class="footer">
+            <div class="container">
+                <div class="footer__bottom">
+                    <p class="footer__bottom__copyright">2023 &copy; <a title="domain esemka" href="#">domain esemka</a>. All rights reserved.</p>
+                </div><!-- .top-footer -->
+            </div><!-- .container -->
+        </footer><!-- site-footer -->
+    </div><!-- #wrapper -->
 </body>
+
 </html>

@@ -100,6 +100,26 @@ if (!function_exists('loaduser')) {
   }
 }
 
+if (!function_exists('loaduserall')) {
+  function loaduserall($id=null,$id2=null)
+  {
+    $ci = get_instance();
+    $ci->load->model('User_model');
+    $data = $ci->User_model->get_all();
+    return $data;
+  }
+}
+
+if (!function_exists('loadpermintaan')) {
+  function loadpermintaan($id=null,$id2=null)
+  {
+    $ci = get_instance();
+    $ci->load->model('Permintaan_model');
+    $data = $ci->Permintaan_model->get_all();
+    return $data;
+  }
+}
+
 if (!function_exists('loadlowongan')) {
   function loadlowongan($id=null)
   {
@@ -177,6 +197,16 @@ if (!function_exists('loadlamaran')) {
     $ci = get_instance();
     $ci->load->model('Lamaran_model');
     $data = $ci->Lamaran_model->get_alllamaran($id);
+    return $data;
+  }
+}
+
+if (!function_exists('loadlamaranall')) {
+  function loadlamaranall($id=null)
+  {
+    $ci = get_instance();
+    $ci->load->model('Lamaran_model');
+    $data = $ci->Lamaran_model->get_all();
     return $data;
   }
 }
@@ -321,6 +351,20 @@ if (!function_exists('getnamauser')) {
       return $data->firstname. ' - '.$data->username;
     else :
       return ' <small class="text-danger"> User Not Found!!</small>';
+    endif;
+  }
+}
+
+if (!function_exists('getnamasiswa')) {
+  function getnamasiswa($id)
+  {
+    $ci = get_instance();
+    $ci->load->model('Siswa_model');
+    $data = $ci->Siswa_model->get_by_id($id);
+    if ($data) :
+      return $data->nama_siswa;
+    else :
+      return ' <small class="text-danger"> Siswa Not Found </small>';
     endif;
   }
 }

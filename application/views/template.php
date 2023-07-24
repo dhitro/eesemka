@@ -137,22 +137,34 @@
                                 if ($this->session->userdata('id_level') == 4) :
                                     $foto = getfotoprofil($this->session->userdata('id_siswa'), 3);
                                 ?>
-                                    <a title="Icon" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
-                                <?php
+                                    <?php if ($foto) : ?>
+                                        <a title="Icon" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
+                                    <?php else : ?>
+                                        <a title="Icon" href="#"><img src="<?= base_url() . "assets/images/avatars/default.jpg" ?>" alt=""></a>
+                                    <?php
+                                    endif;
                                 elseif ($this->session->userdata('id_level') == 2) :
                                     $foto = getfotoprofil($this->session->userdata('id_sekolah'), 5);
-                                ?>
-                                    <a title="Icon" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
+                                    ?>
+                                    <?php if ($foto) : ?>
+                                        <a title="Icon" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
+                                    <?php else : ?>
+                                        <a title="Icon" href="#"><img src="<?= base_url() . "assets/images/avatars/default.jpg" ?>" alt=""></a>
+                                    <?php
+                                    endif; ?>
                                 <?php
                                 elseif ($this->session->userdata('id_level') == 3) :
                                     $foto = getfotoprofil($this->session->userdata('id_perusahaan'), 6);
                                 ?>
-                                    <a title="Icon" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
-                                <?php
-                                else :
-                                    'default.png';
-                                ?>
-                                    <a title="Icon" href="#"><img src="<?= base_url() . "assets/images/avatars/default.png" ?>" alt=""></a>
+                                    <?php if ($foto) : ?>
+                                        <a title="Icon" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
+                                    <?php else : ?>
+                                        <a title="Icon" href="#"><img src="<?= base_url() . "assets/images/avatars/default.jpg" ?>" alt=""></a>
+                                    <?php
+                                    endif;
+                                    ?>
+                                <?php else :?>
+                                    <a title="Icon" href="#"><img src="<?= base_url() . "assets/images/avatars/default.jpg" ?>" alt=""></a>
                                 <?php
                                 endif;
 
@@ -191,7 +203,7 @@
                                 <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('sekolah') ?>">Dashboard</a></li>
                                 <li class="<?= $menuaktif == 'siswa' || $menuaktif == 'siswa_profile' || $menuaktif == 'siswa_create' || $menuaktif == 'siswa_update' || $menuaktif == 'siswa_read' ? 'active' : '' ?>"><a href="<?= base_url('sekolah/siswa') ?>">Data Siswa</a></li>
                                 <li class="<?= $menuaktif == 'lowongan' || $menuaktif == 'lowongandetail'  ?  'active' : '' ?>"><a href="<?= base_url('sekolah/lowongan') ?>">Lowongan Kerja</a></li>
-                                <li><a href="<?= base_url('sekolah/permintaan') ?>">Permintaan Perusahaan</a></li>
+                                <li class="<?= $menuaktif == 'permintaan' ? 'active' : '' ?>"><a href="<?= base_url('sekolah/permintaan') ?>">Permintaan Perusahaan</a></li>
                                 <li class="<?= $menuaktif == 'profile' ? 'active' : '' ?>"><a href="<?= base_url('sekolah/profile') ?>">Profile</a></li>
                             <?php elseif ($menuaawal == 'admin') : ?>
                                 <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('admin') ?>">Dashboard</a></li>

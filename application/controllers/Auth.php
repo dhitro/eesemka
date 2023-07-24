@@ -8,7 +8,11 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        date_default_timezone_set("Asia/Jakarta");
+        $this->load->library('uuid');
+        $this->load->model([
+            'User_model'
+          ]);
+        // date_default_timezone_set("Asia/Jakarta");
     }
 
     public function index()
@@ -18,14 +22,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
         if ($this->form_validation->run() == false) {
 
-            // $data['title'] = "EESEMKA - BISA";
-            // $data['header'] = "Kolaborasi Pemanfaatan Hasil Riset dan Penerapan Inovasi Daerah Provinsi Sumatera Utara Terintegrasi";
-            // $this->load->view('auth/header', $data);
-        $this->load->view('auth/login');
-
-            // $this->load->view('auth/login', $data);
-            // $this->load->view('auth/footer');
-
+            $this->load->view('auth/login');
         } else {
 
             $this->_login();
@@ -34,9 +31,8 @@ class Auth extends CI_Controller
 
     public function login()
     {
-        
+
         $this->_login();
-    
     }
 
     private function _login()
@@ -68,7 +64,7 @@ class Auth extends CI_Controller
                         'id_siswa' => $idsiswa,
                         'id_perusahaan' => $idperusahaan,
                         'level' => $user['level'],
-                        'timeout' => time() + (60*60)
+                        'timeout' => time() + (60 * 60)
                     ];
 
                     $this->session->set_userdata($data);
@@ -129,6 +125,52 @@ class Auth extends CI_Controller
         redirect(site_url());
     }
 
+    public function signup()
+    {
+        echo $this->db->error();
+        $this->user_rules();
+
+        if ($this->form_validation->run() == FALSE) {
+            // $this->user_create();
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">
+                        <i class="fa fa-times-circle"></i>
+                        <h2>Error!</h2> Error Create Your Account. 
+                        </div>');
+                        redirect(site_url('home'));
+        } else {
+            $uuid = $this->uuid->v4();
+            $data = array(
+                'firstname' => $this->input->post('firstname', TRUE),
+                'lastname' => $this->input->post('lastname', TRUE),
+                'username' => $this->input->post('username', TRUE),
+                'password' => password_hash($this->input->post('password', TRUE), PASSWORD_DEFAULT),
+                'email' => $this->input->post('email', TRUE),
+                'id_level' => $this->input->post('id_level', TRUE),
+                'uuid' =>  $uuid,
+            );
+
+            $idlast =   $this->User_model->insert($data);
+            
+                $this->session->set_flashdata('message', '<div class="alert alert-success">                 
+                <i class="fa fa-check-circle"></i>
+                <h2>Well done!</h2> You successfully Create Your Account.  Wait For Adminn To Approve
+                </div>');
+                // $this->session->set_flashdata('message', '<div class="alert alert-danger">
+                //         <i class="fa fa-times-circle"></i>
+                //         <h2>Error!</h2> Error Create Your Account. 
+                //         </div>');
+            
+            redirect(site_url('home'));
+        }
+    }
+
+    public function user_rules()
+    {
+        $this->form_validation->set_rules('firstname', 'Nama Depan', 'trim|required');
+        $this->form_validation->set_rules('id', 'id', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    }
+
 
     function mypdf()
     {
@@ -139,5 +181,4 @@ class Auth extends CI_Controller
         $this->pdf->render();
         $this->pdf->stream("welcome.pdf");
     }
-    
 }

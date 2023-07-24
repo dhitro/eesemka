@@ -19,6 +19,21 @@ class Lowongankerja extends CI_Controller {
 	
 	public function index()
 	{
+		$per_hal = $this->input->post('per_hal');
+		if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
+		$ses_hal = $this->session->userdata('perhal');
+		$config['base_url'] = site_url('/admin/lowongan');
+		$config['page_query_string'] = TRUE;
+		$config['total_rows'] = $this->Lowongan_model->get_count();
+		$config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
+		$config['full_tag_open'] = '<div class="pagination__numbers">';
+		$config['full_tag_close'] = '</div>';
+	
+		$this->pagination->initialize($config);
+		$limit = $config['per_page'];
+		$offset = html_escape($this->input->get('per_page'));
+		$cari = html_escape($this->input->get('s'));
+		
 		$lowongan = $this->Lowongan_model->get_limit_data($limit, $offset, $cari);
 		$data = array(
 			'title' => 'E-Esemka - Lowongan Kerja',

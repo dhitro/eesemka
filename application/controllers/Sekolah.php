@@ -493,7 +493,7 @@ class Sekolah extends CI_Controller {
         'nama_sekolah' => $this->input->post('nama_sekolah', TRUE),
         'alamat' => $this->input->post('alamat', TRUE),
         'deskripsi' => $this->input->post('deskripsi', TRUE),
-        'id_user' => $this->input->post('id_user', TRUE),
+      
       );
 
       $this->Sekolah_model->update($this->input->post('id', TRUE), $data);
@@ -559,7 +559,34 @@ class Sekolah extends CI_Controller {
      $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
    }
 
+ // Module Permintaan
+ public function permintaan()
+ {
+   $per_hal = $this->input->post('per_hal');
+   if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
+   $ses_hal = $this->session->userdata('perhal');
+   $config['base_url'] = site_url('/sekolah/permintaan');
+   $config['page_query_string'] = TRUE;
+   $config['total_rows'] = $this->Permintaan_model->get_count();
+   $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
+   $config['full_tag_open'] = '<div class="pagination__numbers">';
+   $config['full_tag_close'] = '</div>';
 
+   $this->pagination->initialize($config);
+   $limit = $config['per_page'];
+   $offset = html_escape($this->input->get('per_page'));
+   $cari = html_escape($this->input->get('s'));
+
+   $sekolah = $this->Permintaan_model->get_limit_data_sekolah($limit, $offset, $cari, $this->session->userdata('id_sekolah'));
+   $this->pagination->initialize($config);
+   $data = array(
+     'title' => 'Member Area - Data permintaan',
+     'data' => $sekolah,
+     'actionadd' => site_url('sekolah/permintaan_create'),
+     'actionfilter' => site_url('sekolah/permintaan'),
+   );
+   $this->template->load('template', 'sekolah/Permintaan/permintaan_list', $data);
+ }
 
 
 }

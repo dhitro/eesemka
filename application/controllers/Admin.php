@@ -1312,7 +1312,6 @@ class Admin extends CI_Controller
          'firstname' => $this->input->post('firstname', TRUE),
          'lastname' => $this->input->post('lastname', TRUE),
          'username' => $this->input->post('username', TRUE),
-         'password' => $this->input->post('password', TRUE),
          'email' => $this->input->post('email', TRUE),
          'phone' => $this->input->post('phone', TRUE),
          'facebook' => $this->input->post('facebook', TRUE),
@@ -1322,8 +1321,8 @@ class Admin extends CI_Controller
          'uuid' =>  $uuid,
        );
  
+       if(!empty($this->input->post('password', TRUE)))  $data['password'] = password_hash($this->input->post('password', TRUE), PASSWORD_DEFAULT);
        $idlast =   $this->User_model->insert($data);
- 
        $fileuploaded = array();
  
        if (!empty($_FILES['foto']['name'])) :
