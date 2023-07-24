@@ -190,9 +190,9 @@
                             <?php elseif ($menuaawal == 'sekolah') : ?>
                                 <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('sekolah') ?>">Dashboard</a></li>
                                 <li class="<?= $menuaktif == 'siswa' || $menuaktif == 'siswa_profile' || $menuaktif == 'siswa_create' || $menuaktif == 'siswa_update' || $menuaktif == 'siswa_read' ? 'active' : '' ?>"><a href="<?= base_url('sekolah/siswa') ?>">Data Siswa</a></li>
-                                <li><a href="<?= base_url('sekolah/lowongan') ?>">Lowongan Kerja</a></li>
+                                <li class="<?= $menuaktif == 'lowongan' || $menuaktif == 'lowongandetail'  ?  'active' : '' ?>"><a href="<?= base_url('sekolah/lowongan') ?>">Lowongan Kerja</a></li>
                                 <li><a href="<?= base_url('sekolah/permintaan') ?>">Permintaan Perusahaan</a></li>
-                                <li><a href="<?= base_url('sekolah/profile') ?>">Profile</a></li>
+                                <li class="<?= $menuaktif == 'profile' ? 'active' : '' ?>"><a href="<?= base_url('sekolah/profile') ?>">Profile</a></li>
                             <?php elseif ($menuaawal == 'admin') : ?>
                                 <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('admin') ?>">Dashboard</a></li>
                                 <li class="<?= $menuaktif == 'sekolah' || $menuaktif == 'sekolah_create' || $menuaktif == 'sekolah_update' || $menuaktif == 'sekolah_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/sekolah') ?>">Sekolah</a></li>
