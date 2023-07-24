@@ -29,7 +29,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/responsive.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-    
+
     <!-- jQuery -->
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
@@ -127,12 +127,25 @@
                         <div class="right-header align-right">
                             <nav class="main-menu">
                                 <ul>
-                                    <li><a title="Page" href="<?= base_url($menuaktif.'/lowongankerja') ?>">Lowongan Kerja</a></li>
+                                    <li><a title="Page" href="<?= base_url($menuaktif . '/lowongankerja') ?>">Lowongan Kerja</a></li>
                                 </ul>
                             </nav>
 
                             <div class="ava">
-                                <a title="Sebastian" href="#"><img src="<?= base_url() ?>assets/images/avatars/female-1.jpg" alt=""></a>
+                                <?php
+                                $foto = [];
+                                if ($this->session->userdata('id_level') == 4) :
+                                    $foto = getfotoprofil($this->session->userdata('id_siswa'), 3);
+                                elseif ($this->session->userdata('id_level') == 2) :
+                                    $foto = getfotoprofil($this->session->userdata('id_sekolah'), 5);
+                                elseif ($this->session->userdata('id_level') == 3) :
+                                    $foto = getfotoprofil($this->session->userdata('id_perusahaan'), 6);
+                                else:
+                                    $foto = [];
+                                endif;
+                                
+                                ?>
+                                <a title="Icon" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
                             </div>
                         </div><!-- .right-header -->
                     </div><!-- .col-md-6 -->
@@ -143,39 +156,39 @@
             <div class="site-content owner-content">
                 <div class="member-menu">
                     <div class="container">
-                        <?php 
+                        <?php
                         $menuaawal = $this->uri->segment(1);
                         $menuaktif = $this->uri->segment(2);
-                        $menuparam = $this->uri->segment(3); 
+                        $menuparam = $this->uri->segment(3);
                         // echo $menuaawal.$menuaktif;
                         ?>
                         <ul>
-                            <?php if($menuaawal == 'perusahaan'): ?>
-                            <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan') ?>">Dashboard</a></li>
-                            <li class="<?= $menuaktif == 'lowongan' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan/pelamar') ?>">Pelamar</a></li>
-                            <li><a href="<?= base_url('perusahaan/lowongan') ?>">Lowongan Kerja</a></li>
-                            <li><a href="<?= base_url('perusahaan/permintaan') ?>">Permintaan Siswa</a></li>
-                            <li><a href="<?= base_url('perusahaan/profile') ?>">Profile</a></li>
-                            <?php elseif($menuaawal == 'siswa'): ?>    
-                            <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('siswa') ?>">Dashboard</a></li>
-							<li class="<?= $menuaktif == 'lowongan' || $menuaktif == 'lowongandetail'  ?  'active' : '' ?>"><a href="<?= base_url('siswa/lowongan') ?>">Lowongan Kerja</a></li>
-							<li><a href="<?= base_url('siswa/permintaan') ?>">Permintaan Perusahaan</a></li>
-							<li><a href="<?= base_url('siswa/profile') ?>">Profile</a></li>
-                            <?php elseif($menuaawal == 'sekolah'): ?>    
-                            <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('sekolah') ?>">Dashboard</a></li>
-							<li><a href="<?= base_url('sekolah/siswa') ?>">Data Siswa</a></li>
-							<li><a href="<?= base_url('sekolah/lowongan') ?>">Lowongan Kerja</a></li>
-							<li><a href="<?= base_url('sekolah/permintaan') ?>">Permintaan Perusahaan</a></li>
-							<li><a href="<?= base_url('sekolah/profile') ?>">Profile</a></li>
-                            <?php elseif($menuaawal == 'admin'): ?>    
-                            <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('admin') ?>">Dashboard</a></li>
-							<li class="<?= $menuaktif == 'sekolah' || $menuaktif == 'sekolah_create' || $menuaktif == 'sekolah_update' || $menuaktif== 'sekolah_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/sekolah') ?>">Sekolah</a></li>
-							<li class="<?= $menuaktif == 'siswa' || $menuaktif == 'siswa_profile' || $menuaktif == 'siswa_create' || $menuaktif == 'siswa_update' || $menuaktif== 'siswa_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/siswa') ?>">Siswa</a></li>
-							<li class="<?= $menuaktif == 'perusahaan' || $menuaktif == 'perusahaan_create' || $menuaktif == 'perusahaan_update' || $menuaktif== 'perusahaan_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/perusahaan') ?>">Perusahaan</a></li>
-							<li class="<?= $menuaktif == 'lowongan' || $menuaktif == 'lowongan_create' || $menuaktif == 'lowongan_update' || $menuaktif== 'lowongan_read'  ? 'active' : '' ?>"><a href="<?= base_url('admin/lowongan') ?>">Lowongan Kerja</a></li>
-							<li class="<?= $menuaktif == 'lamaran' || $menuaktif == 'lamaran_create' || $menuaktif == 'lamaran_update' || $menuaktif== 'lamaran_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/lamaran') ?>">Lamaran Kerja</a></li>
-							<li class="<?= $menuaktif == 'permintaan' || $menuaktif == 'permintaan_create' || $menuaktif == 'permintaan_update' || $menuaktif== 'permintaan_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/permintaan') ?>">Permintaan Siswa</a></li>
-							<li class="<?= $menuaktif == 'user' ? 'active' : '' ?>"><a href="<?= base_url('admin/user') ?>">User</a></li>
+                            <?php if ($menuaawal == 'perusahaan') : ?>
+                                <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan') ?>">Dashboard</a></li>
+                                <li class="<?= $menuaktif == 'lowongan' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan/pelamar') ?>">Pelamar</a></li>
+                                <li><a href="<?= base_url('perusahaan/lowongan') ?>">Lowongan Kerja</a></li>
+                                <li><a href="<?= base_url('perusahaan/permintaan') ?>">Permintaan Siswa</a></li>
+                                <li><a href="<?= base_url('perusahaan/profile') ?>">Profile</a></li>
+                            <?php elseif ($menuaawal == 'siswa') : ?>
+                                <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('siswa') ?>">Dashboard</a></li>
+                                <li class="<?= $menuaktif == 'lowongan' || $menuaktif == 'lowongandetail'  ?  'active' : '' ?>"><a href="<?= base_url('siswa/lowongan') ?>">Lowongan Kerja</a></li>
+                                <li class="<?= $menuaktif == 'permintaan' ? 'active' : '' ?>"><a href="<?= base_url('siswa/permintaan') ?>">Permintaan Perusahaan</a></li>
+                                <li class="<?= $menuaktif == 'profile' ? 'active' : '' ?>"><a href="<?= base_url('siswa/profile') ?>">Profile</a></li>
+                            <?php elseif ($menuaawal == 'sekolah') : ?>
+                                <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('sekolah') ?>">Dashboard</a></li>
+                                <li><a href="<?= base_url('sekolah/siswa') ?>">Data Siswa</a></li>
+                                <li><a href="<?= base_url('sekolah/lowongan') ?>">Lowongan Kerja</a></li>
+                                <li><a href="<?= base_url('sekolah/permintaan') ?>">Permintaan Perusahaan</a></li>
+                                <li><a href="<?= base_url('sekolah/profile') ?>">Profile</a></li>
+                            <?php elseif ($menuaawal == 'admin') : ?>
+                                <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('admin') ?>">Dashboard</a></li>
+                                <li class="<?= $menuaktif == 'sekolah' || $menuaktif == 'sekolah_create' || $menuaktif == 'sekolah_update' || $menuaktif == 'sekolah_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/sekolah') ?>">Sekolah</a></li>
+                                <li class="<?= $menuaktif == 'siswa' || $menuaktif == 'siswa_profile' || $menuaktif == 'siswa_create' || $menuaktif == 'siswa_update' || $menuaktif == 'siswa_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/siswa') ?>">Siswa</a></li>
+                                <li class="<?= $menuaktif == 'perusahaan' || $menuaktif == 'perusahaan_create' || $menuaktif == 'perusahaan_update' || $menuaktif == 'perusahaan_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/perusahaan') ?>">Perusahaan</a></li>
+                                <li class="<?= $menuaktif == 'lowongan' || $menuaktif == 'lowongan_create' || $menuaktif == 'lowongan_update' || $menuaktif == 'lowongan_read'  ? 'active' : '' ?>"><a href="<?= base_url('admin/lowongan') ?>">Lowongan Kerja</a></li>
+                                <li class="<?= $menuaktif == 'lamaran' || $menuaktif == 'lamaran_create' || $menuaktif == 'lamaran_update' || $menuaktif == 'lamaran_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/lamaran') ?>">Lamaran Kerja</a></li>
+                                <li class="<?= $menuaktif == 'permintaan' || $menuaktif == 'permintaan_create' || $menuaktif == 'permintaan_update' || $menuaktif == 'permintaan_read' ? 'active' : '' ?>"><a href="<?= base_url('admin/permintaan') ?>">Permintaan Siswa</a></li>
+                                <li class="<?= $menuaktif == 'user' ||$menuaktif == 'user_update' ? 'active' : '' ?>"><a href="<?= base_url('admin/user') ?>">User</a></li>
                             <?php endif; ?>
                             <li class="text-danger"><a onclick="return confirm('Apakah anda yakin akan keluar ?')" href="<?= base_url("auth/logout") ?>"> Logout</a>
                         </ul>
@@ -192,25 +205,25 @@
         </main><!-- .site-main -->
 
         <div class="modal" tabindex="-1" role="dialog" id="myModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title ">Preview File</h5>
-               
-            </div>
-            <div class="modal-body">
-                <object id="viewer" data="" width="100%" height="500px">
-                    This browser does not support PDFs. Please download the PDF to view it:
-                    <a id="downloader" href="" target="_blank">Download PDF</a>
-                </object>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title ">Preview File</h5>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-close-modal" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-body">
+                        <object id="viewer" data="" width="100%" height="500px">
+                            This browser does not support PDFs. Please download the PDF to view it:
+                            <a id="downloader" href="" target="_blank">Download PDF</a>
+                        </object>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-close-modal" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div><!-- Modal -->
         </div>
-    </div><!-- Modal -->
-</div>
 
         <footer id="footer" class="footer">
             <div class="container">

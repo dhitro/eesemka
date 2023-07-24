@@ -35,8 +35,10 @@
                             <input type="hidden" name="id_lowongan" id="id_lowongan" value="<?= $id?>" >
                             <select name="id_posisi" id="id_posisi">
                                 <option value="" selected>Pilih Posisi</option>
-                                <?php foreach (loadposisilowongan($id) as $bp) :  ?>
-                                <option value="<?= $bp->id_posisi ?>"><?= getnamaposisi($bp->id_posisi) ?></option>
+                                <?php foreach (loadposisilowongan($id) as $bp) :  
+                                    $sel = $bp->id_posisi == $id_posisi ? 'selected' : '';
+                                    ?>
+                                <option <?= $sel ?> value="<?= $bp->id_posisi ?>"><?= getnamaposisi($bp->id_posisi) ?></option>
 
                                 <?php endforeach; ?>
                             </select>

@@ -93,13 +93,30 @@ class Siswa extends CI_Controller
     );
     $this->template->load('template', 'Siswa/lowongan', $data);
   }
-  public function lowongandetail($id = null)
+  public function lowongandetail($id = null,$idposisi = null)
   {
 
     $row = $this->Lowongan_model->get_by_id($id);
 
     if ($row) {
+      $data = array(
+        'id_lowongan' => $id,
+        'id_siswa' => $this->session->userdata('id_siswa'),
+        'id_posisi' => $idposisi,
+
+      );
+      $total = $this->Lamaran_model->get_count_where($data);
+      
+      if ($total > 0) :
+        $lamaran = $this->Lamaran_model->get_by_data($data);
+
+        $this->session->set_flashdata('message', 'Lamaran Sudah Pernah Dikirim <br> Status : '.$lamaran->status);
+        // redirect(site_url('siswa/lowongandetail/' . $this->input->post('id_lowongan', TRUE).'/'.$this->input->post('id_posisi', TRUE)));
+
+      endif;
+
       $lowongan = $this->Lowongan_model->get_all();
+      
       $data = array(
         'title' => 'Siswa Area - Form Data Lowongan',
         'button' => 'Update',
@@ -107,6 +124,7 @@ class Siswa extends CI_Controller
         'action' => site_url('admin/lowongan_update_action'),
         'id' => set_value('id', $row->id),
         'id_perusahaan' => set_value('id_perusahaan', $row->id_perusahaan),
+        'id_posisi' => set_value('id_posisi', $idposisi),
         'nama_lowongan' => set_value('nama_lowongan', $row->nama_lowongan),
         'deskripsi' => set_value('deskripsi', $row->deskripsi),
         'persyaratan' => set_value('persyaratan', $row->persyaratan),
@@ -140,7 +158,7 @@ class Siswa extends CI_Controller
       if ($total > 0) :
 
         $this->session->set_flashdata('message', 'Lamaran Sudah Pernah Dikirim');
-        redirect(site_url('siswa/lowongandetail/' . $this->input->post('id_lowongan', TRUE)));
+        redirect(site_url('siswa/lowongandetail/' . $this->input->post('id_lowongan', TRUE).'/'.$this->input->post('id_posisi', TRUE)));
 
       else :
         $data = array(
@@ -168,24 +186,93 @@ class Siswa extends CI_Controller
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
   }
 
-  public function profile($id=null)
+  public function profile()
   {
-    $row = $this->Siswa_model->get_by_id($id);
+    $row = $this->Siswa_model->get_by_id($this->session->userdata('id_siswa'));
     
-      $data = array(
-        'title' => 'Admin Area - Detail Siswa',
-        'nik' => $row->nik,
-        'id' => $row->id,
-        'nama_siswa' => $row->nama_siswa,
-        'jenis_kelamin' => $row->jenis_kelamin,
-        'alamat' => $row->alamat,
-        'status' => $row->status,
-        'deskripsi' => $row->deskripsi,
-        'id_user' => $row->id_user,
-      );
+    $data = array(
+      'title' => 'Admin Area - Form Data Siswa',
+      'button' => 'Update',
+      'action' => site_url('siswa/siswa_update_action'),
+      'id' => set_value('id', $row->id),
+      'uuid' => set_value('uuid', $row->uuid),
+      'id_sekolah' => set_value('id_sekolah', $row->id_sekolah),
+      'nik' => set_value('nik', $row->nik),
+      'nama_siswa' => set_value('nama_siswa', $row->nama_siswa),
+      'jenis_kelamin' => set_value('jenis_kelamin', $row->jenis_kelamin),
+      'alamat' => set_value('alamat', $row->alamat),
+      'status' => set_value('status', $row->status),
+      'deskripsi' => set_value('deskripsi', $row->deskripsi),
+      'id_user' => set_value('id_user', $row->id_user),
+      'uuid' => set_value('uuid', $row->uuid),
+    );
       $this->template->load('template', 'Siswa/profile', $data);
     
   }
+
+  public function siswa_update_action()
+  {
+    $this->siswa_rules();
+
+    if ($this->form_validation->run() == FALSE) {
+      $this->profile();
+    } else {
+      $data = array(
+        'nik' => $this->input->post('nik', TRUE),
+        'nama_siswa' => $this->input->post('nama_siswa', TRUE),
+        'alamat' => $this->input->post('alamat', TRUE),
+        'jenis_kelamin' => $this->input->post('jenis_kelamin', TRUE),
+        'id_sekolah' => $this->input->post('id_sekolah', TRUE),
+        'status' => $this->input->post('status', TRUE),
+        'deskripsi' => $this->input->post('deskripsi', TRUE),
+        'id_user' => $this->input->post('id_user', TRUE),
+      );
+
+      $this->Siswa_model->update($this->input->post('id', TRUE), $data);
+      $this->Swpengalaman_model->delete_pengalaman($this->input->post('id', TRUE));
+      $pengalaman = $this->input->post('pengalaman');
+      $tahun = $this->input->post('tahun');
+      if (!empty($tahun)) :
+        foreach ($tahun as $key => $th) :
+          $datapengalaman = array(
+            'id_siswa' =>  $this->input->post('id', TRUE),
+            'tahun' => $th,
+            'pengalaman' => $pengalaman[$key],
+          );
+          $this->Swpengalaman_model->insert($datapengalaman);
+        endforeach;
+      endif;
+      // $this->File_model->delete_sertifikat($this->input->post('id', TRUE),1);
+      // $this->File_model->delete_sertifikat($this->input->post('id', TRUE),2);
+      $fileuploaded = array();
+      if (!empty($_FILES['sertifikat_ahli']['name'])) :
+        $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['sertifikat_ahli'], $this->input->post('id', TRUE), 1, 'sertifikat_ahli[]');
+      endif;
+      if (!empty($_FILES['sertifikat_pendukung']['name'])) :
+        $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['sertifikat_pendukung'], $this->input->post('id', TRUE), 2, 'sertifikat_pendukung[]');
+      endif;
+      if (!empty($_FILES['foto']['name'])) :
+        $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 3, 'foto[]');
+      endif;
+      // var_dump($fileuploaded);
+      // die();
+
+
+      $this->session->set_flashdata('message', 'Update Record Success');
+      redirect(site_url('siswa/profile'));
+    }
+  }
+
+  public function siswa_rules()
+  {
+    $this->form_validation->set_rules('nama_siswa', 'Nama Siswa', 'trim|required');
+    $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'trim|required');
+    $this->form_validation->set_rules('id_sekolah', 'Sekolah', 'trim|required');
+    $this->form_validation->set_rules('status', 'Status Siswa', 'trim|required');
+    $this->form_validation->set_rules('id', 'id', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+  }
+
 
   // Module Permintaan
   public function permintaan()
@@ -205,9 +292,7 @@ class Siswa extends CI_Controller
     $offset = html_escape($this->input->get('per_page'));
     $cari = html_escape($this->input->get('s'));
 
-    $sekolah = $this->Permintaan_model->get_limit_data($limit, $offset, $cari);
-
-
+    $sekolah = $this->Permintaan_model->get_limit_data_user($limit, $offset, $cari, $this->session->userdata('id_siswa'));
     $this->pagination->initialize($config);
     $data = array(
       'title' => 'Admin Area - Data permintaan',
