@@ -932,7 +932,7 @@ a.place__comments__reply i { display: inline-block; vertical-align: middle; marg
 .place-share .list-social-icon a.pinterest { background-color: #CB2027; }
 
 .listing-main { display: -webkit-box; display: -ms-flexbox; display: flex; justify-content: flex-end; border-top: 1px solid #eeeeee; }
-.listing-main .listing-nav { background-color: #ffffff; position: fixed; left: 0; bottom: 0; top: 153px; width: 36%; z-index: 9; border-top: 1px solid #eee; transition: all 0.3s; }
+.listing-main .listing-nav { background-color: #ffffff; position: fixed; left: 0; bottom: 0; top: 153px; width: 34%; z-index: 9; border-top: 1px solid #eee; transition: all 0.3s; }
 .listing-main .listing-nav.on_scroll { top: 0; }
 .listing-main .listing-nav.is_footer { position: relative; }
 .listing-main .listing-content { -webkit-box-flex: 0; -ms-flex: 0 0 70%; flex: 0 0 70%; max-width: 70%; }

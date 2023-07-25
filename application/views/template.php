@@ -190,10 +190,10 @@
                         <ul>
                             <?php if ($menuaawal == 'perusahaan') : ?>
                                 <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan') ?>">Dashboard</a></li>
-                                <li class="<?= $menuaktif == 'lowongan' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan/pelamar') ?>">Pelamar</a></li>
-                                <li><a href="<?= base_url('perusahaan/lowongan') ?>">Lowongan Kerja</a></li>
-                                <li><a href="<?= base_url('perusahaan/permintaan') ?>">Permintaan Siswa</a></li>
-                                <li><a href="<?= base_url('perusahaan/profile') ?>">Profile</a></li>
+                                <li class="<?= $menuaktif == 'pelamar' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan/pelamar') ?>">Pelamar</a></li>
+                                <li class="<?= $menuaktif == 'lowongan' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan/lowongan') ?>">Lowongan Kerja</a></li>
+                                <li class="<?= $menuaktif == 'permintaan' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan/permintaan') ?>">Permintaan Siswa</a></li>
+                                <li class="<?= $menuaktif == 'profile' ? 'active' : '' ?>"><a href="<?= base_url('perusahaan/profile') ?>">Profile</a></li>
                             <?php elseif ($menuaawal == 'siswa') : ?>
                                 <li class="<?= $menuaktif == '' ? 'active' : '' ?>"><a href="<?= base_url('siswa') ?>">Dashboard</a></li>
                                 <li class="<?= $menuaktif == 'lowongan' || $menuaktif == 'lowongandetail'  ?  'active' : '' ?>"><a href="<?= base_url('siswa/lowongan') ?>">Lowongan Kerja</a></li>

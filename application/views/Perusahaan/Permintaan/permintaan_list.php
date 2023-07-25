@@ -1,58 +1,56 @@
-<div class="member-wrap-top">
-	<h2>Permintaan Siswa</h2>
-</div><!-- .member-wrap-top -->
-<div><?= $this->session->flashdata('message'); ?></div>
-<table class="member-place-list table-responsive">
-	<thead>
-		<tr>
-			<!-- <th>
-										<div class="field-check">
-											<label for="all">
-												<input id="all" type="checkbox" value="all">
-												<span class="checkmark">
-													<i class="la la-check"></i>
-												</span>
-											</label>
-										</div>
-									</th> -->
-			<th>ID</th>
-			<th>Nama Perusahaan</th>
-			<th>Keterangan</th>
-			<th>Status</th>
-			<th>Tanggal</th>
-			<th>Action</th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php
-		$no = 1;
-		foreach ($data as $d) : ?>
-			<tr>
+	<div class="container">
+		<div class="member-wishlist-wrap">
+				<div class="member-wrap-top">
+				<h2>Permintaan Siswa <?php echo $ini; ?>   <a href="<?= base_url() . "perusahaan/siswa" ?>" class="btn" title="Data Siswa">Data Seluruh Siswa</a></h2>
+			</div><!-- .member-wrap-top -->
+			<div><?= $this->session->flashdata('message'); ?></div>
+			<div class="container">
 
-				<td><?= $no++ ?></td>
-				<td class="text-nowrap">
-					<b><?= getnamaperusahaan($d->id_perusahaan) ?></b>
-				</td>
-						<td> <?= $d->keterangan ?></td>
+			<div class="mw-box">
+        <h2></h2>
+        <div class="area-places layout-3col">
 				<?php
-				$st = '';
-				if ($d->status == 'Approve') $st = 'text-success';
-				if ($d->status == 'Pending') $st = 'text-warning';
-				if ($d->status == 'Reject') $st = 'text-danger';
-				?>
-				<td class="small text-status <?= $st ?>"><?= $d->status ?></td>
-				<td style="width: 350px;"><?= $d->created_at ?></td>
-				<td class="">
-					<div class="place-action">
-						<a href="<?= site_url('admin/permintaan_approve/') ?>" data-id="<?= $d->id ?>" class="approved" title="Approve">Approve</a>
-						<a href="<?= site_url('admin/permintaan_approve/') ?>" data-id="<?= $d->id ?>" class="pending" title="Pending">Pending</a>
-						<a href="<?= site_url('admin/permintaan_approve/') ?>" data-id="<?= $d->id ?>" class="reject" title="Reject">Reject</a>
-					</div>
-				</td>
-			</tr>
-		<?php endforeach; ?>
-	</tbody>
-</table>
+				$no = 1;
+				foreach ($data as $d) : ?>
+                <div class="place-item layout-02 place-hover">
+                    <div class="place-inner">
+						<?php
+						$st = '';
+						if ($d->status == 'Approve') $st = 'background:#b5ffae!important;';
+						if ($d->status == 'Pending') $st = '';
+						if ($d->status == 'Reject') $st = 'background:#ffa6a6!important;';
+						?>
+                        <div class="place-thumb hover-img">
+						<?php $foto = getfotoprofil($d->id_siswa, 3);
+							if (!empty('$foto')) : ?>
+                                <a class="entry-thumb" href="#"><img src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt=""></a>
+                            <?php else : ?>
+                                <a class="entry-thumb" href="#"><img src="<?= base_url('assets/') ?>images/listing.jpg" alt=""></a>
+                            <?php endif; ?>
+                            <a href="#" class="author" title="<?= getnamauser($d->created_by)  ?>"><img src="<?= base_url('assets/') ?>images/avatars/default.jpg" alt="<?= getnamauser($d->created_by)  ?>"></a>
+                        </div>
+                        <div class="entry-detail" style="<?= $st ?>">
+                            <div class="entry-head">
+                                <div class="place-type list-item">
+                                    <small><?= getnamasekolah('$d->id_sekolah') ?></small>
+                                </div>
+                            </div>
+                            <h3 class="place-title"><a href="#"><?= getsiswa($d->id_siswa) ?></a></h3>
+                            	
+							<td class="small text-status <?= $st ?>"><b><?= $d->status ?></b></td>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div><!-- .member-wrap -->
+
+
+		<br><br>
+	</div>
+
+
+
 <div class="pagination align-left">
 	<?= $this->pagination->create_links(); ?>
 </div><!-- .pagination -->

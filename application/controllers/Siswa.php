@@ -341,10 +341,13 @@ class Siswa extends CI_Controller
     $offset = html_escape($this->input->get('per_page'));
     $cari = html_escape($this->input->get('s'));
 
-    $sekolah = $this->Permintaan_model->get_limit_data_user($limit, $offset, $cari, $this->session->userdata('id_siswa'));
+    $u = $this->session->userdata('id_siswa');
+
+    $sekolah = $this->Permintaan_model->get_limit_data_siswa($limit, $offset, $cari, $u);
     $this->pagination->initialize($config);
     $data = array(
       'title' => 'Admin Area - Data permintaan',
+      'usis' => $u,
       'data' => $sekolah,
       'actionadd' => site_url('admin/permintaan_create'),
       'actionfilter' => site_url('admin/permintaan'),

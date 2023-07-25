@@ -75,6 +75,16 @@ class Lamaran_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+
+     // get data with limit and search
+     function get_limit_data_user($limit, $start = 0, $q = NULL, $id=null) {
+        $this->db->where('id_lowongan',$id);
+        $this->db->order_by($this->id, $this->order);
+        $this->db->like('id', $q);
+	    $this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
+
     // get data with limit and search
     function get_limit_data_done($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);

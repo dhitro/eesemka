@@ -1,20 +1,10 @@
 <div class="member-wrap-top">
-	<h2>Permintaan Perusahaan</h2>
+	<h2>Permintaan Perusahaan <?php echo $usis; ?></h2>
 </div><!-- .member-wrap-top -->
 <div><?= $this->session->flashdata('message'); ?></div>
 <table class="member-place-list table-responsive">
 	<thead>
 		<tr>
-			<!-- <th>
-										<div class="field-check">
-											<label for="all">
-												<input id="all" type="checkbox" value="all">
-												<span class="checkmark">
-													<i class="la la-check"></i>
-												</span>
-											</label>
-										</div>
-									</th> -->
 			<th>ID</th>
 			<th>Nama Perusahaan</th>
 			<th>Keterangan</th>

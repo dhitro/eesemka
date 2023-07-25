@@ -29,10 +29,35 @@ class Perusahaan extends CI_Controller {
     
 	public function index()
 	{
-        $data = array(
-            'title' => 'Perusahaan Member Area'
-        );
-        $this->template->load('template', 'Perusahaan/dashboard', $data);
+    $per_hal = $this->input->post('per_hal');
+    if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
+    $ses_hal = $this->session->userdata('perhal');
+    $config['base_url'] = site_url('/perusahaan/lowongan');
+    $config['page_query_string'] = TRUE;
+    $config['total_rows'] = $this->Lowongan_model->get_count();
+    $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
+    $config['full_tag_open'] = '<div class="pagination__numbers">';
+    $config['full_tag_close'] = '</div>';
+
+    $this->pagination->initialize($config);
+    $limit = $config['per_page'];
+    $offset = html_escape($this->input->get('per_page'));
+    $cari = html_escape($this->input->get('s'));
+
+    $q = array(
+      'id_siswa' => $this->session->userdata('id_siswa'),
+    
+    );
+
+    $lamaran = $this->Lamaran_model->get_limit_data_done($limit, $offset, $q);
+
+
+    $this->pagination->initialize($config);
+    $data = array(
+        'title' => 'Perusahaan Member Area',
+        'data' => $uper
+    );
+    $this->template->load('template', 'Perusahaan/dashboard', $data);
 	}
 
   public function profile()
@@ -144,13 +169,16 @@ class Perusahaan extends CI_Controller {
     $offset = html_escape($this->input->get('per_page'));
     $cari = html_escape($this->input->get('s'));
 
-    $sekolah = $this->Permintaan_model->get_limit_data($limit, $offset, $cari);
+    
+    $ss = $this->session->userdata('user_id');
+    $sekolah = $this->Permintaan_model->get_limit_data_user($limit, $offset, $cari, $ss);
 
 
     $this->pagination->initialize($config);
     $data = array(
       'title' => 'Perusahaan Area - Data permintaan',
       'data' => $sekolah,
+      'ini' => $ss,
       'actionadd' => site_url('perusahaan/permintaan_create'),
       'actionfilter' => site_url('perusahaan/permintaan'),
     );
@@ -176,11 +204,19 @@ class Perusahaan extends CI_Controller {
     }
   }
 
-  public function permintaan_create()
+  public function permintaan_create($idsis)
   {
+
+    $ss = $this->session->userdata('user_id');
+    $row = $this->Permintaan_model->get_by_id($idsis);
+    $mow = $this->Siswa_model->get_by_id($idsis);
+
     $data = array(
       'title' => 'Perusahaan Area - Tambah permintaan',
-      'button' => 'Create',
+      'button' => 'Rekrut',
+      'idsiswa' => $idsis,
+      'idper' => $ss,
+      'namasiswa' => $mow->nama_siswa,
       'action' => site_url('perusahaan/permintaan_create_action'),
       'id' => set_value('id'),
       'uuid' => set_value('uuid'),
@@ -286,6 +322,80 @@ class Perusahaan extends CI_Controller {
   public function permintaan_rules()
   {
     $this->form_validation->set_rules('id_perusahaan', 'Nama Perusahaan', 'trim|required');
+
+    $this->form_validation->set_rules('id', 'id', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+  }
+
+  // Module Lamaran
+  public function pelamar()
+  {
+    $per_hal = $this->input->post('per_hal');
+    if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
+    $ses_hal = $this->session->userdata('perhal');
+    $config['base_url'] = site_url('/perusahaan/lamaran');
+    $config['page_query_string'] = TRUE;
+    $config['total_rows'] = $this->Lamaran_model->get_count();
+    $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
+    $config['full_tag_open'] = '<div class="pagination__numbers">';
+    $config['full_tag_close'] = '</div>';
+
+    $this->pagination->initialize($config);
+    $limit = $config['per_page'];
+    $offset = html_escape($this->input->get('per_page'));
+    $cari = html_escape($this->input->get('s'));
+
+    $uper = $this->session->userdata('user_id');
+
+    $sekolah = $this->Lamaran_model->get_limit_data_user($limit, $offset, $cari, $uper);
+
+
+    $this->pagination->initialize($config);
+    $data = array(
+      'title' => 'Perusahaan Area - Data Lamaran',
+      'up' => $uper,
+      'data' => $sekolah,
+      'actionadd' => site_url('perusahaan/lamaran_create'),
+      'actionfilter' => site_url('perusahaan/lamaran'),
+    );
+    $this->template->load('template', 'Perusahaan/Lamaran/lamaran_list', $data);
+  }
+
+  public function lamaran_read($id)
+  {
+    $row = $this->Siswa_model->get_by_id($id);
+    if ($row) {
+      $data = array(
+        'title' => 'Admin Area - Detail Siswa',
+        'nik' => $row->nik,
+        'id' => $row->id,
+        'nama_siswa' => $row->nama_siswa,
+        'jenis_kelamin' => $row->jenis_kelamin,
+        'alamat' => $row->alamat,
+        'status' => $row->status,
+        'deskripsi' => $row->deskripsi,
+        'id_user' => $row->id_user,
+      );
+      $this->template->load('template', 'Perusahaan/Lamaran/lamaran_list', $data);
+    } else {
+      $this->session->set_flashdata('message', 'Record Not Found');
+      redirect(site_url('admin/siswa'));
+    }
+  }
+
+  public function lamaran_approve()
+  {
+    $id = $this->input->post('id', TRUE);
+    $val = $this->input->post('val', TRUE);
+    $data = array(
+      'status' => $val,
+    );
+    $this->Lamaran_model->update($id, $data);
+  }
+
+  public function lamaran_rules()
+  {
+    $this->form_validation->set_rules('id_lowongan', 'Nama Lowongan', 'trim|required');
 
     $this->form_validation->set_rules('id', 'id', 'trim');
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
@@ -515,4 +625,86 @@ class Perusahaan extends CI_Controller {
     $this->form_validation->set_rules('id', 'id', 'trim');
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
   }
+
+
+  // Module Siswa
+  public function siswa()
+  {
+    // $Siswa = $this->db->get('eesemka_Siswa')->result_array();
+    $per_hal = $this->input->post('per_hal');
+    if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
+    $ses_hal = $this->session->userdata('perhal');
+    $config['base_url'] = site_url('/perusahaan/siswa');
+    $config['page_query_string'] = TRUE;
+    $config['total_rows'] = $this->Siswa_model->get_count();
+    $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
+    $config['full_tag_open'] = '<div class="pagination__numbers">';
+    $config['full_tag_close'] = '</div>';
+
+    $this->pagination->initialize($config);
+    $limit = $config['per_page'];
+    $offset = html_escape($this->input->get('per_page'));
+    $cari = html_escape($this->input->get('s'));
+
+    $Siswa = $this->Siswa_model->get_limit_data($limit, $offset, $cari);
+
+
+    $this->pagination->initialize($config);
+    $data = array(
+      'title' => 'Perusahaan Area - Data Siswa',
+      'data' => $Siswa,
+      'actionadd' => site_url('perusahaan/siswa_create'),
+      'actionfilter' => site_url('perusahaan/siswa'),
+    );
+    $this->template->load('template', 'Perusahaan/siswa', $data);
+  }
+
+  public function siswa_profile($id)
+  {
+    $row = $this->Siswa_model->get_by_id($id);
+    if ($row) {
+      $data = array(
+        'title' => 'Admin Area - Detail Siswa',
+        'nik' => $row->nik,
+        'id' => $row->id,
+        'nama_siswa' => $row->nama_siswa,
+        'jenis_kelamin' => $row->jenis_kelamin,
+        'alamat' => $row->alamat,
+        'status' => $row->status,
+        'deskripsi' => $row->deskripsi,
+        'id_user' => $row->id_user,
+      );
+      $this->template->load('template', 'Perusahaan/siswa_profile', $data);
+    } else {
+      $this->session->set_flashdata('message', 'Record Not Found');
+      redirect(site_url('admin/siswa'));
+    }
+  }
+
+  public function siswa_approve()
+  {
+    $id = $this->input->post('id', TRUE);
+    $val = $this->input->post('val', TRUE);
+    $data = array(
+      'is_valid' => $val,
+    );
+    $this->Siswa_model->update($id, $data);
+  }
+
+  
+
+  public function siswa_rules()
+  {
+    $this->form_validation->set_rules('nama_siswa', 'Nama Siswa', 'trim|required');
+    $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'trim|required');
+    $this->form_validation->set_rules('id_sekolah', 'Sekolah', 'trim|required');
+    $this->form_validation->set_rules('status', 'Status Siswa', 'trim|required');
+    $this->form_validation->set_rules('id', 'id', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+  }
+
+  
+
 }
+
+
