@@ -22,7 +22,7 @@ class Lowongankerja extends CI_Controller {
 		$per_hal = $this->input->post('per_hal');
 		if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
 		$ses_hal = $this->session->userdata('perhal');
-		$config['base_url'] = site_url('/admin/lowongan');
+		$config['base_url'] = base_url('/admin/lowongan');
 		$config['page_query_string'] = TRUE;
 		$config['total_rows'] = $this->Lowongan_model->get_count();
 		$config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -67,7 +67,7 @@ class Lowongankerja extends CI_Controller {
 		$this->template->load('template_front', 'frontend/singleloker', $data);
 		} else {
 		$this->session->set_flashdata('message', 'Record Not Found');
-		redirect(site_url('admin/lowongan'));
+		redirect(base_url('admin/lowongan'));
 		}
 	}
 	

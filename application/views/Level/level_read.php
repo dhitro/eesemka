@@ -12,7 +12,7 @@
 	    <tr><td>Icon</td><td><?php echo $icon; ?></td></tr>
 	    <tr><td>Is Active</td><td><?php echo $is_active; ?></td></tr>
 	    <tr><td>Is Parent</td><td><?php echo $is_parent; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('menu') ?>" class="btn btn-default">Cancel</a></td></tr>
+	    <tr><td></td><td><a href="<?php echo base_url('menu') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </div><!-- /.box-body -->
               </div><!-- /.box -->

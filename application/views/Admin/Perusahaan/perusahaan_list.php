@@ -70,9 +70,9 @@
 					</ul>
 				</td>
 				<td class="place-action text-nowrap">
-					<a href="<?= site_url('admin/perusahaan_update/' . $d->id) ?>" class="edit" title="Edit"><i class="las la-edit"></i></a>
-					<a href="<?= site_url('admin/perusahaan_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a>
-					<a href="<?= site_url('admin/perusahaan_delete/' . $d->id) ?>" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
+					<a href="<?= base_url('admin/perusahaan_update/' . $d->id) ?>" class="edit" title="Edit"><i class="las la-edit"></i></a>
+					<a href="<?= base_url('admin/perusahaan_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a>
+					<a href="<?= base_url('admin/perusahaan_delete/' . $d->id) ?>" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
 				</td>
 			</tr>
 		<?php endforeach; ?>

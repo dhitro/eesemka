@@ -42,7 +42,7 @@ class Admin extends CI_Controller
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/admin/sekolah');
+    $config['base_url'] = base_url('/admin/sekolah');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Sekolah_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -61,8 +61,8 @@ class Admin extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Data Sekolah',
       'data' => $sekolah,
-      'actionadd' => site_url('admin/sekolah_create'),
-      'actionfilter' => site_url('admin/sekolah'),
+      'actionadd' => base_url('admin/sekolah_create'),
+      'actionfilter' => base_url('admin/sekolah'),
     );
     $this->template->load('template', 'Admin/Sekolah/sekolah_list', $data);
   }
@@ -82,7 +82,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Sekolah/sekolah_read', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/sekolah'));
+      redirect(base_url('admin/sekolah'));
     }
   }
 
@@ -91,7 +91,7 @@ class Admin extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Tambah Sekolah',
       'button' => 'Create',
-      'action' => site_url('admin/sekolah_create_action'),
+      'action' => base_url('admin/sekolah_create_action'),
       'id' => set_value('id'),
       'uuid' => set_value('uuid'),
       'nama_sekolah' => set_value('nama_sekolah'),
@@ -127,7 +127,7 @@ class Admin extends CI_Controller
       endif;
 
       $this->session->set_flashdata('message', 'Create Record Success');
-      redirect(site_url('admin/sekolah'));
+      redirect(base_url('admin/sekolah'));
     }
   }
 
@@ -140,7 +140,7 @@ class Admin extends CI_Controller
       $data = array(
         'title' => 'Admin Area - Form Data Sekolah',
         'button' => 'Update',
-        'action' => site_url('admin/sekolah_update_action'),
+        'action' => base_url('admin/sekolah_update_action'),
         'id' => set_value('id', $row->id),
         'nama_sekolah' => set_value('nama_sekolah', $row->nama_sekolah),
         'alamat' => set_value('alamat', $row->alamat),
@@ -151,7 +151,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Sekolah/sekolah_form', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/sekolah'));
+      redirect(base_url('admin/sekolah'));
     }
   }
 
@@ -175,7 +175,7 @@ class Admin extends CI_Controller
         $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 5, 'foto[]');
       endif;
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('admin/sekolah'));
+      redirect(base_url('admin/sekolah'));
     }
   }
 
@@ -186,10 +186,10 @@ class Admin extends CI_Controller
     if ($row) {
       $this->Sekolah_model->delete($id);
       // $this->session->set_flashdata('message', 'Delete Record Success');
-      // redirect(site_url('admin/sekolah'));
+      // redirect(base_url('admin/sekolah'));
     } else {
       // $this->session->set_flashdata('message', 'Record Not Found');
-      // redirect(site_url('admin/sekolah'));
+      // redirect(base_url('admin/sekolah'));
     }
   }
 
@@ -208,7 +208,7 @@ class Admin extends CI_Controller
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/admin/siswa');
+    $config['base_url'] = base_url('/admin/siswa');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Siswa_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -227,8 +227,8 @@ class Admin extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Data Siswa',
       'data' => $Siswa,
-      'actionadd' => site_url('admin/siswa_create'),
-      'actionfilter' => site_url('admin/siswa'),
+      'actionadd' => base_url('admin/siswa_create'),
+      'actionfilter' => base_url('admin/siswa'),
     );
     $this->template->load('template', 'Admin/Siswa/siswa_list', $data);
   }
@@ -251,7 +251,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Siswa/siswa_read', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/siswa'));
+      redirect(base_url('admin/siswa'));
     }
   }
 
@@ -273,7 +273,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Siswa/siswa_profile', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/siswa'));
+      redirect(base_url('admin/siswa'));
     }
   }
 
@@ -282,9 +282,9 @@ class Admin extends CI_Controller
     $data = array(
       'button' => 'Create',
       'title' => 'Admin Area - Form Siswa',
-      'action' => site_url('admin/siswa_create_action'),
-      'actionadd' => site_url('admin/sekolah_create'),
-      'actionfilter' => site_url('admin/sekolah'),
+      'action' => base_url('admin/siswa_create_action'),
+      'actionadd' => base_url('admin/sekolah_create'),
+      'actionfilter' => base_url('admin/sekolah'),
       'id' => set_value('id'),
       'uuid' => set_value('uuid'),
       'id_sekolah' => set_value('id_sekolah'),
@@ -346,7 +346,7 @@ class Admin extends CI_Controller
       endif;
 
       $this->session->set_flashdata('message', 'Create Record Success');
-      redirect(site_url('admin/siswa'));
+      redirect(base_url('admin/siswa'));
     }
   }
 
@@ -359,7 +359,7 @@ class Admin extends CI_Controller
       $data = array(
         'title' => 'Admin Area - Form Data Siswa',
         'button' => 'Update',
-        'action' => site_url('admin/siswa_update_action'),
+        'action' => base_url('admin/siswa_update_action'),
         'id' => set_value('id', $row->id),
         'uuid' => set_value('uuid', $row->uuid),
         'id_sekolah' => set_value('id_sekolah', $row->id_sekolah),
@@ -375,7 +375,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Siswa/siswa_form', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/siswa'));
+      redirect(base_url('admin/siswa'));
     }
   }
 
@@ -428,7 +428,7 @@ class Admin extends CI_Controller
 
 
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('admin/siswa'));
+      redirect(base_url('admin/siswa'));
     }
   }
 
@@ -449,10 +449,10 @@ class Admin extends CI_Controller
     if ($row) {
       $this->Siswa_model->delete($id);
       // $this->session->set_flashdata('message', 'Delete Record Success');
-      // redirect(site_url('admin/Siswa'));
+      // redirect(base_url('admin/Siswa'));
     } else {
       // $this->session->set_flashdata('message', 'Record Not Found');
-      // redirect(site_url('admin/Siswa'));
+      // redirect(base_url('admin/Siswa'));
     }
   }
 
@@ -466,10 +466,10 @@ class Admin extends CI_Controller
       $path = "./upload/dokumen/" . $row->file;
       unlink($path);
       // $this->session->set_flashdata('message', 'Delete Record Success');
-      // redirect(site_url('admin/Siswa'));
+      // redirect(base_url('admin/Siswa'));
     } else {
       // $this->session->set_flashdata('message', 'Record Not Found');
-      // redirect(site_url('admin/Siswa'));
+      // redirect(base_url('admin/Siswa'));
     }
   }
 
@@ -489,7 +489,7 @@ class Admin extends CI_Controller
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/admin/perusahaan');
+    $config['base_url'] = base_url('/admin/perusahaan');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Perusahaan_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -508,8 +508,8 @@ class Admin extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Data Perusahaan',
       'data' => $Perusahaan,
-      'actionadd' => site_url('admin/perusahaan_create'),
-      'actionfilter' => site_url('admin/perusahaan'),
+      'actionadd' => base_url('admin/perusahaan_create'),
+      'actionfilter' => base_url('admin/perusahaan'),
     );
     $this->template->load('template', 'Admin/Perusahaan/perusahaan_list', $data);
   }
@@ -530,7 +530,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Perusahaan/perusahaan_read', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/Perusahaan'));
+      redirect(base_url('admin/Perusahaan'));
     }
   }
 
@@ -539,7 +539,7 @@ class Admin extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Tambah Sekolah',
       'button' => 'Create',
-      'action' => site_url('admin/perusahaan_create_action'),
+      'action' => base_url('admin/perusahaan_create_action'),
       'id' => set_value('id'),
       'nama_perusahaan' => set_value('nama_perusahaan'),
       'alamat' => set_value('alamat'),
@@ -588,7 +588,7 @@ class Admin extends CI_Controller
 
 
       $this->session->set_flashdata('message', 'Create Record Success');
-      redirect(site_url('admin/perusahaan'));
+      redirect(base_url('admin/perusahaan'));
     }
   }
 
@@ -601,7 +601,7 @@ class Admin extends CI_Controller
       $data = array(
         'title' => 'Admin Area - Form Data Perusahaan',
         'button' => 'Update',
-        'action' => site_url('admin/perusahaan_update_action'),
+        'action' => base_url('admin/perusahaan_update_action'),
         'id' => set_value('id', $row->id),
         'nama_perusahaan' => set_value('nama_perusahaan', $row->nama_perusahaan),
         'alamat' => set_value('alamat', $row->alamat),
@@ -613,7 +613,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Perusahaan/perusahaan_form', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/perusahaan'));
+      redirect(base_url('admin/perusahaan'));
     }
   }
 
@@ -651,7 +651,7 @@ class Admin extends CI_Controller
       endif;
 
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('admin/perusahaan'));
+      redirect(base_url('admin/perusahaan'));
     }
   }
 
@@ -680,7 +680,7 @@ class Admin extends CI_Controller
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/admin/lowongan');
+    $config['base_url'] = base_url('/admin/lowongan');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Lowongan_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -699,8 +699,8 @@ class Admin extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Data Lowongan',
       'data' => $lowongan,
-      'actionadd' => site_url('admin/lowongan_create'),
-      'actionfilter' => site_url('admin/lowongan'),
+      'actionadd' => base_url('admin/lowongan_create'),
+      'actionfilter' => base_url('admin/lowongan'),
     );
     $this->template->load('template', 'Admin/Lowongan/lowongan_list', $data);
   }
@@ -720,7 +720,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Lowongan/lowongan_read', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/lowongan'));
+      redirect(base_url('admin/lowongan'));
     }
   }
 
@@ -729,7 +729,7 @@ class Admin extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Tambah Lowongan',
       'button' => 'Create',
-      'action' => site_url('admin/lowongan_create_action'),
+      'action' => base_url('admin/lowongan_create_action'),
       'id' => set_value('id'),
       'id_perusahaan' => set_value('id_perusahaan'),
       'uuid' => set_value('uuid'),
@@ -781,7 +781,7 @@ class Admin extends CI_Controller
 
 
       $this->session->set_flashdata('message', 'Create Record Success');
-      redirect(site_url('admin/lowongan'));
+      redirect(base_url('admin/lowongan'));
     }
   }
 
@@ -794,7 +794,7 @@ class Admin extends CI_Controller
       $data = array(
         'title' => 'Admin Area - Form Data Lowongan',
         'button' => 'Update',
-        'action' => site_url('admin/lowongan_update_action'),
+        'action' => base_url('admin/lowongan_update_action'),
         'id' => set_value('id', $row->id),
         'id_perusahaan' => set_value('id_perusahaan', $row->id_perusahaan),
         'nama_lowongan' => set_value('nama_lowongan', $row->nama_lowongan),
@@ -806,7 +806,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Lowongan/lowongan_form', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/lowongan'));
+      redirect(base_url('admin/lowongan'));
     }
   }
 
@@ -845,10 +845,10 @@ class Admin extends CI_Controller
       endif;
       if ($update) :
         $this->session->set_flashdata('message', 'Update Record Success');
-        redirect(site_url('admin/lowongan'));
+        redirect(base_url('admin/lowongan'));
       else :
         $this->session->set_flashdata('message', 'Error Record' . var_dump($this->db->error()));
-        redirect(site_url('admin/lowongan'));
+        redirect(base_url('admin/lowongan'));
       endif;
     }
   }
@@ -898,7 +898,7 @@ class Admin extends CI_Controller
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/admin/lamaran');
+    $config['base_url'] = base_url('/admin/lamaran');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Lamaran_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -917,8 +917,8 @@ class Admin extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Data Lamaran',
       'data' => $sekolah,
-      'actionadd' => site_url('admin/lamaran_create'),
-      'actionfilter' => site_url('admin/lamaran'),
+      'actionadd' => base_url('admin/lamaran_create'),
+      'actionfilter' => base_url('admin/lamaran'),
     );
     $this->template->load('template', 'Admin/Lamaran/lamaran_list', $data);
   }
@@ -937,7 +937,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Lamaran/lamaran_read', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/lamaran'));
+      redirect(base_url('admin/lamaran'));
     }
   }
 
@@ -946,7 +946,7 @@ class Admin extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Tambah Lamaran',
       'button' => 'Create',
-      'action' => site_url('admin/lamaran_create_action'),
+      'action' => base_url('admin/lamaran_create_action'),
       'id' => set_value('id'),
       'uuid' => set_value('uuid'),
       'id_lowongan' => set_value('id_lowongan'),
@@ -976,7 +976,7 @@ class Admin extends CI_Controller
       $idlast =   $this->Lamaran_model->insert($data);
 
      $this->session->set_flashdata('message', 'Create Record Success');
-      redirect(site_url('admin/lamaran'));
+      redirect(base_url('admin/lamaran'));
     }
   }
 
@@ -989,7 +989,7 @@ class Admin extends CI_Controller
       $data = array(
         'title' => 'Admin Area - Form Data Lamaran',
         'button' => 'Update',
-        'action' => site_url('admin/lamaran_update_action'),
+        'action' => base_url('admin/lamaran_update_action'),
         'id' => set_value('id', $row->id),
         'id_lowongan' => set_value('id_lowongan', $row->id_lowongan),
         'id_siswa' => set_value('id_siswa', $row->id_siswa),
@@ -999,7 +999,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Lamaran/lamaran_form', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/lamaran'));
+      redirect(base_url('admin/lamaran'));
     }
   }
 
@@ -1019,7 +1019,7 @@ class Admin extends CI_Controller
 
       $this->Lamaran_model->update($this->input->post('id', TRUE), $data);
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('admin/lamaran'));
+      redirect(base_url('admin/lamaran'));
     }
   }
 
@@ -1041,10 +1041,10 @@ class Admin extends CI_Controller
     if ($row) {
       $this->Lamaran_model->delete($id);
       // $this->session->set_flashdata('message', 'Delete Record Success');
-      // redirect(site_url('admin/sekolah'));
+      // redirect(base_url('admin/sekolah'));
     } else {
       // $this->session->set_flashdata('message', 'Record Not Found');
-      // redirect(site_url('admin/sekolah'));
+      // redirect(base_url('admin/sekolah'));
     }
   }
 
@@ -1062,7 +1062,7 @@ class Admin extends CI_Controller
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/admin/permintaan');
+    $config['base_url'] = base_url('/admin/permintaan');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Permintaan_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -1081,8 +1081,8 @@ class Admin extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Data permintaan',
       'data' => $sekolah,
-      'actionadd' => site_url('admin/permintaan_create'),
-      'actionfilter' => site_url('admin/permintaan'),
+      'actionadd' => base_url('admin/permintaan_create'),
+      'actionfilter' => base_url('admin/permintaan'),
     );
     $this->template->load('template', 'Admin/Permintaan/permintaan_list', $data);
   }
@@ -1102,7 +1102,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Permintaan/permintaan_read', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/permintaan'));
+      redirect(base_url('admin/permintaan'));
     }
   }
 
@@ -1111,7 +1111,7 @@ class Admin extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Tambah permintaan',
       'button' => 'Create',
-      'action' => site_url('admin/permintaan_create_action'),
+      'action' => base_url('admin/permintaan_create_action'),
       'id' => set_value('id'),
       'uuid' => set_value('uuid'),
       'id_perusahaan' => set_value('id_perusahaan'),
@@ -1141,7 +1141,7 @@ class Admin extends CI_Controller
       $idlast =   $this->Permintaan_model->insert($data);
 
      $this->session->set_flashdata('message', 'Create Record Success');
-      redirect(site_url('admin/permintaan'));
+      redirect(base_url('admin/permintaan'));
     }
   }
 
@@ -1154,7 +1154,7 @@ class Admin extends CI_Controller
       $data = array(
         'title' => 'Admin Area - Form Data permintaan',
         'button' => 'Update',
-        'action' => site_url('admin/permintaan_update_action'),
+        'action' => base_url('admin/permintaan_update_action'),
         'id' => set_value('id', $row->id),
         'id_perusahaan' => set_value('id_perusahaan', $row->id_perusahaan),
         'id_siswa' => set_value('id_siswa', $row->id_siswa),
@@ -1164,7 +1164,7 @@ class Admin extends CI_Controller
       $this->template->load('template', 'Admin/Permintaan/permintaan_form', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/permintaan'));
+      redirect(base_url('admin/permintaan'));
     }
   }
 
@@ -1184,7 +1184,7 @@ class Admin extends CI_Controller
 
       $this->Permintaan_model->update($this->input->post('id', TRUE), $data);
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('admin/permintaan'));
+      redirect(base_url('admin/permintaan'));
     }
   }
 
@@ -1206,10 +1206,10 @@ class Admin extends CI_Controller
     if ($row) {
       $this->Permintaan_model->delete($id);
       // $this->session->set_flashdata('message', 'Delete Record Success');
-      // redirect(site_url('admin/sekolah'));
+      // redirect(base_url('admin/sekolah'));
     } else {
       // $this->session->set_flashdata('message', 'Record Not Found');
-      // redirect(site_url('admin/sekolah'));
+      // redirect(base_url('admin/sekolah'));
     }
   }
 
@@ -1229,7 +1229,7 @@ class Admin extends CI_Controller
      $per_hal = $this->input->post('per_hal');
      if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
      $ses_hal = $this->session->userdata('perhal');
-     $config['base_url'] = site_url('/admin/user');
+     $config['base_url'] = base_url('/admin/user');
      $config['page_query_string'] = TRUE;
      $config['total_rows'] = $this->User_model->get_count();
      $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -1248,8 +1248,8 @@ class Admin extends CI_Controller
      $data = array(
        'title' => 'Admin Area - Data User',
        'data' => $user,
-       'actionadd' => site_url('admin/user_create'),
-       'actionfilter' => site_url('admin/user'),
+       'actionadd' => base_url('admin/user_create'),
+       'actionfilter' => base_url('admin/user'),
      );
      $this->template->load('template', 'Admin/User/user_list', $data);
    }
@@ -1274,7 +1274,7 @@ class Admin extends CI_Controller
        $this->template->load('template', 'Admin/User/user_read', $data);
      } else {
        $this->session->set_flashdata('message', 'Record Not Found');
-       redirect(site_url('admin/user'));
+       redirect(base_url('admin/user'));
      }
    }
  
@@ -1283,7 +1283,7 @@ class Admin extends CI_Controller
      $data = array(
        'title' => 'Admin Area - Tambah user',
        'button' => 'Create',
-       'action' => site_url('admin/user_create_action'),
+       'action' => base_url('admin/user_create_action'),
        'id' => set_value('id'),
        'uuid' => set_value('uuid'),
        'firstname' => set_value('firstname'),
@@ -1330,7 +1330,7 @@ class Admin extends CI_Controller
        endif;
  
        $this->session->set_flashdata('message', 'Create Record Success');
-       redirect(site_url('admin/user'));
+       redirect(base_url('admin/user'));
      }
    }
  
@@ -1343,7 +1343,7 @@ class Admin extends CI_Controller
        $data = array(
          'title' => 'Admin Area - Form Data user',
          'button' => 'Update',
-         'action' => site_url('admin/user_update_action'),
+         'action' => base_url('admin/user_update_action'),
          'id' => set_value('id', $row->id),
          'firstname' => set_value('firstname', $row->firstname),
          'lastname' => set_value('lastname', $row->lastname),
@@ -1359,7 +1359,7 @@ class Admin extends CI_Controller
        $this->template->load('template', 'Admin/User/user_form', $data);
      } else {
        $this->session->set_flashdata('message', 'Record Not Found');
-       redirect(site_url('admin/user'));
+       redirect(base_url('admin/user'));
      }
    }
  
@@ -1389,7 +1389,7 @@ class Admin extends CI_Controller
          $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 5, 'foto[]');
        endif;
        $this->session->set_flashdata('message', 'Update Record Success');
-       redirect(site_url('admin/user'));
+       redirect(base_url('admin/user'));
      }
    }
  
@@ -1411,10 +1411,10 @@ class Admin extends CI_Controller
      if ($row) {
        $this->User_model->delete($id);
        // $this->session->set_flashdata('message', 'Delete Record Success');
-       // redirect(site_url('admin/user'));
+       // redirect(base_url('admin/user'));
      } else {
        // $this->session->set_flashdata('message', 'Record Not Found');
-       // redirect(site_url('admin/user'));
+       // redirect(base_url('admin/user'));
      }
    }
  

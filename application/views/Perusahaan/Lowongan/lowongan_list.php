@@ -75,14 +75,14 @@
 				</td>
 				<td class="">
 					<div class="text-nowrap">
-						<a href="<?= site_url('perusahaan/lowongan_update/' . $d->id) ?>" class="edit" title="Edit"><i class="las la-edit"></i></a>
-						<a href="<?= site_url('perusahaan/lowongan_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a>
-						<a href="<?= site_url('perusahaan/lowongan_delete/' . $d->id) ?>" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
+						<a href="<?= base_url('perusahaan/lowongan_update/' . $d->id) ?>" class="edit" title="Edit"><i class="las la-edit"></i></a>
+						<a href="<?= base_url('perusahaan/lowongan_read/' . $d->id) ?>" class="view" title="View"><i class="la la-eye"></i></a>
+						<a href="<?= base_url('perusahaan/lowongan_delete/' . $d->id) ?>" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
 					</div>
 					<div class="place-action">
-						<a href="<?= site_url('perusahaan/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="publish" title="Publish">Publish</a>
-						<a href="<?= site_url('perusahaan/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="pending" title="Pending">Pending</a>
-						<a href="<?= site_url('perusahaan/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="close" title="Close">Close</a>
+						<a href="<?= base_url('perusahaan/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="publish" title="Publish">Publish</a>
+						<a href="<?= base_url('perusahaan/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="pending" title="Pending">Pending</a>
+						<a href="<?= base_url('perusahaan/lowongan_approve/') ?>" data-id="<?= $d->id ?>" class="close" title="Close">Close</a>
 					</div>
 				</td>
 			</tr>

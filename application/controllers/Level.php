@@ -37,7 +37,7 @@ class Level extends CI_Controller
             $this->template->load('template', 'Level/level_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('jurusan'));
+            redirect(base_url('jurusan'));
         }
     }
 
@@ -45,7 +45,7 @@ class Level extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
-            'action' => site_url('jurusan/create_action'),
+            'action' => base_url('jurusan/create_action'),
             'id_jurusan' => set_value('id_jurusan'),
             'jurusan' => set_value('jurusan'),
         );
@@ -65,7 +65,7 @@ class Level extends CI_Controller
 
             $this->Level_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('jurusan'));
+            redirect(base_url('jurusan'));
         }
     }
 
@@ -76,14 +76,14 @@ class Level extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
-                'action' => site_url('jurusan/update_action'),
+                'action' => base_url('jurusan/update_action'),
                 'id_jurusan' => set_value('id_jurusan', $row->id_jurusan),
                 'jurusan' => set_value('jurusan', $row->jurusan),
             );
             $this->template->load('template', 'Level/level_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('jurusan'));
+            redirect(base_url('jurusan'));
         }
     }
 
@@ -100,7 +100,7 @@ class Level extends CI_Controller
 
             $this->Level_model->update($this->input->post('id_jurusan', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('jurusan'));
+            redirect(base_url('jurusan'));
         }
     }
 
@@ -111,10 +111,10 @@ class Level extends CI_Controller
         if ($row) {
             $this->Level_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('jurusan'));
+            redirect(base_url('jurusan'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('jurusan'));
+            redirect(base_url('jurusan'));
         }
     }
 

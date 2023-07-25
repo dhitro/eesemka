@@ -84,7 +84,7 @@
                         <td ><b><?= $d->status ?></b></td>
                         <td ><?= $d->deskripsi ?></td>
                         <td class="place-action text-nowrap">
-                            <a href="<?= site_url('perusahaan/siswa_profile/' . $d->id) ?>" class="view text-danger" title="View"><i class="la la-eye"></i></a>
+                            <a href="<?= base_url('perusahaan/siswa_profile/' . $d->id) ?>" class="view text-danger" title="View"><i class="la la-eye"></i></a>
                         </td>
                     </tr>
                     <?php endforeach; ?>

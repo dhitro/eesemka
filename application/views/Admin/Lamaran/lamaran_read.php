@@ -81,9 +81,9 @@
 					<td class="small <?= $d->is_valid == 'Valid' ? 'text-success' : 'text-danger' ?> text-status text-nowrap"><?= $d->is_valid ?></td>
 					<td><?= $d->deskripsi ?></td>
 					<td class="place-action">
-						<a href="<?= site_url('admin/siswa_approve/') ?>" class="approve text-nowrap" data-id="<?= $d->id ?>" title="Valid">Valid</a>
-						<a href="<?= site_url('admin/siswa_approve/') ?>" class="cancel text-nowrap" data-id="<?= $d->id ?>" title="Tidak Valid">Tidak Valid</a>
-						<a href="<?= site_url('admin/siswa_read/' . $d->id) ?>" class="view text-nowrap" title="View">Detail</a>
+						<a href="<?= base_url('admin/siswa_approve/') ?>" class="approve text-nowrap" data-id="<?= $d->id ?>" title="Valid">Valid</a>
+						<a href="<?= base_url('admin/siswa_approve/') ?>" class="cancel text-nowrap" data-id="<?= $d->id ?>" title="Tidak Valid">Tidak Valid</a>
+						<a href="<?= base_url('admin/siswa_read/' . $d->id) ?>" class="view text-nowrap" title="View">Detail</a>
 					</td>
 				</tr>
 			<?php endforeach; ?>
