@@ -147,7 +147,7 @@
                                             <select name="id_level" id="id_level" class="form-control select2bs4" required>
                                                 <option value="0">-- Pilih User Sebagai --</option>
                                                 <?php foreach (loadlevel() as $lv) :
-                                                    if ($lv->id > 1) :
+                                                    if ($lv->id > 2) :
                                                 ?>
                                                         <option <?= $sel ?> value="<?= $lv->id ?>"><?= $lv->nama ?></option>
                                                     <?php endif; ?>
