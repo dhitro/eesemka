@@ -8,7 +8,7 @@
         <div class="member-statistical">
             <div class="row">
                 <div class="col-lg-6 col-6">
-                    <div class="item blue">
+                    <div class="item yellow">
                         <h3>Masukan Lowongan</h3>
                         <span class="number"><?= count($data) ?></span>
                         <span class="line"></span>
@@ -16,8 +16,8 @@
                 </div>
                 <div class="col-lg-6 col-6">
                     <div class="item green">
-                        <h3>Respon Lowongan</h3>
-                        <span class="number"><?= count($respon) ?> </span>
+                        <h3>Permintaan</h3>
+                        <span class="number"><?= count(loadpermintaansiswa($uis)) ?></span>
                         <span class="line"></span>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
 <div class="owner-page-wrap">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <div class="owner-page-content">
                     <?php if (count($data) > 0) : ?>
                         <h2>Lowongan Yang Anda Masukan</h2>
@@ -80,40 +80,6 @@
                     <div class="pagination align-left">
                         <?= $this->pagination->create_links(); ?>
                     </div><!-- .pagination -->
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="sidebar">
-                    <div class="ob-item">
-                        <div class="ob-head">
-                            <h3>Notifications <span>(5)</span></h3>
-                            <a href="#" class="clear-all" title="Clear All">Clear all</a>
-                        </div>
-                        <div class="ob-content">
-                            <ul>
-                                <li class="noti-item unread">
-                                    <p>Lowongan Anda Diterima <br> Permintaan ID: #123434</p>
-                                    <span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
-                                </li>
-                                <li class="noti-item unread">
-                                    <p>Lowongan Anda Ditolak <br> Permintaan ID: #123434</p>
-                                    <span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
-                                </li>
-                                <li class="noti-item unread">
-                                    <p>Lowongan Anda Diterima <br> Permintaan ID: #123434</p>
-                                    <span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
-                                </li>
-                                <li class="noti-item unread">
-                                    <p>Lowongan Anda Diterima <br> Permintaan ID: #123434</p>
-                                    <span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
-                                </li>
-                                <li class="noti-item unread">
-                                    <p>Lowongan Anda Ditolak <br> Permintaan ID: #123434</p>
-                                    <span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

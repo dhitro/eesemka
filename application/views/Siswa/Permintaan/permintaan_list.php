@@ -1,5 +1,5 @@
 <div class="member-wrap-top">
-	<h2>Permintaan Perusahaan <?php echo $usis; ?></h2>
+	<h2>Permintaan Perusahaan</h2>
 </div><!-- .member-wrap-top -->
 <div><?= $this->session->flashdata('message'); ?></div>
 <table class="member-place-list table-responsive">

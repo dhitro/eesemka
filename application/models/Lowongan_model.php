@@ -11,6 +11,7 @@ class Lowongan_model extends CI_Model
     public $tablef2 = 'eesemka_posisi';
     public $tablef3 = 'eesemka_lamaran';
     public $tablef4 = 'eesemka_perusahaan';
+    public $idperusahaan = 'id_perusahaan';
     public $id = 'id';
     public $order = 'DESC';
 
@@ -25,6 +26,14 @@ class Lowongan_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }
+
+    function get_alllowongan($id = null)
+    {
+        $this->db->where($this->idperusahaan,$id);
+        $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table)->result();
+    }
+
     // get all posisi
     function get_allposisi($id)
     {
@@ -93,6 +102,15 @@ class Lowongan_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id', $q);
 	    $this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
+
+    // get data with limit and search
+    function get_limit_data_done($limit, $start = 0, $q = NULL) {
+        $this->db->order_by($this->id, $this->order);
+        $this->db->where($q);
+	// $this->db->or_like('nama', $q);
+	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
 

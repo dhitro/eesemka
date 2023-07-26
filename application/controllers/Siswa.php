@@ -52,11 +52,15 @@ class Siswa extends CI_Controller
 
     $lamaran = $this->Lamaran_model->get_limit_data_done($limit, $offset, $q);
 
+    $uid = $this->session->userdata('user_id');
+    $uidsis = $this->session->userdata('id_siswa');
 
     $this->pagination->initialize($config);
     $data = array(
       'title' => 'Siswa Member Area',
       'data' => $lamaran,
+      'ui' => $uid,
+      'uis' => $uidsis
       // 'actionadd' => base_url('siswa/lowongan_create'),
       // 'actionfilter' => base_url('siswa/lowongan'),
     );

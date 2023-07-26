@@ -9,6 +9,7 @@ class Permintaan_model extends CI_Model
     public $table = 'eesemka_permintaan';
     public $id = 'id';
     public $idperusahaan = 'id_perusahaan';
+    public $idsiswa = 'id_siswa';
     public $idsekolah = 'id_sekolah';
     public $order = 'DESC';
 
@@ -20,6 +21,20 @@ class Permintaan_model extends CI_Model
     // get all
     function get_all()
     {
+        $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table)->result();
+    }
+
+    function get_allpermintaan($id = null)
+    {
+        $this->db->where($this->idperusahaan,$id);
+        $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table)->result();
+    }
+
+    function get_allpermintaansis($id = null)
+    {
+        $this->db->where($this->idsiswa,$id);
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }

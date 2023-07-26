@@ -120,6 +120,27 @@ if (!function_exists('loadpermintaan')) {
   }
 }
 
+if (!function_exists('loadpermintaanid')) {
+  function loadpermintaanid($id=null,$id2=null)
+  {
+    $ci = get_instance();
+    $ci->load->model('Permintaan_model');
+    $data = $ci->Permintaan_model->get_allpermintaan($id);
+    return $data;
+  }
+}
+
+if (!function_exists('loadpermintaansiswa')) {
+  function loadpermintaansiswa($id=null)
+  {
+    $ci = get_instance();
+    $ci->load->model('Permintaan_model');
+    $data = $ci->Permintaan_model->get_allpermintaansis($id);
+    return $data;
+  }
+}
+
+
 if (!function_exists('loadlowongan')) {
   function loadlowongan($id=null)
   {
@@ -129,6 +150,17 @@ if (!function_exists('loadlowongan')) {
     return $data;
   }
 }
+
+if (!function_exists('loadlowonganid')) {
+  function loadlowonganid($id=null)
+  {
+    $ci = get_instance();
+    $ci->load->model('Lowongan_model');
+    $data = $ci->Lowongan_model->get_alllowongan($id);
+    return $data;
+  }
+}
+
 
 if (!function_exists('loadsiswa')) {
   function loadsiswa($id=null)

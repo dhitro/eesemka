@@ -45,17 +45,19 @@ class Perusahaan extends CI_Controller {
     $cari = html_escape($this->input->get('s'));
 
     $q = array(
-      'id_siswa' => $this->session->userdata('id_siswa'),
+      'id_perusahaan' => $this->session->userdata('id_perusahaan'),
     
     );
 
-    $lamaran = $this->Lamaran_model->get_limit_data_done($limit, $offset, $q);
-    $uper = [];
+    $uid = $this->session->userdata('user_id');
+
+    $lamaran = $this->Lowongan_model->get_limit_data_done($limit, $offset, $q);
 
     $this->pagination->initialize($config);
     $data = array(
         'title' => 'Perusahaan Member Area',
-        'data' => $uper
+        'data' => $lamaran,
+        'ui' => $uid
     );
     $this->template->load('template', 'Perusahaan/dashboard', $data);
 	}
