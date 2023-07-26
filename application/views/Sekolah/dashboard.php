@@ -1,23 +1,16 @@
 <div class="member-statistical">
 	<div class="row">
-		<div class="col-lg-3 col-6">
+		<div class="col-lg-6 col-6">
 			<div class="item blue">
-				<h3>Siswa</h3>
-				<span class="number">1</span>
+				<h3>Siswa  / Alumni</h3>
+				<span class="number"><?= count(loadsiswasekolah($usekola)) ?></span>
 				<span class="line"></span>
 			</div>
 		</div>
-		<div class="col-lg-3 col-6">
-			<div class="item green">
-				<h3>Alumni</h3>
-				<span class="number">12</span>
-				<span class="line"></span>
-			</div>
-		</div>
-		<div class="col-lg-3 col-6">
+		<div class="col-lg-6 col-6">
 			<div class="item yellow">
-				<h3>Permintaan Siswa</h3>
-				<span class="number">6</span>
+				<h3>Permintaan</h3>
+				<span class="number"><?= count($data) ?></span>
 				<span class="line"></span>
 			</div>
 		</div>
@@ -29,78 +22,81 @@
 		<div class="col-lg-4">
 			<div class="ob-item">
 				<div class="ob-head">
-					<h3>Siswa Terbaru</h3>
-					<a href="#" class="view-all" title="View All">View all</a>
+					<h3>Siswa / Alumni Terbaru</h3>
+					<a href="sekolah/siswa" class="view-all" title="View All">View all</a>
 				</div>
 				<div class="ob-content">
 					<ul>
-						<li class="pending">
-							<p class="date"><b>Date:</b>June 15, 2023</p>
-							<p class="place"><b>Nama:</b>Anto</p>
-							<p class="place"><b>Lulusan:</b>S1</p>
-							<p class="status"><b>Status:</b><span>Pending</span></p>
-							<a href="#" title="More" class="more"><i class="las la-angle-right"></i></a>
-						</li>
+						<?php
+						$Perm =  loadsiswasekolah($usekola);
+						foreach($Perm as $per):
+						?>
+
 						<li class="approve">
-							<p class="date"><b>Date:</b>June 15, 2023</p>
-							<p class="place"><b>Nama:</b>Anto</p>
-							<p class="place"><b>Lulusan:</b>S1</p>
-							<p class="status"><b>Status:</b><span>Approve</span></p>
+							<p class="date"><b>Date:</b><?= $per->created_at ?></p>
+							<p class="place"><b>Nama:</b><?= $per->nama_siswa ?></p>
+							<p class="place"><b>Status:</b><?= $per->status ?></p>
+							<p class="place"><b>Verifikasi:</b><?= $per->is_valid ?></p>
 							<a href="#" title="More" class="more"><i class="las la-angle-right"></i></a>
 						</li>
-						<li class="cancel">
-							<p class="date"><b>Date:</b>June 15, 2023</p>
-							<p class="place"><b>Nama:</b>putri</p>
-							<p class="place"><b>Lulusan:</b>S1</p>
-							<p class="status"><b>Status:</b><span>Cancel</span></p>
-							<a href="#" title="More" class="more"><i class="las la-angle-right"></i></a>
-						</li>
-						<li class="pending">
-							<p class="date"><b>Date:</b>June 15, 2023</p>
-							<p class="place"><b>Nama:</b>Sinta</p>
-							<p class="place"><b>Lulusan:</b>S1</p>
-							<p class="status"><b>Status:</b><span>Pending</span></p>
-							<a href="#" title="More" class="more"><i class="las la-angle-right"></i></a>
-						</li>
-						<li class="approve">
-							<p class="date"><b>Date:</b>June 15, 2023</p>
-							<p class="place"><b>Nama:</b>Andi</p>
-							<p class="place"><b>Lulusan:</b>S1</p>
-							<p class="status"><b>Status:</b><span>Approve</span></p>
-							<a href="#" title="More" class="more"><i class="las la-angle-right"></i></a>
-						</li>
+
+						<?php endforeach; ?>
 					</ul>
 				</div>
 			</div>
 		</div>
+
 		<div class="col-lg-4">
 			<div class="ob-item">
 				<div class="ob-head">
-					<h3>Notifications <span>(5)</span></h3>
-					<a href="#" class="clear-all" title="Clear All">Clear all</a>
+					<h3>Permintaan Terbaru</h3>
+					<a href="sekolah/siswa" class="view-all" title="View All">View all</a>
 				</div>
 				<div class="ob-content">
 					<ul>
-						<li class="noti-item unread">
-							<p>Anda Menerima Balasan Atas Permintaan Siswa <br> Permintaan ID: #123434</p>
-							<span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
+						<?php
+						$Perm =  $data;
+						foreach($Perm as $per):
+						?>
+						<?php
+						$st = '';
+						if ($per->status == 'Approve') $st = 'approve';
+						if ($per->status == 'Pending') $st = 'pending';
+						if ($per->status == 'Reject') $st = 'reject';
+						?>
+
+						<li class="<?php echo $st ?>" >
+							<p class="date"><b>Date:</b><?= $per->created_at ?></p>
+							<p class="place"><b>Nama:</b><?= getnamasiswa($per->id_siswa) ?></p>
+							<p class="place"><b>Status:</b><?= $per->status ?></p>
+							<a href="#" title="More" class="more"><i class="las la-angle-right"></i></a>
 						</li>
-						<li class="noti-item unread">
-							<p>Anda Menerima Balasan Atas Permintaan Siswa <br> Permintaan ID: #123434</p>
-							<span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
+
+						<?php endforeach; ?>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4">
+			<div class="ob-item">
+				<div class="ob-head">
+					<h3>Lamaran Terbaru</h3>
+				</div>
+				<div class="ob-content">
+					<ul>
+						<?php
+						$Perm =  $lowongan;
+						foreach($Perm as $per):
+						?>
+
+						<li class="approve">
+							<p class="date"><b>Date:</b><?= $per->created_at ?></p>
+							<p class="place"><b>Nama:</b><?= getnamasiswa($per->id_siswa) ?></p>
+							<p class="place"><b>Status:</b><?= $per->status ?></p>
 						</li>
-						<li class="noti-item unread">
-							<p>Anda Menerima Balasan Atas Permintaan Siswa <br> Permintaan ID: #123434</p>
-							<span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
-						</li>
-						<li class="noti-item unread">
-							<p>Anda Menerima Balasan Atas Permintaan Siswa <br> Permintaan ID: #123434</p>
-							<span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
-						</li>
-						<li class="noti-item unread">
-							<p>Anda Menerima Balasan Atas Permintaan Siswa <br> Permintaan ID: #123434</p>
-							<span>1d ago</span><a href="#" class="delete-noti" title="Delete">Delete</a>
-						</li>
+
+						<?php endforeach; ?>
 					</ul>
 				</div>
 			</div>

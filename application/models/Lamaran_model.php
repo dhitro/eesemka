@@ -85,6 +85,16 @@ class Lamaran_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_limit_data_sekolah($limit, $start = 0, $q = NULL, $id=null) {
+        $this->db->select("$this->table.*");
+        $this->db->where("eesemka_siswa.id_sekolah",$id);
+        $this->db->join("eesemka_siswa","eesemka_siswa.id = $this->table.id_siswa");
+        // $this->db->order_by($this->id, $this->order);
+        // $this->db->like('id', $q);
+	    $this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
+
     // get data with limit and search
     function get_limit_data_done($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);

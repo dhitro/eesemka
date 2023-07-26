@@ -29,9 +29,34 @@ class Sekolah extends CI_Controller {
 
 	public function index()
 	{
-        $data = array(
-            'title' => 'Sekolah Member Area'
-        );
+      $uid = $this->session->userdata('user_id');
+      $uidsis = $this->session->userdata('id_siswa');
+      $uidsekolah = $this->session->userdata('id_sekolah');
+
+      $per_hal = $this->input->post('per_hal');
+      if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
+      $ses_hal = $this->session->userdata('perhal');
+      $config['base_url'] = base_url('/sekolah/dashboard');
+      $config['page_query_string'] = TRUE;
+      $config['total_rows'] = $this->Permintaan_model->get_count();
+      $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
+      $config['full_tag_open'] = '<div class="pagination__numbers">';
+      $config['full_tag_close'] = '</div>';
+
+      $this->pagination->initialize($config);
+      $limit = $config['per_page'];
+      $offset = html_escape($this->input->get('per_page'));
+      $cari = html_escape($this->input->get('s'));
+
+      $sekolah = $this->Permintaan_model->get_limit_data_sekolah($limit, $offset, $cari, $uidsekolah);
+      $lamaran = $this->Lamaran_model->get_limit_data_sekolah($limit, $offset, $cari, $uidsekolah);
+      $this->pagination->initialize($config);
+      $data = array(
+        'title' => 'Sekolah Member Area',
+        'data' => $sekolah,
+        'lowongan' => $lamaran,
+        'usekola' => $uidsekolah,
+      );
         $this->template->load('template', 'Sekolah/dashboard', $data);
 	}
 
@@ -56,7 +81,7 @@ class Sekolah extends CI_Controller {
     $Siswa = $this->Siswa_model->get_limit_data($limit, $offset, $cari);
     $Siswa  = array_filter($Siswa, function ($row) {
       return ($row->id_sekolah == $this->session->userdata('id_sekolah'));
-  });
+    });
   
 
     $this->pagination->initialize($config);
