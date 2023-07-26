@@ -12,7 +12,7 @@ if (!function_exists('is_logged_in')) {
       if (time() < $timeout) {
         $ci->session->set_userdata('timeout', time() + 900);
       } else {
-        redirect(site_url());
+        redirect(base_url());
       }
     }
   }

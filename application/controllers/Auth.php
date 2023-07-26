@@ -122,7 +122,7 @@ class Auth extends CI_Controller
                             <h2>Well done!</h2> You successfully Logout From Your Account. 
                            
                         </div>');
-        redirect(site_url());
+        redirect(base_url());
     }
 
     public function signup()
@@ -136,7 +136,7 @@ class Auth extends CI_Controller
                         <i class="fa fa-times-circle"></i>
                         <h2>Error!</h2> Error Create Your Account. 
                         </div>');
-                        redirect(site_url('home'));
+                        redirect(base_url('home'));
         } else {
             $uuid = $this->uuid->v4();
             $data = array(
@@ -160,7 +160,7 @@ class Auth extends CI_Controller
                 //         <h2>Error!</h2> Error Create Your Account. 
                 //         </div>');
             
-            redirect(site_url('home'));
+            redirect(base_url('home'));
         }
     }
 

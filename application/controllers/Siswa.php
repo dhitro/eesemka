@@ -33,7 +33,7 @@ class Siswa extends CI_Controller
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/siswa/lowongan');
+    $config['base_url'] = base_url('/siswa/lowongan');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Lowongan_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -57,8 +57,8 @@ class Siswa extends CI_Controller
     $data = array(
       'title' => 'Siswa Member Area',
       'data' => $lamaran,
-      // 'actionadd' => site_url('siswa/lowongan_create'),
-      // 'actionfilter' => site_url('siswa/lowongan'),
+      // 'actionadd' => base_url('siswa/lowongan_create'),
+      // 'actionfilter' => base_url('siswa/lowongan'),
     );
     $this->template->load('template', 'Siswa/dashboard', $data);
   }
@@ -68,7 +68,7 @@ class Siswa extends CI_Controller
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/siswa/lowongan');
+    $config['base_url'] = base_url('/siswa/lowongan');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Lowongan_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -88,8 +88,8 @@ class Siswa extends CI_Controller
     $data = array(
       'title' => 'Siswa Area - Data Lowongan',
       'data' => $lowongan,
-      // 'actionadd' => site_url('siswa/lowongan_create'),
-      // 'actionfilter' => site_url('siswa/lowongan'),
+      // 'actionadd' => base_url('siswa/lowongan_create'),
+      // 'actionfilter' => base_url('siswa/lowongan'),
     );
     $this->template->load('template', 'Siswa/lowongan', $data);
   }
@@ -111,7 +111,7 @@ class Siswa extends CI_Controller
         $lamaran = $this->Lamaran_model->get_by_data($data);
 
         $this->session->set_flashdata('message', 'Lamaran Sudah Pernah Dikirim <br> Status : '.$lamaran->status);
-        // redirect(site_url('siswa/lowongandetail/' . $this->input->post('id_lowongan', TRUE).'/'.$this->input->post('id_posisi', TRUE)));
+        // redirect(base_url('siswa/lowongandetail/' . $this->input->post('id_lowongan', TRUE).'/'.$this->input->post('id_posisi', TRUE)));
 
       endif;
 
@@ -121,7 +121,7 @@ class Siswa extends CI_Controller
         'title' => 'Siswa Area - Form Data Lowongan',
         'button' => 'Update',
         'data' => $lowongan,
-        'action' => site_url('siswa/lowongan_update_action'),
+        'action' => base_url('siswa/lowongan_update_action'),
         'id' => set_value('id', $row->id),
         'id_perusahaan' => set_value('id_perusahaan', $row->id_perusahaan),
         'id_posisi' => set_value('id_posisi', $idposisi),
@@ -158,7 +158,7 @@ class Siswa extends CI_Controller
       if ($total > 0) :
 
         $this->session->set_flashdata('message', 'Lamaran Sudah Pernah Dikirim');
-        redirect(site_url('siswa/lowongandetail/' . $this->input->post('id_lowongan', TRUE).'/'.$this->input->post('id_posisi', TRUE)));
+        redirect(base_url('siswa/lowongandetail/' . $this->input->post('id_lowongan', TRUE).'/'.$this->input->post('id_posisi', TRUE)));
 
       else :
         $data = array(
@@ -173,7 +173,7 @@ class Siswa extends CI_Controller
         $idlast =   $this->Lamaran_model->insert($data);
 
         $this->session->set_flashdata('message', 'Lamaran Sukses Dikirim');
-        redirect(site_url('siswa/lowongandetail/' . $this->input->post('id_lowongan', TRUE)));
+        redirect(base_url('siswa/lowongandetail/' . $this->input->post('id_lowongan', TRUE)));
       endif;
     }
   }
@@ -193,7 +193,7 @@ class Siswa extends CI_Controller
     $data = array(
       'title' => 'Admin Area - Form Data Siswa',
       'button' => 'Update',
-      'action' => site_url('siswa/siswa_update_action'),
+      'action' => base_url('siswa/siswa_update_action'),
       'id' => set_value('id', $row->id),
       'uuid' => set_value('uuid', $row->uuid),
       'id_sekolah' => set_value('id_sekolah', $row->id_sekolah),
@@ -206,7 +206,7 @@ class Siswa extends CI_Controller
       'id_user' => set_value('id_user', $row->id_user),
       'uuid' => set_value('uuid', $row->uuid),
      
-      'action2' => site_url('siswa/user_update_action'),
+      'action2' => base_url('siswa/user_update_action'),
       'iduser' => set_value('iduser', $rowbasic->id),
       'firstname' => set_value('firstname', $rowbasic->firstname),
       'lastname' => set_value('lastname', $rowbasic->lastname),
@@ -270,7 +270,7 @@ class Siswa extends CI_Controller
 
 
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('siswa/profile'));
+      redirect(base_url('siswa/profile'));
     }
   }
 
@@ -290,7 +290,7 @@ class Siswa extends CI_Controller
     $this->user_rules();
 
     if ($this->form_validation->run() == FALSE) {
-      redirect(site_url('siswa/profile'));
+      redirect(base_url('siswa/profile'));
     } else {
       $data = array(
         'firstname' => $this->input->post('firstname', TRUE),
@@ -310,7 +310,7 @@ class Siswa extends CI_Controller
         $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 5, 'foto[]');
       endif;
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('siswa/profile'));
+      redirect(base_url('siswa/profile'));
     }
   }
 
@@ -329,7 +329,7 @@ class Siswa extends CI_Controller
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/siswa/permintaan');
+    $config['base_url'] = base_url('/siswa/permintaan');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Permintaan_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -349,8 +349,8 @@ class Siswa extends CI_Controller
       'title' => 'Admin Area - Data permintaan',
       'usis' => $u,
       'data' => $sekolah,
-      'actionadd' => site_url('admin/permintaan_create'),
-      'actionfilter' => site_url('admin/permintaan'),
+      'actionadd' => base_url('admin/permintaan_create'),
+      'actionfilter' => base_url('admin/permintaan'),
     );
     $this->template->load('template', 'siswa/Permintaan/permintaan_list', $data);
   }

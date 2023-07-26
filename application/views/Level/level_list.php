@@ -5,9 +5,9 @@
       <div class='box'>
         <div class='box-header'>
           <h3 class='box-title'>LEVEL LIST <?php echo anchor('level/create/', 'Create', array('class' => 'btn btn-danger btn-sm')); ?>
-            <?php echo anchor(site_url('level/excel'), ' <i class="fa fa-file-excel-o"></i> Excel', 'class="btn btn-primary btn-sm"'); ?>
-            <?php echo anchor(site_url('level/word'), '<i class="fa fa-file-word-o"></i> Word', 'class="btn btn-primary btn-sm"'); ?>
-            <?php echo anchor(site_url('level/pdf'), '<i class="fa fa-file-pdf-o"></i> PDF', 'class="btn btn-primary btn-sm"'); ?></h3>
+            <?php echo anchor(base_url('level/excel'), ' <i class="fa fa-file-excel-o"></i> Excel', 'class="btn btn-primary btn-sm"'); ?>
+            <?php echo anchor(base_url('level/word'), '<i class="fa fa-file-word-o"></i> Word', 'class="btn btn-primary btn-sm"'); ?>
+            <?php echo anchor(base_url('level/pdf'), '<i class="fa fa-file-pdf-o"></i> PDF', 'class="btn btn-primary btn-sm"'); ?></h3>
         </div><!-- /.box-header -->
         <div class='box-body'>
           <table class="table table-bordered table-striped" id="mytable">
@@ -31,11 +31,11 @@
 
                   <td style="text-align:center" width="140px">
                     <?php
-                    echo anchor(site_url('level/read/' . $menu->id), '<i class="fa fa-eye"></i>', array('title' => 'detail', 'class' => 'btn btn-danger btn-sm'));
+                    echo anchor(base_url('level/read/' . $menu->id), '<i class="fa fa-eye"></i>', array('title' => 'detail', 'class' => 'btn btn-danger btn-sm'));
                     echo '  ';
-                    echo anchor(site_url('level/update/' . $menu->id), '<i class="fa fa-pencil-square-o"></i>', array('title' => 'edit', 'class' => 'btn btn-danger btn-sm'));
+                    echo anchor(base_url('level/update/' . $menu->id), '<i class="fa fa-pencil-square-o"></i>', array('title' => 'edit', 'class' => 'btn btn-danger btn-sm'));
                     echo '  ';
-                    echo anchor(site_url('level/delete/' . $menu->id), '<i class="fa fa-trash-o"></i>', 'title="delete" class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
+                    echo anchor(base_url('level/delete/' . $menu->id), '<i class="fa fa-trash-o"></i>', 'title="delete" class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
                     ?>
                   </td>
                 </tr>

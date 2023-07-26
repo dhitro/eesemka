@@ -66,7 +66,7 @@
 					if (!empty($foto)) : ?>
 						<img class="img_pre"  width="40px" src="<?= base_url() . "upload/dokumen/" . $foto->file ?>" alt="">
 					<?php endif; ?>
-					<a href="<?= site_url('perusahaan/lamaran_read/' . $d->id) ?>" class="view" title="View"><?= getsiswa($d->id_siswa) ?></a>
+					<a href="<?= base_url('perusahaan/lamaran_read/' . $d->id) ?>" class="view" title="View"><?= getsiswa($d->id_siswa) ?></a>
 				</td>
 				<td class="text-nowrap"><?= getnamaposisi($d->id_posisi) ?></td>
 				<?php
@@ -79,9 +79,9 @@
 				<td style="width: 350px;"><?= $d->created_at ?></td>
 				<td class="">
 					<div class="place-action">
-						<a href="<?= site_url('perusahaan/lamaran_approve/') ?>" data-id="<?= $d->id ?>" class="approved" title="Approve">Approve</a>
-						<a href="<?= site_url('perusahaan/lamaran_approve/') ?>" data-id="<?= $d->id ?>" class="pending" title="Pending">Pending</a>
-						<a href="<?= site_url('perusahaan/lamaran_approve/') ?>" data-id="<?= $d->id ?>" class="reject" title="Reject">Reject</a>
+						<a href="<?= base_url('perusahaan/lamaran_approve/') ?>" data-id="<?= $d->id ?>" class="approved" title="Approve">Approve</a>
+						<a href="<?= base_url('perusahaan/lamaran_approve/') ?>" data-id="<?= $d->id ?>" class="pending" title="Pending">Pending</a>
+						<a href="<?= base_url('perusahaan/lamaran_approve/') ?>" data-id="<?= $d->id ?>" class="reject" title="Reject">Reject</a>
 					</div>
 				</td>
 			</tr>

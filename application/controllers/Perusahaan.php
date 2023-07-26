@@ -32,7 +32,7 @@ class Perusahaan extends CI_Controller {
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/perusahaan/lowongan');
+    $config['base_url'] = base_url('/perusahaan/lowongan');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Lowongan_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -50,7 +50,7 @@ class Perusahaan extends CI_Controller {
     );
 
     $lamaran = $this->Lamaran_model->get_limit_data_done($limit, $offset, $q);
-
+    $uper = [];
 
     $this->pagination->initialize($config);
     $data = array(
@@ -91,7 +91,7 @@ class Perusahaan extends CI_Controller {
     $data = array(
       'title' => 'Perusahaan Area - Form Data Perusahaan',
       'button' => 'Update',
-      'action' => site_url('perusahaan/perusahaan_update_action'),
+      'action' => base_url('perusahaan/perusahaan_update_action'),
       'id' => set_value('id', $row->id),
       'nama_perusahaan' => set_value('nama_perusahaan', $row->nama_perusahaan),
       'alamat' => set_value('alamat', $row->alamat),
@@ -138,7 +138,7 @@ class Perusahaan extends CI_Controller {
       endif;
 
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('perusahaan/profile'));
+      redirect(base_url('perusahaan/profile'));
     }
   }
 
@@ -157,7 +157,7 @@ class Perusahaan extends CI_Controller {
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/perusahaan/permintaan');
+    $config['base_url'] = base_url('/perusahaan/permintaan');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Permintaan_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -179,8 +179,8 @@ class Perusahaan extends CI_Controller {
       'title' => 'Perusahaan Area - Data permintaan',
       'data' => $sekolah,
       'ini' => $ss,
-      'actionadd' => site_url('perusahaan/permintaan_create'),
-      'actionfilter' => site_url('perusahaan/permintaan'),
+      'actionadd' => base_url('perusahaan/permintaan_create'),
+      'actionfilter' => base_url('perusahaan/permintaan'),
     );
     $this->template->load('template', 'Perusahaan/Permintaan/permintaan_list', $data);
   }
@@ -200,11 +200,11 @@ class Perusahaan extends CI_Controller {
       $this->template->load('template', 'Perusahaan/Permintaan/permintaan_read', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('perusahaan/permintaan'));
+      redirect(base_url('perusahaan/permintaan'));
     }
   }
 
-  public function permintaan_create($idsis)
+  public function permintaan_create($idsis = null)
   {
 
     $ss = $this->session->userdata('user_id');
@@ -217,7 +217,7 @@ class Perusahaan extends CI_Controller {
       'idsiswa' => $idsis,
       'idper' => $ss,
       'namasiswa' => $mow->nama_siswa,
-      'action' => site_url('perusahaan/permintaan_create_action'),
+      'action' => base_url('perusahaan/permintaan_create_action'),
       'id' => set_value('id'),
       'uuid' => set_value('uuid'),
       'id_perusahaan' => set_value('id_perusahaan'),
@@ -247,7 +247,7 @@ class Perusahaan extends CI_Controller {
       $idlast =   $this->Permintaan_model->insert($data);
 
      $this->session->set_flashdata('message', 'Create Record Success');
-      redirect(site_url('perusahaan/permintaan'));
+      redirect(base_url('perusahaan/permintaan'));
     }
   }
 
@@ -260,7 +260,7 @@ class Perusahaan extends CI_Controller {
       $data = array(
         'title' => 'Perusahaan Area - Form Data permintaan',
         'button' => 'Update',
-        'action' => site_url('perusahaan/permintaan_update_action'),
+        'action' => base_url('perusahaan/permintaan_update_action'),
         'id' => set_value('id', $row->id),
         'id_perusahaan' => set_value('id_perusahaan', $row->id_perusahaan),
         'id_siswa' => set_value('id_siswa', $row->id_siswa),
@@ -270,7 +270,7 @@ class Perusahaan extends CI_Controller {
       $this->template->load('template', 'Perusahaan/Permintaan/permintaan_form', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('perusahaan/permintaan'));
+      redirect(base_url('perusahaan/permintaan'));
     }
   }
 
@@ -290,7 +290,7 @@ class Perusahaan extends CI_Controller {
 
       $this->Permintaan_model->update($this->input->post('id', TRUE), $data);
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('perusahaan/permintaan'));
+      redirect(base_url('perusahaan/permintaan'));
     }
   }
 
@@ -312,10 +312,10 @@ class Perusahaan extends CI_Controller {
     if ($row) {
       $this->Permintaan_model->delete($id);
       // $this->session->set_flashdata('message', 'Delete Record Success');
-      // redirect(site_url('perusahaan/sekolah'));
+      // redirect(base_url('perusahaan/sekolah'));
     } else {
       // $this->session->set_flashdata('message', 'Record Not Found');
-      // redirect(site_url('perusahaan/sekolah'));
+      // redirect(base_url('perusahaan/sekolah'));
     }
   }
 
@@ -333,7 +333,7 @@ class Perusahaan extends CI_Controller {
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/perusahaan/lamaran');
+    $config['base_url'] = base_url('/perusahaan/lamaran');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Lamaran_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -355,8 +355,8 @@ class Perusahaan extends CI_Controller {
       'title' => 'Perusahaan Area - Data Lamaran',
       'up' => $uper,
       'data' => $sekolah,
-      'actionadd' => site_url('perusahaan/lamaran_create'),
-      'actionfilter' => site_url('perusahaan/lamaran'),
+      'actionadd' => base_url('perusahaan/lamaran_create'),
+      'actionfilter' => base_url('perusahaan/lamaran'),
     );
     $this->template->load('template', 'Perusahaan/Lamaran/lamaran_list', $data);
   }
@@ -379,7 +379,7 @@ class Perusahaan extends CI_Controller {
       $this->template->load('template', 'Perusahaan/Lamaran/lamaran_list', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/siswa'));
+      redirect(base_url('admin/siswa'));
     }
   }
 
@@ -407,7 +407,7 @@ class Perusahaan extends CI_Controller {
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/perusahaan/lowongan');
+    $config['base_url'] = base_url('/perusahaan/lowongan');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Lowongan_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -427,8 +427,8 @@ class Perusahaan extends CI_Controller {
       'title' => 'Perusahaan Area - Data Lowongan',
       'data' => $lowongan,
       'uper' => $uper,
-      'actionadd' => site_url('perusahaan/lowongan_create'),
-      'actionfilter' => site_url('perusahaan/lowongan'),
+      'actionadd' => base_url('perusahaan/lowongan_create'),
+      'actionfilter' => base_url('perusahaan/lowongan'),
     );
     $this->template->load('template', 'Perusahaan/Lowongan/lowongan_list', $data);
   }
@@ -448,7 +448,7 @@ class Perusahaan extends CI_Controller {
       $this->template->load('template', 'Perusahaan/Lowongan/lowongan_read', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('perusahaan/lowongan'));
+      redirect(base_url('perusahaan/lowongan'));
     }
   }
 
@@ -462,7 +462,7 @@ class Perusahaan extends CI_Controller {
       'title' => 'Perusahaan Area - Tambah Lowongan',
       'userper' => $uper,
       'button' => 'Create',
-      'action' => site_url('perusahaan/lowongan_create_action'),
+      'action' => base_url('perusahaan/lowongan_create_action'),
       'id' => set_value('id'),
       'id_perusahaan' => set_value('id_perusahaan'),
       'uuid' => set_value('uuid'),
@@ -514,7 +514,7 @@ class Perusahaan extends CI_Controller {
 
 
       $this->session->set_flashdata('message', 'Create Record Success');
-      redirect(site_url('perusahaan/lowongan'));
+      redirect(base_url('perusahaan/lowongan'));
     }
   }
 
@@ -529,7 +529,7 @@ class Perusahaan extends CI_Controller {
         'title' => 'Perusahaan Area - Form Data Lowongan',
         'button' => 'Update',
         'userper' => $uper,
-        'action' => site_url('perusahaan/lowongan_update_action'),
+        'action' => base_url('perusahaan/lowongan_update_action'),
         'id' => set_value('id', $row->id),
         'id_perusahaan' => set_value('id_perusahaan', $row->id_perusahaan),
         'nama_lowongan' => set_value('nama_lowongan', $row->nama_lowongan),
@@ -541,7 +541,7 @@ class Perusahaan extends CI_Controller {
       $this->template->load('template', 'Perusahaan/Lowongan/lowongan_form', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('perusahaan/lowongan'));
+      redirect(base_url('perusahaan/lowongan'));
     }
   }
 
@@ -580,10 +580,10 @@ class Perusahaan extends CI_Controller {
       endif;
       if ($update) :
         $this->session->set_flashdata('message', 'Update Record Success');
-        redirect(site_url('perusahaan/lowongan'));
+        redirect(base_url('perusahaan/lowongan'));
       else :
         $this->session->set_flashdata('message', 'Error Record' . var_dump($this->db->error()));
-        redirect(site_url('perusahaan/lowongan'));
+        redirect(base_url('perusahaan/lowongan'));
       endif;
     }
   }
@@ -634,7 +634,7 @@ class Perusahaan extends CI_Controller {
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/perusahaan/siswa');
+    $config['base_url'] = base_url('/perusahaan/siswa');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Siswa_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -653,8 +653,8 @@ class Perusahaan extends CI_Controller {
     $data = array(
       'title' => 'Perusahaan Area - Data Siswa',
       'data' => $Siswa,
-      'actionadd' => site_url('perusahaan/siswa_create'),
-      'actionfilter' => site_url('perusahaan/siswa'),
+      'actionadd' => base_url('perusahaan/siswa_create'),
+      'actionfilter' => base_url('perusahaan/siswa'),
     );
     $this->template->load('template', 'Perusahaan/siswa', $data);
   }
@@ -677,7 +677,7 @@ class Perusahaan extends CI_Controller {
       $this->template->load('template', 'Perusahaan/siswa_profile', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('admin/siswa'));
+      redirect(base_url('admin/siswa'));
     }
   }
 

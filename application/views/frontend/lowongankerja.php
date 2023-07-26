@@ -56,7 +56,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <h3 class="place-title"><a href="<?= site_url('lowongankerja/detail/' . $d->id) ?>"><?= $d->nama_lowongan ?></a></h3>
+                            <h3 class="place-title"><a href="<?= base_url('lowongankerja/detail/' . $d->id) ?>"><?= $d->nama_lowongan ?></a></h3>
                             <div class="entry-address"><i class="las la-map-marker"></i><?= getnamaperusahaan($d->id_perusahaan)  ?></div>
                         </div>
                     </div>

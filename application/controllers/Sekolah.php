@@ -41,7 +41,7 @@ class Sekolah extends CI_Controller {
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/sekolah/siswa');
+    $config['base_url'] = base_url('/sekolah/siswa');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Siswa_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -63,8 +63,8 @@ class Sekolah extends CI_Controller {
     $data = array(
       'title' => 'Admin Area - Data Siswa',
       'data' => $Siswa,
-      'actionadd' => site_url('sekolah/siswa_create'),
-      'actionfilter' => site_url('sekolah/siswa'),
+      'actionadd' => base_url('sekolah/siswa_create'),
+      'actionfilter' => base_url('sekolah/siswa'),
     );
     $this->template->load('template', 'Sekolah/Siswa/siswa_list', $data);
   }
@@ -90,7 +90,7 @@ class Sekolah extends CI_Controller {
       $this->template->load('template', 'Sekolah/Siswa/siswa_read', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('sekolah/siswa'));
+      redirect(base_url('sekolah/siswa'));
     }
   }
 
@@ -112,7 +112,7 @@ class Sekolah extends CI_Controller {
       $this->template->load('template', 'Sekolah/Siswa/siswa_profile', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('sekolah/siswa'));
+      redirect(base_url('sekolah/siswa'));
     }
   }
 
@@ -121,9 +121,9 @@ class Sekolah extends CI_Controller {
     $data = array(
       'button' => 'Create',
       'title' => 'Member Area - Form Siswa',
-      'action' => site_url('sekolah/siswa_create_action'),
-      'actionadd' => site_url('sekolah/sekolah_create'),
-      'actionfilter' => site_url('sekolah/sekolah'),
+      'action' => base_url('sekolah/siswa_create_action'),
+      'actionadd' => base_url('sekolah/sekolah_create'),
+      'actionfilter' => base_url('sekolah/sekolah'),
       'id' => set_value('id'),
       'uuid' => set_value('uuid'),
       'id_sekolah' => set_value('id_sekolah'),
@@ -185,7 +185,7 @@ class Sekolah extends CI_Controller {
       endif;
 
       $this->session->set_flashdata('message', 'Create Record Success');
-      redirect(site_url('sekolah/siswa'));
+      redirect(base_url('sekolah/siswa'));
     }
   }
 
@@ -198,7 +198,7 @@ class Sekolah extends CI_Controller {
       $data = array(
         'title' => 'Member Area - Form Data Siswa',
         'button' => 'Update',
-        'action' => site_url('sekolah/siswa_update_action'),
+        'action' => base_url('sekolah/siswa_update_action'),
         'id' => set_value('id', $row->id),
         'uuid' => set_value('uuid', $row->uuid),
         'id_sekolah' => set_value('id_sekolah', $row->id_sekolah),
@@ -214,7 +214,7 @@ class Sekolah extends CI_Controller {
       $this->template->load('template', 'Sekolah/Siswa/siswa_form', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('sekolah/siswa'));
+      redirect(base_url('sekolah/siswa'));
     }
   }
 
@@ -267,7 +267,7 @@ class Sekolah extends CI_Controller {
 
 
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('sekolah/siswa'));
+      redirect(base_url('sekolah/siswa'));
     }
   }
 
@@ -288,10 +288,10 @@ class Sekolah extends CI_Controller {
     if ($row) {
       $this->Siswa_model->delete($id);
       // $this->session->set_flashdata('message', 'Delete Record Success');
-      // redirect(site_url('admin/Siswa'));
+      // redirect(base_url('admin/Siswa'));
     } else {
       // $this->session->set_flashdata('message', 'Record Not Found');
-      // redirect(site_url('admin/Siswa'));
+      // redirect(base_url('admin/Siswa'));
     }
   }
 
@@ -305,10 +305,10 @@ class Sekolah extends CI_Controller {
       $path = "./upload/dokumen/" . $row->file;
       unlink($path);
       // $this->session->set_flashdata('message', 'Delete Record Success');
-      // redirect(site_url('admin/Siswa'));
+      // redirect(base_url('admin/Siswa'));
     } else {
       // $this->session->set_flashdata('message', 'Record Not Found');
-      // redirect(site_url('admin/Siswa'));
+      // redirect(base_url('admin/Siswa'));
     }
   }
 
@@ -327,7 +327,7 @@ class Sekolah extends CI_Controller {
     $per_hal = $this->input->post('per_hal');
     if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
     $ses_hal = $this->session->userdata('perhal');
-    $config['base_url'] = site_url('/sekolah/lowongan');
+    $config['base_url'] = base_url('/sekolah/lowongan');
     $config['page_query_string'] = TRUE;
     $config['total_rows'] = $this->Lowongan_model->get_count();
     $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -347,8 +347,8 @@ class Sekolah extends CI_Controller {
     $data = array(
       'title' => 'Member Area - Data Lowongan',
       'data' => $lowongan,
-      // 'actionadd' => site_url('sekolah/lowongan_create'),
-      // 'actionfilter' => site_url('sekolah/lowongan'),
+      // 'actionadd' => base_url('sekolah/lowongan_create'),
+      // 'actionfilter' => base_url('sekolah/lowongan'),
     );
     $this->template->load('template', 'Sekolah/lowongan', $data);
   }
@@ -370,7 +370,7 @@ class Sekolah extends CI_Controller {
         $lamaran = $this->Lamaran_model->get_by_data($data);
 
         $this->session->set_flashdata('message', 'Lamaran Sudah Pernah Dikirim <br> Status : '.$lamaran->status);
-        // redirect(site_url('sekolah/lowongandetail/' . $this->input->post('id_lowongan', TRUE).'/'.$this->input->post('id_posisi', TRUE)));
+        // redirect(base_url('sekolah/lowongandetail/' . $this->input->post('id_lowongan', TRUE).'/'.$this->input->post('id_posisi', TRUE)));
 
       endif;
 
@@ -380,7 +380,7 @@ class Sekolah extends CI_Controller {
         'title' => 'Siswa Area - Form Data Lowongan',
         'button' => 'Update',
         'data' => $lowongan,
-        'action' => site_url('sekolah/lowongan_update_action'),
+        'action' => base_url('sekolah/lowongan_update_action'),
         'id' => set_value('id', $row->id),
         'id_perusahaan' => set_value('id_perusahaan', $row->id_perusahaan),
         'id_posisi' => set_value('id_posisi', $idposisi),
@@ -417,7 +417,7 @@ class Sekolah extends CI_Controller {
       if ($total > 0) :
 
         $this->session->set_flashdata('message', 'Lamaran Sudah Pernah Dikirim');
-        redirect(site_url('sekolah/lowongandetail/' . $this->input->post('id_lowongan', TRUE).'/'.$this->input->post('id_posisi', TRUE)));
+        redirect(base_url('sekolah/lowongandetail/' . $this->input->post('id_lowongan', TRUE).'/'.$this->input->post('id_posisi', TRUE)));
 
       else :
         $data = array(
@@ -432,7 +432,7 @@ class Sekolah extends CI_Controller {
         $idlast =   $this->Lamaran_model->insert($data);
 
         $this->session->set_flashdata('message', 'Lamaran Sukses Dikirim');
-        redirect(site_url('sekolah/lowongandetail/' . $this->input->post('id_lowongan', TRUE)));
+        redirect(base_url('sekolah/lowongandetail/' . $this->input->post('id_lowongan', TRUE)));
       endif;
     }
   }
@@ -456,7 +456,7 @@ class Sekolah extends CI_Controller {
       $data = array(
         'title' => 'Member Area - Form Data Sekolah',
         'button' => 'Update',
-        'action' => site_url('sekolah/sekolah_update_action'),
+        'action' => base_url('sekolah/sekolah_update_action'),
         'id' => set_value('id', $row->id),
         'nama_sekolah' => set_value('nama_sekolah', $row->nama_sekolah),
         'alamat' => set_value('alamat', $row->alamat),
@@ -464,7 +464,7 @@ class Sekolah extends CI_Controller {
         'id_user' => set_value('id_user', $row->id_user),
         'uuid' => set_value('uuid', $row->uuid),
 
-        'action2' => site_url('sekolah/user_update_action'),
+        'action2' => base_url('sekolah/user_update_action'),
         'iduser' => set_value('iduser', $rowbasic->id),
         'firstname' => set_value('firstname', $rowbasic->firstname),
         'lastname' => set_value('lastname', $rowbasic->lastname),
@@ -478,7 +478,7 @@ class Sekolah extends CI_Controller {
       $this->template->load('template', 'Sekolah/profile', $data);
     } else {
       $this->session->set_flashdata('message', 'Record Not Found');
-      redirect(site_url('sekolah/profile'));
+      redirect(base_url('sekolah/profile'));
     }
   }
 
@@ -502,7 +502,7 @@ class Sekolah extends CI_Controller {
         $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 5, 'foto[]');
       endif;
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('sekolah/profile'));
+      redirect(base_url('sekolah/profile'));
     }
   }
 
@@ -527,7 +527,7 @@ class Sekolah extends CI_Controller {
     $this->user_rules();
 
     if ($this->form_validation->run() == FALSE) {
-      redirect(site_url('sekolah/profile'));
+      redirect(base_url('sekolah/profile'));
     } else {
       $data = array(
         'firstname' => $this->input->post('firstname', TRUE),
@@ -547,7 +547,7 @@ class Sekolah extends CI_Controller {
         $fileuploaded =  upload_files('upload/dokumen', $this->input->post('uuid', TRUE), $_FILES['foto'], $this->input->post('id', TRUE), 5, 'foto[]');
       endif;
       $this->session->set_flashdata('message', 'Update Record Success');
-      redirect(site_url('sekolah/profile'));
+      redirect(base_url('sekolah/profile'));
     }
   }
 
@@ -565,7 +565,7 @@ class Sekolah extends CI_Controller {
    $per_hal = $this->input->post('per_hal');
    if (!empty($per_hal))  $this->session->set_userdata(['perhal' => $per_hal]);
    $ses_hal = $this->session->userdata('perhal');
-   $config['base_url'] = site_url('/sekolah/permintaan');
+   $config['base_url'] = base_url('/sekolah/permintaan');
    $config['page_query_string'] = TRUE;
    $config['total_rows'] = $this->Permintaan_model->get_count();
    $config['per_page'] = ($ses_hal == null || $ses_hal == '') ? 10 : $ses_hal;
@@ -582,8 +582,8 @@ class Sekolah extends CI_Controller {
    $data = array(
      'title' => 'Member Area - Data permintaan',
      'data' => $sekolah,
-     'actionadd' => site_url('sekolah/permintaan_create'),
-     'actionfilter' => site_url('sekolah/permintaan'),
+     'actionadd' => base_url('sekolah/permintaan_create'),
+     'actionfilter' => base_url('sekolah/permintaan'),
    );
    $this->template->load('template', 'sekolah/Permintaan/permintaan_list', $data);
  }
