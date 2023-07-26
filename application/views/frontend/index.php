@@ -72,16 +72,10 @@
                                         </div><!-- .popup__user -->
                                         <div class="popup__menu popup__box">
                                             <ul class="menu-arrow">
-                                                <li><a title="Page" href="#">Lowongan Kerja</a></li>
-                                            </ul>
+                                                <li><a title="Page" href="<?= base_url() ?>lowongankerja">Lowongan Kerja</a></li>
+                                            </ul>  
                                         </div><!-- .popup__menu -->
                                     </div><!-- .popup__content -->
-                                    <div class="popup__button popup__box">
-                                        <a title="Add place" href="add-place.html" class="btn">
-                                            <i class="la la-plus"></i>
-                                            <span>Add place</span>
-                                        </a>
-                                    </div><!-- .popup__button -->
                                 </div><!-- .popup -->
                             </div><!-- .site__menu -->
                             <div class="site__brand">
