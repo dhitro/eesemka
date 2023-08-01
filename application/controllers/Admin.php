@@ -833,7 +833,7 @@ class Admin extends CI_Controller
       endif;
       $posisi_list = $this->input->post('posisi_list');
       $this->PsLowongan_model->delete_lowongan($this->input->post('id', TRUE));
-      $posisi_list = $this->input->post('posisi_list');
+      $posisi_list = $this->input->post('posisi_list', TRUE);
       if (!empty($posisi_list)) :
         foreach ($posisi_list as $posisi) :
           $datab = array(
